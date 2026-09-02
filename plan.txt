@@ -1,17 +1,3 @@
-// Ipa connect and clone kay Cordovez
-https://github.com/Tyson913/Skill-Link.git
-
-
-git clone https://github.com/Tyson913/Skill-Link.git
-cd project
-git checkout -b your-feature
-
-If mag push ka ug code sa ato codebase: 
-git push -u origin your-feature
-
-
-Feature style architecture
-
 [Frameworks to use]
 
 Frontend
