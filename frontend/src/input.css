@@ -1,1 +1,6 @@
 @import "tailwindcss";
+
+@theme {
+    --font-heading: "Space Grotesk", sans-serif;
+    --font-text: "Inter", sans-serif;
+}
