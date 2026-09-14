@@ -4,159 +4,653 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Skill Link</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
     <header>
-        <img src="" alt="">
-        <div class="header-left">
-            <button id="loginBtn">Login</button>
-            <button id="signupBtn">Signup</button>
+        <div class="header-inner">
+            <img class="logo" src="/frontend/src/logo-removebg-preview.png" alt="Company logo">
+
+            <nav class="header-left">
+
+                <button id="loginBtn" class="btn btn-ghost" type="button">
+                    Log in
+                </button>
+
+                <button id="signupBtn" class="btn btn-primary" type="button">
+                    Sign up
+                </button>
+
+                <button id="usernameBttn" class="btn btn-pill" type="button" hidden></button>
+
+                <button id="logout" class="btn btn-ghost" type="button" hidden>
+                    Log out
+                </button>
+            </nav>
         </div>
     </header>
 
     <main>
         <section id="landingPage">
-            <div class="landing-page-container">
-                <div class="hero-section">
-                    <h1>Every Problem Has a Solution.</h1>
-                    <p>Find the right service to get it solved.</p>
+
+            <div class="container hero">
+
+                <div class="hero-content">
+
+                    <h1>
+                        Every problem has a solution.
+                    </h1>
+
+                    <p>
+                        Find the right service to get it solved.
+                    </p>
+
+                    <button id="main-page-trigger" class="btn btn-primary btn-lg" type="button">
+                        Get started
+                    </button>
+
                 </div>
-                <button id="main-page-trigger">Get Started</button>
+
             </div>
+
         </section>
 
-
         <section id="mainPage" style="display: none;">
-            <div class="main-page-container">
-                <div class="main-page-center">
+
+            <div class="container main-page-container">
+
+                <div class="toolbar">
+
                     <span class="search-bar">
+
                         <i data-lucide="search"></i>
-                        <input type="text">
+
+                        <input type="text" placeholder="Search services or usernames">
+
                     </span>
+
+                    <button type="button" class="btn btn-icon" id="filterToggle" aria-label="Toggle filters"
+                        aria-expanded="false">
+                        <i data-lucide="sliders-horizontal"></i>
+                    </button>
+
                 </div>
 
-                <div class="category-section">
-                    <h2 id="catLabel">Categories</h2>
-                    <div class="service-category-container">
-                        <span><i data-lucide="wrench"></i> Home & Repair</span>
-                        <span><i data-lucide="laptop"></i> Technology</span>
-                        <span><i data-lucide="car"></i> Automotive</span>
-                        <span><i data-lucide="broom"></i> Cleaning</span>
-                        <span><i data-lucide="sparkles"></i> Beauty & Wellness</span>
-                        <span><i data-lucide="book-open"></i> Education</span>
-                        <span><i data-lucide="palette"></i> Creative</span>
-                        <span><i data-lucide="hard-hat"></i> Construction</span>
-                        <span><i data-lucide="truck"></i> Delivery & Moving</span>
-                        <span><i data-lucide="briefcase-business"></i> Professional Services</span>
+                <form action="" id="filter-form" class="filter-form" hidden>
+
+                    <div class="filter-field">
+
+                        <label for="filterCategory">
+                            Category
+                        </label>
+
+                        <select id="filterCategory" name="category">
+                            <option value="">
+                                All categories
+                            </option>
+
+                            <option value="home-repair">
+                                Home & Repair
+                            </option>
+
+                            <option value="technology">
+                                Technology
+                            </option>
+
+                            <option value="automotive">
+                                Automotive
+                            </option>
+
+                            <option value="cleaning">
+                                Cleaning
+                            </option>
+
+                            <option value="beauty-wellness">
+                                Beauty & Wellness
+                            </option>
+
+                            <option value="education">
+                                Education
+                            </option>
+
+                            <option value="creative">
+                                Creative
+                            </option>
+
+                            <option value="construction">
+                                Construction
+                            </option>
+
+                            <option value="delivery-moving">
+                                Delivery & Moving
+                            </option>
+
+                            <option value="professional">
+                                Professional Services
+                            </option>
+                        </select>
+
                     </div>
+
+
+                    <div class="filter-field">
+
+                        <label for="filterLocation">
+                            Location
+                        </label>
+
+                        <input type="text" id="filterLocation" name="location" placeholder="City or zip code">
+
+                    </div>
+
+
+                    <div class="filter-field">
+
+                        <label for="filterMinPrice">
+                            Price range
+                        </label>
+
+                        <div class="filter-range-inputs">
+
+                            <input type="number" id="filterMinPrice" name="minPrice" min="0" placeholder="Min">
+
+                            <span class="filter-range-sep">
+                                –
+                            </span>
+
+                            <input type="number" id="filterMaxPrice" name="maxPrice" min="0" placeholder="Max">
+                        </div>
+                    </div>
+
+
+                    <div class="filter-field">
+
+                        <label for="filterSort">
+                            Sort by
+                        </label>
+
+                        <select id="filterSort" name="sort">
+                            <option value="relevance">
+                                Relevance
+                            </option>
+
+                            <option value="price-asc">
+                                Price: low to high
+                            </option>
+
+                            <option value="price-desc">
+                                Price: high to low
+                            </option>
+
+                            <option value="rating">
+                                Highest rated
+                            </option>
+                        </select>
+
+                    </div>
+
+
+                    <div class="filter-actions">
+
+                        <button type="reset" class="btn btn-ghost">
+                            Clear
+                        </button>
+
+                        <button type="submit" class="btn btn-primary">
+                            Apply filters
+                        </button>
+
+                    </div>
+
+                </form>
+
+                <div class="category-page" id="categoryPage">
+
+                    <div class="category-section">
+
+                        <h2 id="catLabel">
+                            Categories
+                        </h2>
+
+
+                        <div class="service-category-container">
+
+                            <span data-service="home-repair-services">
+                                <i data-lucide="wrench"></i>
+                                Home & Repair
+                            </span>
+
+                            <span data-service="technology-services">
+                                <i data-lucide="laptop"></i>
+                                Technology
+                            </span>
+
+                            <span data-service="automotive-services">
+                                <i data-lucide="car"></i>
+                                Automotive
+                            </span>
+
+                            <span data-service="cleaning-services">
+                                <i data-lucide="broom"></i>
+                                Cleaning
+                            </span>
+
+                            <span data-service="beauty-wellness-services">
+                                <i data-lucide="sparkles"></i>
+                                Beauty & Wellness
+                            </span>
+
+                            <span data-service="education-services">
+                                <i data-lucide="book-open"></i>
+                                Education
+                            </span>
+
+                            <span data-service="creative-services">
+                                <i data-lucide="palette"></i>
+                                Creative
+                            </span>
+
+                            <span data-service="construction-services">
+                                <i data-lucide="hard-hat"></i>
+                                Construction
+                            </span>
+
+                            <span data-service="delivery-moving-services">
+                                <i data-lucide="truck"></i>
+                                Delivery & Moving
+                            </span>
+
+                            <span data-service="professional-services">
+                                <i data-lucide="briefcase-business"></i>
+                                Professional Services
+                            </span>
+
+                        </div>
+
+                    </div>
+
                 </div>
-                <div class="home-repair-services">
+
+                <div class="services" id="home-repair-services" hidden>
+
+                    <button type="button" class="service-close" aria-label="Back to categories">
+                        <i data-lucide="x"></i>
+                    </button>
+
+                    <div class="service-header">
+
+                        <i data-lucide="wrench"></i>
+
+                        <h1>
+                            Home & Repair
+                        </h1>
+
+                    </div>
+
                     <div class="service-list"></div>
+
                 </div>
 
-                <div class="technology-services">
+
+                <div class="services" id="technology-services" hidden>
+
+                    <button type="button" class="service-close" aria-label="Back to categories">
+                        <i data-lucide="x"></i>
+                    </button>
+
+                    <div class="service-header">
+
+                        <i data-lucide="laptop"></i>
+
+                        <h1>
+                            Technology
+                        </h1>
+
+                    </div>
+
                     <div class="service-list"></div>
+
                 </div>
 
-                <div class="automotive-services">
+
+                <div class="services" id="automotive-services" hidden>
+
+                    <button type="button" class="service-close" aria-label="Back to categories">
+                        <i data-lucide="x"></i>
+                    </button>
+
+                    <div class="service-header">
+
+                        <i data-lucide="car"></i>
+
+                        <h1>
+                            Automotive
+                        </h1>
+
+                    </div>
+
                     <div class="service-list"></div>
+
                 </div>
 
-                <div class="cleaning-services">
+
+                <div class="services" id="cleaning-services" hidden>
+
+                    <button type="button" class="service-close" aria-label="Back to categories">
+                        <i data-lucide="x"></i>
+                    </button>
+
+                    <div class="service-header">
+
+                        <i data-lucide="broom"></i>
+
+                        <h1>
+                            Cleaning
+                        </h1>
+
+                    </div>
+
                     <div class="service-list"></div>
+
                 </div>
 
-                <div class="beauty-wellness-services">
+
+                <div class="services" id="beauty-wellness-services" hidden>
+
+                    <button type="button" class="service-close" aria-label="Back to categories">
+                        <i data-lucide="x"></i>
+                    </button>
+
+                    <div class="service-header">
+
+                        <i data-lucide="sparkles"></i>
+
+                        <h1>
+                            Beauty & Wellness
+                        </h1>
+
+                    </div>
+
                     <div class="service-list"></div>
+
                 </div>
 
-                <div class="education-services">
+
+                <div class="services" id="education-services" hidden>
+
+                    <button type="button" class="service-close" aria-label="Back to categories">
+                        <i data-lucide="x"></i>
+                    </button>
+
+                    <div class="service-header">
+
+                        <i data-lucide="book-open"></i>
+
+                        <h1>
+                            Education
+                        </h1>
+
+                    </div>
+
                     <div class="service-list"></div>
+
                 </div>
 
-                <div class="creative-services">
+
+                <div class="services" id="creative-services" hidden>
+
+                    <button type="button" class="service-close" aria-label="Back to categories">
+                        <i data-lucide="x"></i>
+                    </button>
+
+                    <div class="service-header">
+
+                        <i data-lucide="palette"></i>
+
+                        <h1>
+                            Creative
+                        </h1>
+
+                    </div>
+
                     <div class="service-list"></div>
+
                 </div>
 
-                <div class="construction-services">
+
+                <div class="services" id="construction-services" hidden>
+
+                    <button type="button" class="service-close" aria-label="Back to categories">
+                        <i data-lucide="x"></i>
+                    </button>
+
+                    <div class="service-header">
+
+                        <i data-lucide="hard-hat"></i>
+
+                        <h1>
+                            Construction
+                        </h1>
+
+                    </div>
+
                     <div class="service-list"></div>
+
                 </div>
 
-                <div class="delivery-moving-services">
+
+                <div class="services" id="delivery-moving-services" hidden>
+
+                    <button type="button" class="service-close" aria-label="Back to categories">
+                        <i data-lucide="x"></i>
+                    </button>
+
+                    <div class="service-header">
+
+                        <i data-lucide="truck"></i>
+
+                        <h1>
+                            Delivery & Moving
+                        </h1>
+
+                    </div>
+
                     <div class="service-list"></div>
+
                 </div>
 
-                <div class="professional-services">
+
+                <div class="services" id="professional-services" hidden>
+
+                    <button type="button" class="service-close" aria-label="Back to categories">
+                        <i data-lucide="x"></i>
+                    </button>
+
+                    <div class="service-header">
+
+                        <i data-lucide="briefcase-business"></i>
+
+                        <h1>
+                            Professional Services
+                        </h1>
+
+                    </div>
+
                     <div class="service-list"></div>
-                </div>
-
-
-                <div class="profilePage">
 
                 </div>
+
+                <div class="profile" id="profilePage" hidden>
+
+                    <div class="profile-header">
+
+                        <div class="profile-avatar" id="profileAvatar"></div>
+
+                        <div>
+
+                            <h2 id="profileName">
+                                Your profile
+                            </h2>
+
+                            <p class="profile-meta">
+                                Manage your account details.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
             </div>
+
         </section>
 
         <div class="auth-form-container" id="authFormContainer">
+
             <div class="auth-form-overlay" id="authFormOverlay"></div>
 
+
             <div class="auth-form-box">
-                <button type="button" class="auth-form-close" id="authFormClose" aria-label="Close">&times;</button>
+
+                <button type="button" class="auth-form-close" id="authFormClose" aria-label="Close">
+                    &times;
+                </button>
 
                 <form id="loginForm" class="auth-form" novalidate>
-                    <h2>Login</h2>
+
+                    <h2>
+                        Log in
+                    </h2>
 
                     <div class="form-group">
-                        <label for="loginEmail">Email</label>
+
+                        <label for="loginEmail">
+                            Email
+                        </label>
+
                         <input type="email" id="loginEmail" name="email" autocomplete="email" required>
+
                     </div>
 
+
                     <div class="form-group">
-                        <label for="loginPassword">Password</label>
+
+                        <label for="loginPassword">
+                            Password
+                        </label>
+
                         <input type="password" id="loginPassword" name="password" autocomplete="current-password"
                             required>
+
                     </div>
 
-                    <button type="submit">Login</button>
 
-                    <p class="auth-form-switch">Don't have an account? <a href="#" id="switchToSignup">Sign up</a></p>
+                    <button type="submit">
+                        Log in
+                    </button>
+
+
+                    <p class="auth-form-switch">
+                        Don't have an account?
+                        <a href="#" id="switchToSignup">
+                            Sign up
+                        </a>
+                    </p>
+
                 </form>
+                <form id="signupForm" class="auth-form is-hidden" novalidate>
 
-                <form id="signupForm" class="auth-form" novalidate>
-                    <h2>Sign Up</h2>
+                    <h2>
+                        Sign up
+                    </h2>
+
 
                     <div class="form-group">
-                        <label for="signupName">Full Name</label>
+
+                        <label for="signupName">
+                            Full name
+                        </label>
+
                         <input type="text" id="signupName" name="name" autocomplete="name" required>
+
                     </div>
 
+
                     <div class="form-group">
-                        <label for="signupEmail">Email</label>
+
+                        <label for="signupEmail">
+                            Email
+                        </label>
+
                         <input type="email" id="signupEmail" name="email" autocomplete="email" required>
+
                     </div>
 
+
                     <div class="form-group">
-                        <label for="signupPassword">Password</label>
+
+                        <label for="signupPassword">
+                            Password
+                        </label>
+
                         <input type="password" id="signupPassword" name="password" autocomplete="new-password" required>
+
                     </div>
 
+
                     <div class="form-group">
-                        <label for="signupConfirmPassword">Confirm Password</label>
+
+                        <label for="signupConfirmPassword">
+                            Confirm password
+                        </label>
+
                         <input type="password" id="signupConfirmPassword" name="confirmPassword"
                             autocomplete="new-password" required>
+
                     </div>
 
-                    <button type="submit">Sign Up</button>
+                    <button type="submit">
+                        Sign up
+                    </button>
 
-                    <p class="auth-form-switch">Already have an account? <a href="#" id="switchToLogin">Login</a></p>
+
+                    <p class="auth-form-switch">
+                        Already have an account?
+                        <a href="#" id="switchToLogin">
+                            Log in
+                        </a>
+                    </p>
+
                 </form>
+
             </div>
+
         </div>
+
     </main>
     <footer>
+        <div class="footer-inner">
+            <span>
+                <a href="#about">About Us</a>
+                <a href="#terms">Terms</a>
+                <a href="#privacy">Privacy Policy</a>
+            </span>
+
+            <span>
+                <a href="#help">Help</a>
+                <a href="#contact">Contact</a>
+                <a href="#faq">FAQ</a>
+            </span>
+
+            <span>
+                <a href="#facebook">Facebook</a>
+                <a href="#instagram">Instagram</a>
+                <a href="#github">GitHub</a>
+            </span>
+        </div>
     </footer>
     <script src="https://unpkg.com/lucide@latest"></script>
     <script src="main.js"></script>
