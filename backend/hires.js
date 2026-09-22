@@ -1,0 +1,1 @@
+// isulod sa db sa user ang ija na hire

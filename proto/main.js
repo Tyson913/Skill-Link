@@ -283,12 +283,9 @@ categorySpans.forEach((span) => {
 
 });
 
-
 closeButtons.forEach((button) => {
 
     button.addEventListener('click', () => {
-
-
         services.forEach((service) => {
             service.hidden = true;
         });
@@ -298,3 +295,15 @@ closeButtons.forEach((button) => {
         lucide.createIcons();
     });
 });
+
+
+loginForm.addEventListener('submit', () => {
+    login
+
+
+})
+
+signupForm.addEventListener('submit', () => {
+    
+})
+
