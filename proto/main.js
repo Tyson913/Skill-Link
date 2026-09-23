@@ -305,6 +305,8 @@ loginForm.addEventListener('submit', () => {
 signupForm.addEventListener('submit', () => {
     const signupEmail = document.getElementById("signupEmail");
     const signupPassword = document.getElementById("signupPassword");
-    
 })
+
+
+
 
