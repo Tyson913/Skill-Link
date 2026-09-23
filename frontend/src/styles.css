@@ -201,6 +201,12 @@
             font-size: 16px;
         }
 
+        .btn:disabled,
+        .auth-form button[type="submit"]:disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
         .header-inner {
             display: flex;
             align-items: center;
@@ -338,6 +344,19 @@
             border-radius: var(--radius-md);
 
             background: var(--color-surface-alt);
+        }
+
+        .app-status {
+            min-height: 22px;
+            margin-top: var(--space-3);
+
+            font-size: 14px;
+            color: var(--color-body);
+        }
+
+        .app-status[data-type="error"],
+        .form-status[data-type="error"] {
+            color: #B91C1C;
         }
 
         .filter-form[hidden] {
@@ -527,6 +546,86 @@
 
             font-size: 14px;
             color: var(--color-muted);
+        }
+
+        .service-card {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-4);
+
+            min-height: 260px;
+            padding: var(--space-5);
+
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-sm);
+
+            background: var(--color-surface);
+        }
+
+        .service-card-header,
+        .service-card-footer,
+        .service-meta {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: var(--space-3);
+        }
+
+        .service-card h3 {
+            font-size: 17px;
+            font-weight: 500;
+        }
+
+        .service-provider,
+        .service-description,
+        .service-meta,
+        .service-tag {
+            font-size: 14px;
+        }
+
+        .service-provider {
+            margin-top: var(--space-1);
+            color: var(--color-muted);
+        }
+
+        .service-price {
+            flex-shrink: 0;
+
+            font-family: var(--font-heading);
+            font-weight: 600;
+            color: var(--color-primary);
+        }
+
+        .service-description {
+            flex: 1;
+            color: var(--color-body);
+        }
+
+        .service-meta {
+            justify-content: flex-start;
+            color: var(--color-muted);
+        }
+
+        .service-meta span {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-1);
+        }
+
+        .service-meta svg {
+            width: 15px;
+            height: 15px;
+        }
+
+        .service-tag {
+            align-self: center;
+
+            padding: var(--space-1) var(--space-3);
+
+            border-radius: var(--radius-full);
+
+            background: var(--color-primary-tint);
+            color: var(--color-primary-dark);
         }
 
         .service-close {
@@ -730,6 +829,15 @@
             text-align: center;
 
             color: var(--color-body);
+        }
+
+        .form-status {
+            min-height: 20px;
+            margin: 0;
+
+            font-size: 13px;
+            color: var(--color-body);
+            text-align: center;
         }
 
         .auth-form-switch a {
