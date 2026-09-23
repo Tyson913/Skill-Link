@@ -1,4 +1,8 @@
 {
+  "scripts": {
+    "start": "node backend/server.js",
+    "check": "node --check backend/server.js && node --check backend/db.js && node --check backend/authentication.js && node --check backend/hires.js && node --check backend/payment.js && node --check frontend/src/main.js"
+  },
   "dependencies": {
     "@tailwindcss/cli": "^4.3.3",
     "tailwindcss": "^4.3.3"
