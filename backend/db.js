@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const providerProfileId = '00000000-0000-4000-8000-000000000001';
+const providerEmail = 'skilllink-provider@example.com';
 
 const seedCategories = [
     { id: 1, name: 'Home & Repair', slug: 'home-repair' },
@@ -19,7 +19,7 @@ const seedCategories = [
 const seedServices = [
     {
         id: 1,
-        user_id: providerProfileId,
+        user_id: null,
         category_id: 1,
         service_name: 'Pipe leak repair',
         description: 'Same-day plumbing help for leaks, clogged drains, and fixture replacements.',
@@ -27,7 +27,7 @@ const seedServices = [
     },
     {
         id: 2,
-        user_id: providerProfileId,
+        user_id: null,
         category_id: 2,
         service_name: 'Laptop tune-up',
         description: 'Cleanup, malware scans, storage checks, and basic software troubleshooting.',
@@ -35,7 +35,7 @@ const seedServices = [
     },
     {
         id: 3,
-        user_id: providerProfileId,
+        user_id: null,
         category_id: 3,
         service_name: 'Motorcycle maintenance',
         description: 'Oil changes, brake checks, chain adjustment, and road-readiness inspection.',
@@ -43,7 +43,7 @@ const seedServices = [
     },
     {
         id: 4,
-        user_id: providerProfileId,
+        user_id: null,
         category_id: 4,
         service_name: 'Apartment deep cleaning',
         description: 'Kitchen, bath, floor, and window cleaning for condos and small apartments.',
@@ -51,7 +51,7 @@ const seedServices = [
     },
     {
         id: 5,
-        user_id: providerProfileId,
+        user_id: null,
         category_id: 5,
         service_name: 'Home-service haircut',
         description: 'Simple cuts, styling, and grooming appointments at your home.',
@@ -59,7 +59,7 @@ const seedServices = [
     },
     {
         id: 6,
-        user_id: providerProfileId,
+        user_id: null,
         category_id: 6,
         service_name: 'Math tutor',
         description: 'One-on-one algebra and geometry tutoring for junior and senior high students.',
@@ -67,7 +67,7 @@ const seedServices = [
     },
     {
         id: 7,
-        user_id: providerProfileId,
+        user_id: null,
         category_id: 7,
         service_name: 'Logo starter package',
         description: 'Three logo concepts, basic color palette, and export files for small brands.',
@@ -75,7 +75,7 @@ const seedServices = [
     },
     {
         id: 8,
-        user_id: providerProfileId,
+        user_id: null,
         category_id: 8,
         service_name: 'Small masonry repair',
         description: 'Minor wall, tile, step, and concrete patch repairs for homes and shops.',
@@ -83,7 +83,7 @@ const seedServices = [
     },
     {
         id: 9,
-        user_id: providerProfileId,
+        user_id: null,
         category_id: 9,
         service_name: 'Van moving assist',
         description: 'Small home or office moves with driver, van, and loading support.',
@@ -91,7 +91,7 @@ const seedServices = [
     },
     {
         id: 10,
-        user_id: providerProfileId,
+        user_id: null,
         category_id: 10,
         service_name: 'Business permit assistance',
         description: 'Guidance and document preparation for small business registration tasks.',
@@ -231,19 +231,46 @@ function mapService(row, categoriesById, profilesById) {
     };
 }
 
+async function findProviderUser() {
+    const payload = await supabaseFetch('/auth/v1/admin/users?page=1&per_page=100');
+    const users = payload.users || [];
+    return users.find((user) => user.email === providerEmail) || null;
+}
+
+async function createProviderUser() {
+    const payload = await supabaseFetch('/auth/v1/admin/users', {
+        method: 'POST',
+        body: {
+            email: providerEmail,
+            password: `SkillLink-${Date.now()}`,
+            email_confirm: true,
+            user_metadata: {
+                name: 'SkillLink Provider',
+                full_name: 'SkillLink Provider'
+            }
+        }
+    });
+
+    return payload.user || payload;
+}
+
 async function ensureSeedProfile() {
+    const providerUser = await findProviderUser() || await createProviderUser();
+
     await supabaseFetch('/rest/v1/profiles?on_conflict=id', {
         method: 'POST',
         headers: {
             Prefer: 'resolution=merge-duplicates,return=minimal'
         },
         body: {
-            id: providerProfileId,
+            id: providerUser.id,
             username: 'SkillLink Provider',
             location: 'Cebu City',
             status: 'active'
         }
     });
+
+    return providerUser.id;
 }
 
 async function ensureSeedCategories() {
@@ -269,14 +296,17 @@ async function ensureSeedServices() {
         return;
     }
 
-    await ensureSeedProfile();
+    const providerProfileId = await ensureSeedProfile();
     await ensureSeedCategories();
     await supabaseFetch('/rest/v1/services', {
         method: 'POST',
         headers: {
             Prefer: 'return=minimal'
         },
-        body: seedServices
+        body: seedServices.map((service) => ({
+            ...service,
+            user_id: providerProfileId
+        }))
     });
 }
 
