@@ -345,6 +345,7 @@ function buildServiceCard(service) {
 }
 
 function renderServices() {
+    const activeServiceId = document.querySelector('.services:not([hidden])')?.id || '';
     renderFilterOptions();
     renderCategoryNav();
     renderCategorySections();
@@ -364,6 +365,15 @@ function renderServices() {
 
         list.append(buildServiceCard(service));
     });
+
+    const activeService = activeServiceId ? document.getElementById(activeServiceId) : null;
+
+    if (activeService) {
+        categoryPage.hidden = true;
+        activeService.hidden = false;
+    } else {
+        categoryPage.hidden = false;
+    }
 
     refreshIcons();
 }
