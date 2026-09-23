@@ -4,6 +4,7 @@ const authStorageKey = 'skilllinkToken';
 let authToken = localStorage.getItem(authStorageKey) || '';
 let currentUser = null;
 let services = [];
+let categories = [];
 
 const mainPageTrigger = document.getElementById('main-page-trigger');
 const mainPage = document.getElementById('mainPage');
@@ -21,14 +22,13 @@ const usernameBttn = document.getElementById('usernameBttn');
 const logoutBtn = document.getElementById('logout');
 const filterToggle = document.getElementById('filterToggle');
 const filterForm = document.getElementById('filter-form');
+const filterCategory = document.getElementById('filterCategory');
 const serviceSearch = document.getElementById('serviceSearch');
 const appStatus = document.getElementById('appStatus');
 const loginStatus = document.getElementById('loginStatus');
 const signupStatus = document.getElementById('signupStatus');
 const categoryPage = document.getElementById('categoryPage');
-const categorySpans = document.querySelectorAll('.service-category-container span');
-const serviceSections = document.querySelectorAll('.services');
-const closeButtons = document.querySelectorAll('.service-close');
+const categoryList = document.querySelector('.service-category-container');
 
 const categoryLabels = {
     'home-repair': 'Home & Repair',
@@ -41,6 +41,24 @@ const categoryLabels = {
     construction: 'Construction',
     'delivery-moving': 'Delivery & Moving',
     professional: 'Professional Services'
+};
+
+const categoryIcons = {
+    'home-and-repair': 'wrench',
+    'home-repair': 'wrench',
+    technology: 'laptop',
+    automotive: 'car',
+    cleaning: 'broom',
+    'beauty-and-wellness': 'sparkles',
+    'beauty-wellness': 'sparkles',
+    education: 'book-open',
+    creative: 'palette',
+    construction: 'hard-hat',
+    'delivery-and-moving': 'truck',
+    'delivery-moving': 'truck',
+    professional: 'briefcase-business',
+    'professional-services': 'briefcase-business',
+    uncategorized: 'layers'
 };
 
 function refreshIcons() {
@@ -147,6 +165,118 @@ function formatPrice(price) {
     }).format(price);
 }
 
+function normalizeCategorySlug(name) {
+    return String(name || 'uncategorized')
+        .trim()
+        .toLowerCase()
+        .replace(/&/g, 'and')
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-+|-+$/g, '') || 'uncategorized';
+}
+
+function normalizeCategories(apiCategories, apiServices) {
+    const categoryMap = new Map();
+
+    (apiCategories || []).forEach((category) => {
+        const name = category.name || categoryLabels[category.slug] || category.slug || 'Uncategorized';
+        const slug = category.slug || normalizeCategorySlug(name);
+        categoryMap.set(slug, {
+            id: category.id || slug,
+            name,
+            slug
+        });
+    });
+
+    (apiServices || []).forEach((service) => {
+        const name = service.categoryName || categoryLabels[service.category] || service.category || 'Uncategorized';
+        const slug = service.category || normalizeCategorySlug(name);
+
+        if (!categoryMap.has(slug)) {
+            categoryMap.set(slug, {
+                id: slug,
+                name,
+                slug
+            });
+        }
+    });
+
+    return [...categoryMap.values()];
+}
+
+function renderFilterOptions() {
+    const selectedValue = filterCategory.value;
+    filterCategory.textContent = '';
+
+    const allOption = document.createElement('option');
+    allOption.value = '';
+    allOption.textContent = 'All categories';
+    filterCategory.append(allOption);
+
+    categories.forEach((category) => {
+        const option = document.createElement('option');
+        option.value = category.slug;
+        option.textContent = category.name;
+        filterCategory.append(option);
+    });
+
+    filterCategory.value = categories.some((category) => category.slug === selectedValue) ? selectedValue : '';
+}
+
+function renderCategoryNav() {
+    categoryList.textContent = '';
+
+    if (categories.length === 0) {
+        categoryList.textContent = 'No categories available.';
+        return;
+    }
+
+    categories.forEach((category) => {
+        const item = document.createElement('span');
+        item.dataset.service = `${category.slug}-services`;
+        item.tabIndex = 0;
+        item.setAttribute('role', 'button');
+        item.innerHTML = `<i data-lucide="${categoryIcons[category.slug] || 'briefcase-business'}"></i>`;
+        item.append(` ${category.name}`);
+        categoryList.append(item);
+    });
+}
+
+function buildServiceSection(category) {
+    const section = document.createElement('div');
+    section.className = 'services';
+    section.id = `${category.slug}-services`;
+    section.hidden = true;
+
+    const closeButton = document.createElement('button');
+    closeButton.type = 'button';
+    closeButton.className = 'service-close';
+    closeButton.setAttribute('aria-label', 'Back to categories');
+    closeButton.innerHTML = '<i data-lucide="x"></i>';
+
+    const header = document.createElement('div');
+    header.className = 'service-header';
+    header.innerHTML = `<i data-lucide="${categoryIcons[category.slug] || 'briefcase-business'}"></i>`;
+
+    const heading = document.createElement('h1');
+    heading.textContent = category.name;
+    header.append(heading);
+
+    const list = document.createElement('div');
+    list.className = 'service-list';
+
+    section.append(closeButton, header, list);
+    return section;
+}
+
+function renderCategorySections() {
+    document.querySelectorAll('.services').forEach((section) => {
+        section.remove();
+    });
+
+    const sections = categories.map(buildServiceSection);
+    categoryPage.after(...sections);
+}
+
 function clearServiceLists() {
     document.querySelectorAll('.service-list').forEach((list) => {
         list.textContent = 'No listings yet - check back soon.';
@@ -191,7 +321,7 @@ function buildServiceCard(service) {
 
     const rating = document.createElement('span');
     rating.innerHTML = '<i data-lucide="star"></i>';
-    rating.append(` ${service.rating.toFixed(1)}`);
+    rating.append(` ${typeof service.rating === 'number' ? service.rating.toFixed(1) : 'New'}`);
 
     meta.append(location, rating);
 
@@ -200,7 +330,7 @@ function buildServiceCard(service) {
 
     const category = document.createElement('span');
     category.className = 'service-tag';
-    category.textContent = categoryLabels[service.category] || service.category;
+    category.textContent = service.categoryName || categoryLabels[service.category] || service.category;
 
     const hireButton = document.createElement('button');
     hireButton.type = 'button';
@@ -215,6 +345,9 @@ function buildServiceCard(service) {
 }
 
 function renderServices() {
+    renderFilterOptions();
+    renderCategoryNav();
+    renderCategorySections();
     clearServiceLists();
 
     services.forEach((service) => {
@@ -260,6 +393,7 @@ async function loadServices() {
         setStatus(appStatus, 'Loading services...');
         const payload = await apiRequest(`/services${queryString ? `?${queryString}` : ''}`);
         services = payload.services || [];
+        categories = normalizeCategories(payload.categories || [], services);
         renderServices();
         setStatus(appStatus, services.length ? `${services.length} services found.` : 'No services match your filters.');
     } catch (error) {
@@ -403,35 +537,57 @@ filterForm.addEventListener('reset', () => {
 
 serviceSearch.addEventListener('input', queueServiceLoad);
 
-categorySpans.forEach((span) => {
-    span.addEventListener('click', () => {
-        const serviceId = span.dataset.service;
-        const selectedService = document.getElementById(serviceId);
+function openServiceSection(serviceId) {
+    const selectedService = document.getElementById(serviceId);
 
-        if (!selectedService) {
-            return;
-        }
+    if (!selectedService) {
+        return;
+    }
 
-        categoryPage.hidden = true;
+    categoryPage.hidden = true;
 
-        serviceSections.forEach((service) => {
-            service.hidden = true;
-        });
-
-        selectedService.hidden = false;
-        refreshIcons();
+    document.querySelectorAll('.services').forEach((service) => {
+        service.hidden = true;
     });
+
+    selectedService.hidden = false;
+    refreshIcons();
+}
+
+categoryList.addEventListener('click', (event) => {
+    const categoryItem = event.target.closest('[data-service]');
+
+    if (categoryItem) {
+        openServiceSection(categoryItem.dataset.service);
+    }
 });
 
-closeButtons.forEach((button) => {
-    button.addEventListener('click', () => {
-        serviceSections.forEach((service) => {
-            service.hidden = true;
-        });
+categoryList.addEventListener('keydown', (event) => {
+    if (event.key !== 'Enter' && event.key !== ' ') {
+        return;
+    }
 
-        categoryPage.hidden = false;
-        refreshIcons();
+    const categoryItem = event.target.closest('[data-service]');
+
+    if (categoryItem) {
+        event.preventDefault();
+        openServiceSection(categoryItem.dataset.service);
+    }
+});
+
+document.addEventListener('click', (event) => {
+    const closeButton = event.target.closest('.service-close');
+
+    if (!closeButton) {
+        return;
+    }
+
+    document.querySelectorAll('.services').forEach((service) => {
+        service.hidden = true;
     });
+
+    categoryPage.hidden = false;
+    refreshIcons();
 });
 
 document.addEventListener('click', async (event) => {

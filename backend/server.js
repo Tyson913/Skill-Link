@@ -82,6 +82,7 @@ function filterServices(services, searchParams) {
             service.title,
             service.providerName,
             service.category,
+            service.categoryName,
             service.location,
             service.description
         ].join(' ').toLowerCase();
@@ -114,7 +115,7 @@ function filterServices(services, searchParams) {
     } else if (sort === 'price-desc') {
         filtered.sort((a, b) => b.price - a.price);
     } else if (sort === 'rating') {
-        filtered.sort((a, b) => b.rating - a.rating);
+        filtered.sort((a, b) => (b.rating || 0) - (a.rating || 0));
     }
 
     return filtered;
@@ -155,6 +156,7 @@ async function handleApi(req, res, url) {
     if (req.method === 'GET' && url.pathname === '/api/services') {
         const data = await readData();
         sendJson(res, 200, {
+            categories: data.categories,
             services: filterServices(data.services, url.searchParams)
         });
         return;
