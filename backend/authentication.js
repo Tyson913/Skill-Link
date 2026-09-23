@@ -23,15 +23,16 @@ function sanitizeUser(user) {
 async function upsertProfile(user) {
     const safeUser = sanitizeUser(user);
 
-    await supabaseFetch('/rest/v1/profiles', {
+    await supabaseFetch('/rest/v1/profiles?on_conflict=id', {
         method: 'POST',
         headers: {
             Prefer: 'resolution=merge-duplicates,return=minimal'
         },
         body: {
             id: safeUser.id,
-            name: safeUser.name,
-            email: safeUser.email
+            username: safeUser.name,
+            location: null,
+            status: 'active'
         }
     });
 
