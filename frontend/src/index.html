@@ -10,7 +10,7 @@
 <body>
     <header>
         <div class="header-inner">
-            <img class="logo" src="/frontend/src/logo-removebg-preview.png" alt="Company logo">
+            <img class="logo" src="logo-removebg-preview.png" alt="Company logo">
 
             <nav class="header-left">
 
@@ -65,7 +65,7 @@
 
                         <i data-lucide="search"></i>
 
-                        <input type="text" placeholder="Search services or usernames">
+                        <input id="serviceSearch" type="text" placeholder="Search services or usernames">
 
                     </span>
 
@@ -75,6 +75,8 @@
                     </button>
 
                 </div>
+
+                <p id="appStatus" class="app-status" role="status"></p>
 
                 <form action="" id="filter-form" class="filter-form" hidden>
 
@@ -546,6 +548,8 @@
                         Log in
                     </button>
 
+                    <p id="loginStatus" class="form-status" role="status"></p>
+
 
                     <p class="auth-form-switch">
                         Don't have an account?
@@ -606,6 +610,8 @@
                     <button type="submit">
                         Sign up
                     </button>
+
+                    <p id="signupStatus" class="form-status" role="status"></p>
 
 
                     <p class="auth-form-switch">
