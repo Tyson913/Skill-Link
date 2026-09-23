@@ -357,10 +357,16 @@ signupForm.addEventListener('submit', async (event) => {
             body: formData
         });
 
+        signupForm.reset();
+
+        if (payload.requiresConfirmation || !payload.token) {
+            setStatus(signupStatus, 'Account created. Check your email to confirm it, then log in.');
+            return;
+        }
+
         authToken = payload.token;
         localStorage.setItem(authStorageKey, authToken);
         setLoggedIn(payload.user);
-        signupForm.reset();
         setStatus(appStatus, 'Account created.');
     } catch (error) {
         setStatus(signupStatus, getErrorMessage(error), 'error');

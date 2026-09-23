@@ -1,43 +1,51 @@
-const crypto = require('crypto');
-const { createId, readData, updateData } = require('./db');
-
-const publicUserFields = ['id', 'name', 'email', 'createdAt'];
+const { anonKey, supabaseFetch } = require('./db');
 
 function normalizeEmail(email) {
     return String(email || '').trim().toLowerCase();
-}
-
-function sanitizeUser(user) {
-    return publicUserFields.reduce((safeUser, key) => {
-        safeUser[key] = user[key];
-        return safeUser;
-    }, {});
 }
 
 function validateEmail(email) {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
 
-function hashPassword(password, salt = crypto.randomBytes(16).toString('hex')) {
-    const hash = crypto
-        .pbkdf2Sync(String(password), salt, 100000, 64, 'sha512')
-        .toString('hex');
+function sanitizeUser(user) {
+    const metadata = user.user_metadata || {};
+    const email = user.email || '';
 
-    return { salt, hash };
-}
-
-function verifyPassword(password, user) {
-    const { hash } = hashPassword(password, user.passwordSalt);
-    return crypto.timingSafeEqual(Buffer.from(hash), Buffer.from(user.passwordHash));
-}
-
-function createSession(userId) {
     return {
-        id: createId('session'),
-        userId,
-        token: crypto.randomBytes(32).toString('hex'),
-        createdAt: new Date().toISOString()
+        id: user.id,
+        name: metadata.name || metadata.full_name || email.split('@')[0] || 'Account',
+        email,
+        createdAt: user.created_at || user.createdAt || null
     };
+}
+
+async function upsertProfile(user) {
+    const safeUser = sanitizeUser(user);
+
+    await supabaseFetch('/rest/v1/profiles', {
+        method: 'POST',
+        headers: {
+            Prefer: 'resolution=merge-duplicates,return=minimal'
+        },
+        body: {
+            id: safeUser.id,
+            name: safeUser.name,
+            email: safeUser.email
+        }
+    });
+
+    return safeUser;
+}
+
+function extractToken(payload) {
+    return payload.access_token ||
+        (payload.session && payload.session.access_token) ||
+        '';
+}
+
+function extractUser(payload) {
+    return payload.user || payload;
 }
 
 async function signup({ name, email, password }) {
@@ -62,62 +70,58 @@ async function signup({ name, email, password }) {
         throw error;
     }
 
-    return updateData((data) => {
-        const existingUser = data.users.find((user) => user.email === cleanEmail);
-
-        if (existingUser) {
-            const error = new Error('An account with that email already exists.');
-            error.status = 409;
-            throw error;
-        }
-
-        const passwordRecord = hashPassword(password);
-        const user = {
-            id: createId('user'),
-            name: cleanName,
+    const payload = await supabaseFetch('/auth/v1/signup', {
+        method: 'POST',
+        key: anonKey,
+        token: anonKey,
+        body: {
             email: cleanEmail,
-            passwordSalt: passwordRecord.salt,
-            passwordHash: passwordRecord.hash,
-            createdAt: new Date().toISOString()
-        };
-        const session = createSession(user.id);
-
-        data.users.push(user);
-        data.sessions.push(session);
-
-        return {
-            user: sanitizeUser(user),
-            token: session.token
-        };
+            password,
+            data: {
+                name: cleanName,
+                full_name: cleanName
+            }
+        }
     });
+    const user = extractUser(payload);
+    const safeUser = await upsertProfile(user);
+
+    return {
+        user: safeUser,
+        token: extractToken(payload),
+        requiresConfirmation: !extractToken(payload)
+    };
 }
 
 async function login({ email, password }) {
     const cleanEmail = normalizeEmail(email);
-
-    return updateData((data) => {
-        const user = data.users.find((candidate) => candidate.email === cleanEmail);
-
-        if (!user || !verifyPassword(password || '', user)) {
-            const error = new Error('Invalid email or password.');
-            error.status = 401;
-            throw error;
+    const payload = await supabaseFetch('/auth/v1/token?grant_type=password', {
+        method: 'POST',
+        key: anonKey,
+        token: anonKey,
+        body: {
+            email: cleanEmail,
+            password
         }
-
-        const session = createSession(user.id);
-        data.sessions.push(session);
-
-        return {
-            user: sanitizeUser(user),
-            token: session.token
-        };
     });
+    const user = extractUser(payload);
+    const safeUser = await upsertProfile(user);
+
+    return {
+        user: safeUser,
+        token: extractToken(payload)
+    };
 }
 
 async function logout(token) {
-    await updateData((data) => {
-        data.sessions = data.sessions.filter((session) => session.token !== token);
-        return null;
+    if (!token) {
+        return;
+    }
+
+    await supabaseFetch('/auth/v1/logout', {
+        method: 'POST',
+        key: anonKey,
+        token
     });
 }
 
@@ -136,15 +140,12 @@ async function getUserByToken(token) {
         return null;
     }
 
-    const data = await readData();
-    const session = data.sessions.find((candidate) => candidate.token === token);
+    const user = await supabaseFetch('/auth/v1/user', {
+        key: anonKey,
+        token
+    });
 
-    if (!session) {
-        return null;
-    }
-
-    const user = data.users.find((candidate) => candidate.id === session.userId);
-    return user ? sanitizeUser(user) : null;
+    return sanitizeUser(user);
 }
 
 async function requireUser(req) {
