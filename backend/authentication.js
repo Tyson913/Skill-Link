@@ -71,27 +71,20 @@ async function signup({ name, email, password }) {
         throw error;
     }
 
-    const payload = await supabaseFetch('/auth/v1/signup', {
+    await supabaseFetch('/auth/v1/admin/users', {
         method: 'POST',
-        key: anonKey,
-        token: anonKey,
         body: {
             email: cleanEmail,
             password,
-            data: {
+            email_confirm: true,
+            user_metadata: {
                 name: cleanName,
                 full_name: cleanName
             }
         }
     });
-    const user = extractUser(payload);
-    const safeUser = await upsertProfile(user);
 
-    return {
-        user: safeUser,
-        token: extractToken(payload),
-        requiresConfirmation: !extractToken(payload)
-    };
+    return login({ email: cleanEmail, password });
 }
 
 async function login({ email, password }) {

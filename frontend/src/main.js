@@ -503,11 +503,6 @@ signupForm.addEventListener('submit', async (event) => {
 
         signupForm.reset();
 
-        if (payload.requiresConfirmation || !payload.token) {
-            setStatus(signupStatus, 'Account created. Check your email to confirm it, then log in.');
-            return;
-        }
-
         authToken = payload.token;
         localStorage.setItem(authStorageKey, authToken);
         setLoggedIn(payload.user);
