@@ -298,12 +298,13 @@ closeButtons.forEach((button) => {
 
 
 loginForm.addEventListener('submit', () => {
-    login
-
-
+    const loginEmail = document.getElementById("loginEmail");
+    const loginPassword = document.getElementById("loginPassword");
 })
 
 signupForm.addEventListener('submit', () => {
+    const signupEmail = document.getElementById("signupEmail");
+    const signupPassword = document.getElementById("signupPassword");
     
 })
 
