@@ -3,4 +3,5 @@ node_modules
 dist/
 build/
 backend/data/*.json
-.chrome-profile-smoke
+.chrome-profile*
+package-lock.json
