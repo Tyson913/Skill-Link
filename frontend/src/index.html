@@ -5,76 +5,81 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Skill Link</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ionic/core/css/ionic.bundle.css">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <header>
-        <div class="header-inner">
-            <img class="logo" src="logo-removebg-preview.png" alt="Company logo">
+    <ion-app>
+        <ion-header class="app-shell-header">
+            <header>
+                <div class="header-inner">
+                    <img class="logo" src="logo-removebg-preview.png" alt="Company logo">
 
-            <nav class="header-left">
+                    <nav class="header-left">
 
-                <button id="loginBtn" class="btn btn-ghost" type="button">
-                    Log in
-                </button>
+                        <ion-button id="loginBtn" class="btn btn-ghost" type="button" fill="clear">
+                            Log in
+                        </ion-button>
 
-                <button id="signupBtn" class="btn btn-primary" type="button">
-                    Sign up
-                </button>
+                        <ion-button id="signupBtn" class="btn btn-primary" type="button">
+                            Sign up
+                        </ion-button>
 
-                <button id="usernameBttn" class="btn btn-pill" type="button" hidden></button>
+                        <ion-button id="usernameBttn" class="btn btn-pill" type="button" hidden></ion-button>
 
-                <button id="logout" class="btn btn-ghost" type="button" hidden>
-                    Log out
-                </button>
-            </nav>
-        </div>
-    </header>
-
-    <main>
-        <section id="landingPage">
-
-            <div class="container hero">
-
-                <div class="hero-content">
-                    <h1>
-                        Every problem has a solution.
-                    </h1>
-
-                    <p>
-                        Find the right service to get it solved.
-                    </p>
-
-                    <button id="main-page-trigger" class="btn btn-primary btn-lg" type="button">
-                        Get started
-                    </button>
-
+                        <ion-button id="logout" class="btn btn-ghost" type="button" fill="clear" hidden>
+                            Log out
+                        </ion-button>
+                    </nav>
                 </div>
+            </header>
+        </ion-header>
 
-            </div>
+        <ion-content fullscreen="true">
+            <main>
+                <section id="landingPage">
 
-        </section>
+                    <div class="container hero">
 
-        <section id="mainPage" style="display: none;">
+                        <div class="hero-content">
+                            <h1>
+                                Every problem has a solution.
+                            </h1>
 
-            <div class="container main-page-container">
+                            <p>
+                                Find the right service to get it solved.
+                            </p>
 
-                <div class="toolbar">
+                            <ion-button id="main-page-trigger" class="btn btn-primary btn-lg" type="button">
+                                Get started
+                            </ion-button>
 
-                    <span class="search-bar">
+                        </div>
 
-                        <i data-lucide="search"></i>
+                    </div>
 
-                        <input id="serviceSearch" type="text" placeholder="Search services or usernames">
+                </section>
 
-                    </span>
+                <section id="mainPage" style="display: none;">
 
-                    <button type="button" class="btn btn-icon" id="filterToggle" aria-label="Toggle filters"
-                        aria-expanded="false">
-                        <i data-lucide="sliders-horizontal"></i>
-                    </button>
+                    <div class="container main-page-container">
 
-                </div>
+                        <div class="toolbar">
+
+                            <span class="search-bar">
+
+                                <i data-lucide="search"></i>
+
+                                <input id="serviceSearch" type="text" placeholder="Search services or usernames">
+
+                            </span>
+
+                            <ion-button type="button" class="btn btn-icon" id="filterToggle" aria-label="Toggle filters"
+                                aria-expanded="false" fill="clear">
+                                <i data-lucide="sliders-horizontal"></i>
+                            </ion-button>
+
+                        </div>
 
                 <p id="appStatus" class="app-status" role="status"></p>
 
@@ -217,55 +222,55 @@
 
                         <div class="service-category-container">
 
-                            <span data-service="home-repair-services">
+                            <ion-chip data-service="home-repair-services">
                                 <i data-lucide="wrench"></i>
                                 Home & Repair
-                            </span>
+                            </ion-chip>
 
-                            <span data-service="technology-services">
+                            <ion-chip data-service="technology-services">
                                 <i data-lucide="laptop"></i>
                                 Technology
-                            </span>
+                            </ion-chip>
 
-                            <span data-service="automotive-services">
+                            <ion-chip data-service="automotive-services">
                                 <i data-lucide="car"></i>
                                 Automotive
-                            </span>
+                            </ion-chip>
 
-                            <span data-service="cleaning-services">
+                            <ion-chip data-service="cleaning-services">
                                 <i data-lucide="broom"></i>
                                 Cleaning
-                            </span>
+                            </ion-chip>
 
-                            <span data-service="beauty-wellness-services">
+                            <ion-chip data-service="beauty-wellness-services">
                                 <i data-lucide="sparkles"></i>
                                 Beauty & Wellness
-                            </span>
+                            </ion-chip>
 
-                            <span data-service="education-services">
+                            <ion-chip data-service="education-services">
                                 <i data-lucide="book-open"></i>
                                 Education
-                            </span>
+                            </ion-chip>
 
-                            <span data-service="creative-services">
+                            <ion-chip data-service="creative-services">
                                 <i data-lucide="palette"></i>
                                 Creative
-                            </span>
+                            </ion-chip>
 
-                            <span data-service="construction-services">
+                            <ion-chip data-service="construction-services">
                                 <i data-lucide="hard-hat"></i>
                                 Construction
-                            </span>
+                            </ion-chip>
 
-                            <span data-service="delivery-moving-services">
+                            <ion-chip data-service="delivery-moving-services">
                                 <i data-lucide="truck"></i>
                                 Delivery & Moving
-                            </span>
+                            </ion-chip>
 
-                            <span data-service="professional-services">
+                            <ion-chip data-service="professional-services">
                                 <i data-lucide="briefcase-business"></i>
                                 Professional Services
-                            </span>
+                            </ion-chip>
 
                         </div>
 
@@ -275,9 +280,9 @@
 
                 <div class="services" id="home-repair-services" hidden>
 
-                    <button type="button" class="service-close" aria-label="Back to categories">
+                    <ion-button type="button" class="service-close" aria-label="Back to categories" fill="clear">
                         <i data-lucide="x"></i>
-                    </button>
+                    </ion-button>
 
                     <div class="service-header">
 
@@ -296,9 +301,9 @@
 
                 <div class="services" id="technology-services" hidden>
 
-                    <button type="button" class="service-close" aria-label="Back to categories">
+                    <ion-button type="button" class="service-close" aria-label="Back to categories" fill="clear">
                         <i data-lucide="x"></i>
-                    </button>
+                    </ion-button>
 
                     <div class="service-header">
 
@@ -317,9 +322,9 @@
 
                 <div class="services" id="automotive-services" hidden>
 
-                    <button type="button" class="service-close" aria-label="Back to categories">
+                    <ion-button type="button" class="service-close" aria-label="Back to categories" fill="clear">
                         <i data-lucide="x"></i>
-                    </button>
+                    </ion-button>
 
                     <div class="service-header">
 
@@ -338,9 +343,9 @@
 
                 <div class="services" id="cleaning-services" hidden>
 
-                    <button type="button" class="service-close" aria-label="Back to categories">
+                    <ion-button type="button" class="service-close" aria-label="Back to categories" fill="clear">
                         <i data-lucide="x"></i>
-                    </button>
+                    </ion-button>
 
                     <div class="service-header">
 
@@ -359,9 +364,9 @@
 
                 <div class="services" id="beauty-wellness-services" hidden>
 
-                    <button type="button" class="service-close" aria-label="Back to categories">
+                    <ion-button type="button" class="service-close" aria-label="Back to categories" fill="clear">
                         <i data-lucide="x"></i>
-                    </button>
+                    </ion-button>
 
                     <div class="service-header">
 
@@ -380,9 +385,9 @@
 
                 <div class="services" id="education-services" hidden>
 
-                    <button type="button" class="service-close" aria-label="Back to categories">
+                    <ion-button type="button" class="service-close" aria-label="Back to categories" fill="clear">
                         <i data-lucide="x"></i>
-                    </button>
+                    </ion-button>
 
                     <div class="service-header">
 
@@ -401,9 +406,9 @@
 
                 <div class="services" id="creative-services" hidden>
 
-                    <button type="button" class="service-close" aria-label="Back to categories">
+                    <ion-button type="button" class="service-close" aria-label="Back to categories" fill="clear">
                         <i data-lucide="x"></i>
-                    </button>
+                    </ion-button>
 
                     <div class="service-header">
 
@@ -422,9 +427,9 @@
 
                 <div class="services" id="construction-services" hidden>
 
-                    <button type="button" class="service-close" aria-label="Back to categories">
+                    <ion-button type="button" class="service-close" aria-label="Back to categories" fill="clear">
                         <i data-lucide="x"></i>
-                    </button>
+                    </ion-button>
 
                     <div class="service-header">
 
@@ -443,9 +448,9 @@
 
                 <div class="services" id="delivery-moving-services" hidden>
 
-                    <button type="button" class="service-close" aria-label="Back to categories">
+                    <ion-button type="button" class="service-close" aria-label="Back to categories" fill="clear">
                         <i data-lucide="x"></i>
-                    </button>
+                    </ion-button>
 
                     <div class="service-header">
 
@@ -464,9 +469,9 @@
 
                 <div class="services" id="professional-services" hidden>
 
-                    <button type="button" class="service-close" aria-label="Back to categories">
+                    <ion-button type="button" class="service-close" aria-label="Back to categories" fill="clear">
                         <i data-lucide="x"></i>
-                    </button>
+                    </ion-button>
 
                     <div class="service-header">
 
@@ -502,9 +507,9 @@
                     </div>
                 </div>
             </div>
-        </section>
+                </section>
 
-        <div class="auth-form-container" id="authFormContainer">
+                <div class="auth-form-container" id="authFormContainer">
 
             <div class="auth-form-overlay" id="authFormOverlay"></div>
 
@@ -642,29 +647,33 @@
     
                 </form>
             </div>
-        </div>
-    </main>
-    <footer>
-        <div class="footer-inner">
-            <span>
-                <a href="#about">About Us</a>
-                <a href="#terms">Terms</a>
-                <a href="#privacy">Privacy Policy</a>
-            </span>
+                </div>
+            </main>
+            <footer>
+                <div class="footer-inner">
+                    <span>
+                        <a href="#about">About Us</a>
+                        <a href="#terms">Terms</a>
+                        <a href="#privacy">Privacy Policy</a>
+                    </span>
 
-            <span>
-                <a href="#help">Help</a>
-                <a href="#contact">Contact</a>
-                <a href="#faq">FAQ</a>
-            </span>
+                    <span>
+                        <a href="#help">Help</a>
+                        <a href="#contact">Contact</a>
+                        <a href="#faq">FAQ</a>
+                    </span>
 
-            <span>
-                <a href="#facebook">Facebook</a>
-                <a href="#instagram">Instagram</a>
-                <a href="#github">GitHub</a>
-            </span>
-        </div>
-    </footer>
+                    <span>
+                        <a href="#facebook">Facebook</a>
+                        <a href="#instagram">Instagram</a>
+                        <a href="#github">GitHub</a>
+                    </span>
+                </div>
+            </footer>
+        </ion-content>
+    </ion-app>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.esm.js"></script>
+    <script nomodule src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.js"></script>
     <script src="https://unpkg.com/lucide@latest">lucide.createIcons();</script>
     <script src="main.js"></script>
 </body>

@@ -231,7 +231,7 @@ function renderCategoryNav() {
     }
 
     categories.forEach((category) => {
-        const item = document.createElement('span');
+        const item = document.createElement('ion-chip');
         item.dataset.service = `${category.slug}-services`;
         item.tabIndex = 0;
         item.setAttribute('role', 'button');
@@ -247,9 +247,10 @@ function buildServiceSection(category) {
     section.id = `${category.slug}-services`;
     section.hidden = true;
 
-    const closeButton = document.createElement('button');
+    const closeButton = document.createElement('ion-button');
     closeButton.type = 'button';
     closeButton.className = 'service-close';
+    closeButton.setAttribute('fill', 'clear');
     closeButton.setAttribute('aria-label', 'Back to categories');
     closeButton.innerHTML = '<i data-lucide="x"></i>';
 
@@ -285,7 +286,7 @@ function clearServiceLists() {
 }
 
 function buildServiceCard(service) {
-    const card = document.createElement('article');
+    const card = document.createElement('ion-card');
     card.className = 'service-card';
 
     const header = document.createElement('div');
@@ -328,11 +329,11 @@ function buildServiceCard(service) {
     const footer = document.createElement('div');
     footer.className = 'service-card-footer';
 
-    const category = document.createElement('span');
+    const category = document.createElement('ion-chip');
     category.className = 'service-tag';
     category.textContent = service.categoryName || categoryLabels[service.category] || service.category;
 
-    const hireButton = document.createElement('button');
+    const hireButton = document.createElement('ion-button');
     hireButton.type = 'button';
     hireButton.className = 'btn btn-primary';
     hireButton.dataset.hireServiceId = service.id;
