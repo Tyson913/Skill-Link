@@ -44,27 +44,29 @@ const categoryLabels = {
 };
 
 const categoryIcons = {
-    'home-and-repair': 'wrench',
-    'home-repair': 'wrench',
-    technology: 'laptop',
-    automotive: 'car',
-    cleaning: 'broom',
-    'beauty-and-wellness': 'sparkles',
-    'beauty-wellness': 'sparkles',
-    education: 'book-open',
-    creative: 'palette',
-    construction: 'hard-hat',
-    'delivery-and-moving': 'truck',
-    'delivery-moving': 'truck',
-    professional: 'briefcase-business',
-    'professional-services': 'briefcase-business',
-    uncategorized: 'layers'
+    'home-and-repair': 'construct-outline',
+    'home-repair': 'construct-outline',
+    technology: 'laptop-outline',
+    automotive: 'car-outline',
+    cleaning: 'sparkles-outline',
+    'beauty-and-wellness': 'heart-outline',
+    'beauty-wellness': 'heart-outline',
+    education: 'book-outline',
+    creative: 'color-palette-outline',
+    construction: 'hammer-outline',
+    'delivery-and-moving': 'cube-outline',
+    'delivery-moving': 'cube-outline',
+    professional: 'briefcase-outline',
+    'professional-services': 'briefcase-outline',
+    uncategorized: 'layers-outline'
 };
 
 function refreshIcons() {
-    if (window.lucide) {
-        window.lucide.createIcons();
-    }
+    // Ionic icons render themselves once the web components are hydrated.
+}
+
+function iconMarkup(name) {
+    return `<ion-icon name="${name}" aria-hidden="true"></ion-icon>`;
 }
 
 function setStatus(element, message, type = '') {
@@ -110,11 +112,31 @@ async function apiRequest(path, options = {}) {
 }
 
 function getFormData(form) {
-    return Object.fromEntries(new FormData(form).entries());
+    const data = {};
+
+    form.querySelectorAll('[name]').forEach((field) => {
+        if (field.disabled) {
+            return;
+        }
+
+        data[field.name] = String(field.value || '').trim();
+    });
+
+    return data;
+}
+
+function resetFormControls(form) {
+    form.querySelectorAll('ion-input').forEach((field) => {
+        field.value = '';
+    });
+
+    form.querySelectorAll('ion-select').forEach((field) => {
+        field.value = field.dataset.defaultValue || '';
+    });
 }
 
 function setBusy(form, isBusy) {
-    const button = form.querySelector('button[type="submit"]');
+    const button = form.querySelector('ion-button[type="submit"], button[type="submit"]');
 
     if (button) {
         button.disabled = isBusy;
@@ -207,13 +229,13 @@ function renderFilterOptions() {
     const selectedValue = filterCategory.value;
     filterCategory.textContent = '';
 
-    const allOption = document.createElement('option');
+    const allOption = document.createElement('ion-select-option');
     allOption.value = '';
     allOption.textContent = 'All categories';
     filterCategory.append(allOption);
 
     categories.forEach((category) => {
-        const option = document.createElement('option');
+        const option = document.createElement('ion-select-option');
         option.value = category.slug;
         option.textContent = category.name;
         filterCategory.append(option);
@@ -235,7 +257,7 @@ function renderCategoryNav() {
         item.dataset.service = `${category.slug}-services`;
         item.tabIndex = 0;
         item.setAttribute('role', 'button');
-        item.innerHTML = `<i data-lucide="${categoryIcons[category.slug] || 'briefcase-business'}"></i>`;
+        item.innerHTML = iconMarkup(categoryIcons[category.slug] || 'briefcase-outline');
         item.append(` ${category.name}`);
         categoryList.append(item);
     });
@@ -252,11 +274,11 @@ function buildServiceSection(category) {
     closeButton.className = 'service-close';
     closeButton.setAttribute('fill', 'clear');
     closeButton.setAttribute('aria-label', 'Back to categories');
-    closeButton.innerHTML = '<i data-lucide="x"></i>';
+    closeButton.innerHTML = iconMarkup('close-outline');
 
     const header = document.createElement('div');
     header.className = 'service-header';
-    header.innerHTML = `<i data-lucide="${categoryIcons[category.slug] || 'briefcase-business'}"></i>`;
+    header.innerHTML = iconMarkup(categoryIcons[category.slug] || 'briefcase-outline');
 
     const heading = document.createElement('h1');
     heading.textContent = category.name;
@@ -317,11 +339,11 @@ function buildServiceCard(service) {
     meta.className = 'service-meta';
 
     const location = document.createElement('span');
-    location.innerHTML = '<i data-lucide="map-pin"></i>';
+    location.innerHTML = iconMarkup('location-outline');
     location.append(` ${service.location}`);
 
     const rating = document.createElement('span');
-    rating.innerHTML = '<i data-lucide="star"></i>';
+    rating.innerHTML = iconMarkup('star-outline');
     rating.append(` ${typeof service.rating === 'number' ? service.rating.toFixed(1) : 'New'}`);
 
     meta.append(location, rating);
@@ -380,19 +402,19 @@ function renderServices() {
 }
 
 function collectServiceQuery() {
-    const formData = new FormData(filterForm);
+    const formData = getFormData(filterForm);
     const params = new URLSearchParams();
-    const query = serviceSearch.value.trim();
+    const query = String(serviceSearch.value || '').trim();
 
     if (query) {
         params.set('q', query);
     }
 
-    for (const [key, value] of formData.entries()) {
+    Object.entries(formData).forEach(([key, value]) => {
         if (String(value).trim()) {
             params.set(key, String(value).trim());
         }
-    }
+    });
 
     return params.toString();
 }
@@ -474,7 +496,7 @@ loginForm.addEventListener('submit', async (event) => {
         authToken = payload.token;
         localStorage.setItem(authStorageKey, authToken);
         setLoggedIn(payload.user);
-        loginForm.reset();
+        resetFormControls(loginForm);
         setStatus(appStatus, 'Logged in.');
     } catch (error) {
         setStatus(loginStatus, getErrorMessage(error), 'error');
@@ -502,7 +524,7 @@ signupForm.addEventListener('submit', async (event) => {
             body: formData
         });
 
-        signupForm.reset();
+        resetFormControls(signupForm);
 
         authToken = payload.token;
         localStorage.setItem(authStorageKey, authToken);
@@ -538,9 +560,19 @@ filterForm.addEventListener('submit', (event) => {
 });
 
 filterForm.addEventListener('reset', () => {
-    window.setTimeout(loadServices, 0);
+    window.setTimeout(() => {
+        resetFormControls(filterForm);
+        const sortSelect = document.getElementById('filterSort');
+
+        if (sortSelect) {
+            sortSelect.value = 'relevance';
+        }
+
+        loadServices();
+    }, 0);
 });
 
+serviceSearch.addEventListener('ionInput', queueServiceLoad);
 serviceSearch.addEventListener('input', queueServiceLoad);
 
 function openServiceSection(serviceId) {
@@ -625,6 +657,53 @@ document.addEventListener('click', async (event) => {
         hireButton.disabled = false;
         hireButton.textContent = 'Hire';
         setStatus(appStatus, getErrorMessage(error), 'error');
+    }
+});
+
+// --- Footer pages: About / Terms / Privacy ---
+const pageSections = document.querySelectorAll('.page-section');
+const primaryViews = [landingPage, mainPage]; // the two "real" views, already in your code
+
+let previousView = landingPage;
+
+function showPage(id) {
+    // remember which primary view was on screen, so Back can restore it
+    previousView = primaryViews.find(view => view.style.display !== 'none') || landingPage;
+
+    primaryViews.forEach(view => (view.style.display = 'none'));
+    pageSections.forEach(section => (section.hidden = section.id !== id));
+    window.scrollTo({ top: 0 });
+}
+
+function closePage() {
+    pageSections.forEach(section => (section.hidden = true));
+    primaryViews.forEach(view => (view.style.display = 'none'));
+    previousView.style.display = '';
+}
+
+document.querySelectorAll('footer a[href^="#"]').forEach(link => {
+    link.addEventListener('click', (e) => {
+        const id = link.getAttribute('href').slice(1);
+        const target = document.getElementById(id);
+        if (!target || !target.classList.contains('page-section')) return; // lets #help/#contact/#faq pass through untouched
+        e.preventDefault();
+        showPage(id);
+        history.pushState(null, '', `#${id}`);
+    });
+});
+
+document.querySelectorAll('.page-back').forEach(btn => {
+    btn.addEventListener('click', () => {
+        closePage();
+        history.pushState(null, '', window.location.pathname);
+    });
+});
+
+// lets someone load the site at yoursite.com/#about directly
+window.addEventListener('DOMContentLoaded', () => {
+    const hash = window.location.hash.slice(1);
+    if (hash && document.getElementById(hash)?.classList.contains('page-section')) {
+        showPage(hash);
     }
 });
 

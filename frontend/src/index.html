@@ -5,81 +5,76 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Skill Link</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ionic/core/css/ionic.bundle.css">
+    <link rel="stylesheet" href="vendor/ionic/css/ionic.bundle.css">
     <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
     <ion-app>
-        <ion-header class="app-shell-header">
-            <header>
-                <div class="header-inner">
-                    <img class="logo" src="logo-removebg-preview.png" alt="Company logo">
+    <ion-header class="app-shell-header">
+        <div class="header-inner">
+            <ion-img class="logo" src="logo-removebg-preview.png" alt="Company logo"></ion-img>
 
-                    <nav class="header-left">
+            <nav class="header-left">
 
-                        <ion-button id="loginBtn" class="btn btn-ghost" type="button" fill="clear">
-                            Log in
-                        </ion-button>
+                <ion-button id="loginBtn" class="btn btn-ghost" type="button" fill="clear">
+                    Log in
+                </ion-button>
 
-                        <ion-button id="signupBtn" class="btn btn-primary" type="button">
-                            Sign up
-                        </ion-button>
+                <ion-button id="signupBtn" class="btn btn-primary" type="button">
+                    Sign up
+                </ion-button>
 
-                        <ion-button id="usernameBttn" class="btn btn-pill" type="button" hidden></ion-button>
+                <ion-button id="usernameBttn" class="btn btn-pill" type="button" hidden></ion-button>
 
-                        <ion-button id="logout" class="btn btn-ghost" type="button" fill="clear" hidden>
-                            Log out
-                        </ion-button>
-                    </nav>
+                <ion-button id="logout" class="btn btn-ghost" type="button" fill="clear" hidden>
+                    Log out
+                </ion-button>
+            </nav>
+        </div>
+    </ion-header>
+    <ion-content fullscreen>
+    <main>
+        <section id="landingPage">
+
+            <div class="container hero">
+
+                <div class="hero-content">
+                    <h1>
+                        Every problem has a solution.
+                    </h1>
+
+                    <p>
+                        Find the right service to get it solved.
+                    </p>
+
+                    <ion-button id="main-page-trigger" class="btn btn-primary btn-lg" type="button">
+                        Get started
+                    </ion-button>
                 </div>
-            </header>
-        </ion-header>
+            </div>
+        </section>
 
-        <ion-content fullscreen="true">
-            <main>
-                <section id="landingPage">
+        <section id="mainPage" style="display: none;">
 
-                    <div class="container hero">
+            <div class="container main-page-container">
 
-                        <div class="hero-content">
-                            <h1>
-                                Every problem has a solution.
-                            </h1>
+                <div class="toolbar">
 
-                            <p>
-                                Find the right service to get it solved.
-                            </p>
+                    <span class="search-bar">
 
-                            <ion-button id="main-page-trigger" class="btn btn-primary btn-lg" type="button">
-                                Get started
-                            </ion-button>
+                        <ion-icon name="search-outline" aria-hidden="true"></ion-icon>
 
-                        </div>
+                        <ion-input id="serviceSearch" type="text" placeholder="Search services or usernames"></ion-input>
 
-                    </div>
+                    </span>
 
-                </section>
+                    <ion-button type="button" class="btn btn-icon" id="filterToggle" aria-label="Toggle filters"
+                        aria-expanded="false">
+                        <ion-icon name="options-outline" aria-hidden="true"></ion-icon>
+                    </ion-button>
 
-                <section id="mainPage" style="display: none;">
-
-                    <div class="container main-page-container">
-
-                        <div class="toolbar">
-
-                            <span class="search-bar">
-
-                                <i data-lucide="search"></i>
-
-                                <input id="serviceSearch" type="text" placeholder="Search services or usernames">
-
-                            </span>
-
-                            <ion-button type="button" class="btn btn-icon" id="filterToggle" aria-label="Toggle filters"
-                                aria-expanded="false" fill="clear">
-                                <i data-lucide="sliders-horizontal"></i>
-                            </ion-button>
-
-                        </div>
+                </div>
 
                 <p id="appStatus" class="app-status" role="status"></p>
 
@@ -91,51 +86,51 @@
                             Category
                         </label>
 
-                        <select id="filterCategory" name="category">
-                            <option value="">
+                        <ion-select id="filterCategory" name="category" interface="popover" value="">
+                            <ion-select-option value="">
                                 All categories
-                            </option>
+                            </ion-select-option>
 
-                            <option value="home-repair">
+                            <ion-select-option value="home-repair">
                                 Home & Repair
-                            </option>
+                            </ion-select-option>
 
-                            <option value="technology">
+                            <ion-select-option value="technology">
                                 Technology
-                            </option>
+                            </ion-select-option>
 
-                            <option value="automotive">
+                            <ion-select-option value="automotive">
                                 Automotive
-                            </option>
+                            </ion-select-option>
 
-                            <option value="cleaning">
+                            <ion-select-option value="cleaning">
                                 Cleaning
-                            </option>
+                            </ion-select-option>
 
-                            <option value="beauty-wellness">
+                            <ion-select-option value="beauty-wellness">
                                 Beauty & Wellness
-                            </option>
+                            </ion-select-option>
 
-                            <option value="education">
+                            <ion-select-option value="education">
                                 Education
-                            </option>
+                            </ion-select-option>
 
-                            <option value="creative">
+                            <ion-select-option value="creative">
                                 Creative
-                            </option>
+                            </ion-select-option>
 
-                            <option value="construction">
+                            <ion-select-option value="construction">
                                 Construction
-                            </option>
+                            </ion-select-option>
 
-                            <option value="delivery-moving">
+                            <ion-select-option value="delivery-moving">
                                 Delivery & Moving
-                            </option>
+                            </ion-select-option>
 
-                            <option value="professional">
+                            <ion-select-option value="professional">
                                 Professional Services
-                            </option>
-                        </select>
+                            </ion-select-option>
+                        </ion-select>
 
                     </div>
 
@@ -146,7 +141,7 @@
                             Location
                         </label>
 
-                        <input type="text" id="filterLocation" name="location" placeholder="City or zip code">
+                        <ion-input type="text" id="filterLocation" name="location" placeholder="City or zip code"></ion-input>
 
                     </div>
 
@@ -159,13 +154,13 @@
 
                         <div class="filter-range-inputs">
 
-                            <input type="number" id="filterMinPrice" name="minPrice" min="0" placeholder="Min">
+                            <ion-input type="number" id="filterMinPrice" name="minPrice" min="0" placeholder="Min"></ion-input>
 
                             <span class="filter-range-sep">
                                 –
                             </span>
 
-                            <input type="number" id="filterMaxPrice" name="maxPrice" min="0" placeholder="Max">
+                            <ion-input type="number" id="filterMaxPrice" name="maxPrice" min="0" placeholder="Max"></ion-input>
                         </div>
                     </div>
 
@@ -176,36 +171,36 @@
                             Sort by
                         </label>
 
-                        <select id="filterSort" name="sort">
-                            <option value="relevance">
+                        <ion-select id="filterSort" name="sort" interface="popover" value="relevance">
+                            <ion-select-option value="relevance">
                                 Relevance
-                            </option>
+                            </ion-select-option>
 
-                            <option value="price-asc">
+                            <ion-select-option value="price-asc">
                                 Price: low to high
-                            </option>
+                            </ion-select-option>
 
-                            <option value="price-desc">
+                            <ion-select-option value="price-desc">
                                 Price: high to low
-                            </option>
+                            </ion-select-option>
 
-                            <option value="rating">
+                            <ion-select-option value="rating">
                                 Highest rated
-                            </option>
-                        </select>
+                            </ion-select-option>
+                        </ion-select>
 
                     </div>
 
 
                     <div class="filter-actions">
 
-                        <button type="reset" class="btn btn-ghost">
+                        <ion-button type="reset" class="btn btn-ghost" fill="clear">
                             Clear
-                        </button>
+                        </ion-button>
 
-                        <button type="submit" class="btn btn-primary">
+                        <ion-button type="submit" class="btn btn-primary">
                             Apply filters
-                        </button>
+                        </ion-button>
 
                     </div>
 
@@ -222,55 +217,55 @@
 
                         <div class="service-category-container">
 
-                            <ion-chip data-service="home-repair-services">
-                                <i data-lucide="wrench"></i>
+                            <span data-service="home-repair-services">
+                                <ion-icon name="construct-outline" aria-hidden="true"></ion-icon>
                                 Home & Repair
-                            </ion-chip>
+                            </span>
 
-                            <ion-chip data-service="technology-services">
-                                <i data-lucide="laptop"></i>
+                            <span data-service="technology-services">
+                                <ion-icon name="laptop-outline" aria-hidden="true"></ion-icon>
                                 Technology
-                            </ion-chip>
+                            </span>
 
-                            <ion-chip data-service="automotive-services">
-                                <i data-lucide="car"></i>
+                            <span data-service="automotive-services">
+                                <ion-icon name="car-outline" aria-hidden="true"></ion-icon>
                                 Automotive
-                            </ion-chip>
+                            </span>
 
-                            <ion-chip data-service="cleaning-services">
-                                <i data-lucide="broom"></i>
+                            <span data-service="cleaning-services">
+                                <ion-icon name="sparkles-outline" aria-hidden="true"></ion-icon>
                                 Cleaning
-                            </ion-chip>
+                            </span>
 
-                            <ion-chip data-service="beauty-wellness-services">
-                                <i data-lucide="sparkles"></i>
+                            <span data-service="beauty-wellness-services">
+                                <ion-icon name="heart-outline" aria-hidden="true"></ion-icon>
                                 Beauty & Wellness
-                            </ion-chip>
+                            </span>
 
-                            <ion-chip data-service="education-services">
-                                <i data-lucide="book-open"></i>
+                            <span data-service="education-services">
+                                <ion-icon name="book-outline" aria-hidden="true"></ion-icon>
                                 Education
-                            </ion-chip>
+                            </span>
 
-                            <ion-chip data-service="creative-services">
-                                <i data-lucide="palette"></i>
+                            <span data-service="creative-services">
+                                <ion-icon name="color-palette-outline" aria-hidden="true"></ion-icon>
                                 Creative
-                            </ion-chip>
+                            </span>
 
-                            <ion-chip data-service="construction-services">
-                                <i data-lucide="hard-hat"></i>
+                            <span data-service="construction-services">
+                                <ion-icon name="hammer-outline" aria-hidden="true"></ion-icon>
                                 Construction
-                            </ion-chip>
+                            </span>
 
-                            <ion-chip data-service="delivery-moving-services">
-                                <i data-lucide="truck"></i>
+                            <span data-service="delivery-moving-services">
+                                <ion-icon name="cube-outline" aria-hidden="true"></ion-icon>
                                 Delivery & Moving
-                            </ion-chip>
+                            </span>
 
-                            <ion-chip data-service="professional-services">
-                                <i data-lucide="briefcase-business"></i>
+                            <span data-service="professional-services">
+                                <ion-icon name="briefcase-outline" aria-hidden="true"></ion-icon>
                                 Professional Services
-                            </ion-chip>
+                            </span>
 
                         </div>
 
@@ -281,12 +276,12 @@
                 <div class="services" id="home-repair-services" hidden>
 
                     <ion-button type="button" class="service-close" aria-label="Back to categories" fill="clear">
-                        <i data-lucide="x"></i>
+                        <ion-icon name="close-outline" aria-hidden="true"></ion-icon>
                     </ion-button>
 
                     <div class="service-header">
 
-                        <i data-lucide="wrench"></i>
+                        <ion-icon name="construct-outline" aria-hidden="true"></ion-icon>
 
                         <h1>
                             Home & Repair
@@ -302,12 +297,12 @@
                 <div class="services" id="technology-services" hidden>
 
                     <ion-button type="button" class="service-close" aria-label="Back to categories" fill="clear">
-                        <i data-lucide="x"></i>
+                        <ion-icon name="close-outline" aria-hidden="true"></ion-icon>
                     </ion-button>
 
                     <div class="service-header">
 
-                        <i data-lucide="laptop"></i>
+                        <ion-icon name="laptop-outline" aria-hidden="true"></ion-icon>
 
                         <h1>
                             Technology
@@ -323,12 +318,12 @@
                 <div class="services" id="automotive-services" hidden>
 
                     <ion-button type="button" class="service-close" aria-label="Back to categories" fill="clear">
-                        <i data-lucide="x"></i>
+                        <ion-icon name="close-outline" aria-hidden="true"></ion-icon>
                     </ion-button>
 
                     <div class="service-header">
 
-                        <i data-lucide="car"></i>
+                        <ion-icon name="car-outline" aria-hidden="true"></ion-icon>
 
                         <h1>
                             Automotive
@@ -344,12 +339,12 @@
                 <div class="services" id="cleaning-services" hidden>
 
                     <ion-button type="button" class="service-close" aria-label="Back to categories" fill="clear">
-                        <i data-lucide="x"></i>
+                        <ion-icon name="close-outline" aria-hidden="true"></ion-icon>
                     </ion-button>
 
                     <div class="service-header">
 
-                        <i data-lucide="broom"></i>
+                        <ion-icon name="sparkles-outline" aria-hidden="true"></ion-icon>
 
                         <h1>
                             Cleaning
@@ -365,12 +360,12 @@
                 <div class="services" id="beauty-wellness-services" hidden>
 
                     <ion-button type="button" class="service-close" aria-label="Back to categories" fill="clear">
-                        <i data-lucide="x"></i>
+                        <ion-icon name="close-outline" aria-hidden="true"></ion-icon>
                     </ion-button>
 
                     <div class="service-header">
 
-                        <i data-lucide="sparkles"></i>
+                        <ion-icon name="heart-outline" aria-hidden="true"></ion-icon>
 
                         <h1>
                             Beauty & Wellness
@@ -386,12 +381,12 @@
                 <div class="services" id="education-services" hidden>
 
                     <ion-button type="button" class="service-close" aria-label="Back to categories" fill="clear">
-                        <i data-lucide="x"></i>
+                        <ion-icon name="close-outline" aria-hidden="true"></ion-icon>
                     </ion-button>
 
                     <div class="service-header">
 
-                        <i data-lucide="book-open"></i>
+                        <ion-icon name="book-outline" aria-hidden="true"></ion-icon>
 
                         <h1>
                             Education
@@ -407,12 +402,12 @@
                 <div class="services" id="creative-services" hidden>
 
                     <ion-button type="button" class="service-close" aria-label="Back to categories" fill="clear">
-                        <i data-lucide="x"></i>
+                        <ion-icon name="close-outline" aria-hidden="true"></ion-icon>
                     </ion-button>
 
                     <div class="service-header">
 
-                        <i data-lucide="palette"></i>
+                        <ion-icon name="color-palette-outline" aria-hidden="true"></ion-icon>
 
                         <h1>
                             Creative
@@ -428,12 +423,12 @@
                 <div class="services" id="construction-services" hidden>
 
                     <ion-button type="button" class="service-close" aria-label="Back to categories" fill="clear">
-                        <i data-lucide="x"></i>
+                        <ion-icon name="close-outline" aria-hidden="true"></ion-icon>
                     </ion-button>
 
                     <div class="service-header">
 
-                        <i data-lucide="hard-hat"></i>
+                        <ion-icon name="hammer-outline" aria-hidden="true"></ion-icon>
 
                         <h1>
                             Construction
@@ -449,12 +444,12 @@
                 <div class="services" id="delivery-moving-services" hidden>
 
                     <ion-button type="button" class="service-close" aria-label="Back to categories" fill="clear">
-                        <i data-lucide="x"></i>
+                        <ion-icon name="close-outline" aria-hidden="true"></ion-icon>
                     </ion-button>
 
                     <div class="service-header">
 
-                        <i data-lucide="truck"></i>
+                        <ion-icon name="cube-outline" aria-hidden="true"></ion-icon>
 
                         <h1>
                             Delivery & Moving
@@ -470,12 +465,12 @@
                 <div class="services" id="professional-services" hidden>
 
                     <ion-button type="button" class="service-close" aria-label="Back to categories" fill="clear">
-                        <i data-lucide="x"></i>
+                        <ion-icon name="close-outline" aria-hidden="true"></ion-icon>
                     </ion-button>
 
                     <div class="service-header">
 
-                        <i data-lucide="briefcase-business"></i>
+                        <ion-icon name="briefcase-outline" aria-hidden="true"></ion-icon>
 
                         <h1>
                             Professional Services
@@ -494,7 +489,6 @@
                         <div class="profile-avatar" id="profileAvatar"></div>
 
                         <div>
-
                             <h2 id="profileName">
                                 Your profile
                             </h2>
@@ -507,18 +501,18 @@
                     </div>
                 </div>
             </div>
-                </section>
+        </section>
 
-                <div class="auth-form-container" id="authFormContainer">
+        <div class="auth-form-container" id="authFormContainer">
 
             <div class="auth-form-overlay" id="authFormOverlay"></div>
 
 
             <div class="auth-form-box">
 
-                <button type="button" class="auth-form-close" id="authFormClose" aria-label="Close">
-                    &times;
-                </button>
+                <ion-button type="button" class="auth-form-close" id="authFormClose" aria-label="Close" fill="clear">
+                    <ion-icon name="close-outline" aria-hidden="true"></ion-icon>
+                </ion-button>
 
                 <form id="loginForm" class="auth-form" novalidate>
 
@@ -532,7 +526,7 @@
                             Email
                         </label>
 
-                        <input type="email" id="loginEmail" name="email" autocomplete="email" required>
+                        <ion-input type="email" id="loginEmail" name="email" autocomplete="email" required></ion-input>
 
                     </div>
 
@@ -543,15 +537,14 @@
                             Password
                         </label>
 
-                        <input type="password" id="loginPassword" name="password" autocomplete="current-password"
-                            required>
-
+                        <ion-input type="password" id="loginPassword" name="password" autocomplete="current-password"
+                            required></ion-input>
                     </div>
 
 
-                    <button type="submit">
+                    <ion-button type="submit" class="btn btn-primary">
                         Log in
-                    </button>
+                    </ion-button>
 
                     <p id="loginStatus" class="form-status" role="status"></p>
 
@@ -577,7 +570,7 @@
                             Full name
                         </label>
 
-                        <input type="text" id="signupName" name="name" autocomplete="name" required>
+                        <ion-input type="text" id="signupName" name="name" autocomplete="name" required></ion-input>
 
                     </div>
 
@@ -588,7 +581,7 @@
                             Email
                         </label>
 
-                        <input type="email" id="signupEmail" name="email" autocomplete="email" required>
+                        <ion-input type="email" id="signupEmail" name="email" autocomplete="email" required></ion-input>
 
                     </div>
 
@@ -598,7 +591,7 @@
                             Password
                         </label>
 
-                        <input type="password" id="signupPassword" name="password" autocomplete="new-password" required>
+                        <ion-input type="password" id="signupPassword" name="password" autocomplete="new-password" required></ion-input>
                     </div>
 
 
@@ -607,13 +600,13 @@
                             Confirm password
                         </label>
 
-                        <input type="password" id="signupConfirmPassword" name="confirmPassword"
-                            autocomplete="new-password" required>
+                        <ion-input type="password" id="signupConfirmPassword" name="confirmPassword"
+                            autocomplete="new-password" required></ion-input>
                     </div>
 
-                    <button type="submit">
+                    <ion-button type="submit" class="btn btn-primary">
                         Sign up
-                    </button>
+                    </ion-button>
 
                     <p id="signupStatus" class="form-status" role="status"></p>
 
@@ -628,12 +621,12 @@
                 <form action="">
                     <span>
                         <label for="fullname">Full Name</label>
-                        <input type="text" placeholder="">
+                        <ion-input type="text" placeholder=""></ion-input>
                     </span>
 
                     <span>
                         <label for="">Age</label>
-                        <input type="number" min="18">
+                        <ion-input type="number" min="18"></ion-input>
                     </span>
 
                     <span>
@@ -644,36 +637,224 @@
                     <span>
 
                     </span>
-    
+
                 </form>
             </div>
-                </div>
-            </main>
-            <footer>
-                <div class="footer-inner">
-                    <span>
-                        <a href="#about">About Us</a>
-                        <a href="#terms">Terms</a>
-                        <a href="#privacy">Privacy Policy</a>
-                    </span>
+        </div>
 
-                    <span>
-                        <a href="#help">Help</a>
-                        <a href="#contact">Contact</a>
-                        <a href="#faq">FAQ</a>
-                    </span>
+        <section class="page-section about" id="about" hidden>
+            <div class="container page-content">
+                <button type="button" class="page-back" data-close-page>
+                    <i data-lucide="arrow-left"></i>
+                    Back
+                </button>
 
-                    <span>
-                        <a href="#facebook">Facebook</a>
-                        <a href="#instagram">Instagram</a>
-                        <a href="#github">GitHub</a>
-                    </span>
+                <h1>About SkillLink</h1>
+                <p class="page-lead">Connecting people who need things done with people who know how to do them.</p>
+
+                <div class="page-body">
+                    <h2>Our mission</h2>
+                    <p>SkillLink makes it simple to find trustworthy help — whether that's a plumber down the street or
+                        a developer on the other side of the country. We built a two-sided marketplace where anyone can
+                        offer a skill or hire one, manual or technical.</p>
+
+                    <h2>How it works</h2>
+                    <p>Providers list what they do, set their rates, and get discovered through search and category
+                        browsing. Clients compare listings, filter by location and price, and reach out directly — no
+                        middlemen, no bidding wars.</p>
+
+                    <h2>Where we're headed</h2>
+                    <p>We're actively adding features like verified reviews, in-app messaging, and secure payments.
+                        Feedback is always welcome.</p>
                 </div>
-            </footer>
-        </ion-content>
-    </ion-app>
-    <script type="module" src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.esm.js"></script>
-    <script nomodule src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.js"></script>
+            </div>
+        </section>
+
+        <section class="page-section terms-conditions" id="terms" hidden>
+            <div class="container page-content">
+                <button type="button" class="page-back" data-close-page>
+                    <i data-lucide="arrow-left"></i>
+                    Back
+                </button>
+
+                <h1>Terms &amp; Conditions</h1>
+                <p class="page-lead">Last updated: [date]</p>
+
+                <div class="page-body">
+                    <h2>1. Acceptance of terms</h2>
+                    <p>By creating an account or using SkillLink, you agree to these terms.</p>
+
+                    <h2>2. What SkillLink is</h2>
+                    <p>SkillLink connects people offering services with people looking to hire them. We don't employ
+                        providers and aren't a party to agreements made between a client and a provider.</p>
+
+                    <h2>3. Accounts</h2>
+                    <p>You're responsible for keeping your login details secure and for all activity under your account.
+                        You must be at least 18 to create an account.</p>
+
+                    <h2>4. User conduct</h2>
+                    <p>You agree not to post false listings, harass other users, or attempt to circumvent the platform
+                        to avoid fees.</p>
+
+                    <h2>5. Payments and fees</h2>
+                    <p>Any platform fees are disclosed before you're charged. Arrangements made outside the platform are
+                        the responsibility of the parties involved.</p>
+
+                    <h2>6. Limitation of liability</h2>
+                    <p>SkillLink is provided "as is." We don't guarantee the quality, safety, or legality of services
+                        offered by providers.</p>
+
+                    <h2>7. Changes to these terms</h2>
+                    <p>We may update these terms; continued use after changes means you accept them.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="page-section privacy-policy" id="privacy" hidden>
+            <div class="container page-content">
+                <button type="button" class="page-back" data-close-page>
+                    <i data-lucide="arrow-left"></i>
+                    Back
+                </button>
+
+                <h1>Privacy Policy</h1>
+                <p class="page-lead">Last updated: [date]</p>
+
+                <div class="page-body">
+                    <h2>Information we collect</h2>
+                    <p>Your name, email, and password when you sign up, plus any listing details you provide — category,
+                        price, location.</p>
+
+                    <h2>How we use it</h2>
+                    <p>To run your account, show your listings to other users, and improve SkillLink. We don't sell your
+                        data to third parties.</p>
+
+                    <h2>Cookies and storage</h2>
+                    <p>We use local storage and cookies to keep you signed in and remember your preferences.</p>
+
+                    <h2>Sharing</h2>
+                    <p>Your public profile and listings are visible to other users. We only share private account
+                        details when required by law or to operate core services (hosting, database).</p>
+
+                    <h2>Your choices</h2>
+                    <p>Update or delete your info anytime from your profile settings, or contact us to have your data
+                        removed entirely.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="page-section help" id="help" hidden>
+            <div class="container page-content">
+                <button type="button" class="page-back" data-close-page>
+                    <i data-lucide="arrow-left"></i>
+                    Back
+                </button>
+
+                <h1>Help Center</h1>
+                <p class="page-lead">Quick answers to get you moving — browsing, offering, and managing your account.
+                </p>
+
+                <div class="page-body">
+                    <h2>Getting started</h2>
+                    <p>Create an account with the Sign up button, then browse categories on the main page or search
+                        directly for a service or username.</p>
+
+                    <h2>Offering a service</h2>
+                    <p>Once you're signed in, list what you do under the relevant category, set your price, and add a
+                        location so nearby clients can find you.</p>
+
+                    <h2>Finding a provider</h2>
+                    <p>Use the search bar or category tiles to browse listings. The filter panel lets you narrow results
+                        by category, location, price range, and sort order.</p>
+
+                    <h2>Managing your account</h2>
+                    <p>Update your details from your profile page. If something looks wrong or you can't access your
+                        account, reach out through our Contact page.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="page-section contact" id="contact" hidden>
+            <div class="container page-content">
+                <button type="button" class="page-back" data-close-page>
+                    <i data-lucide="arrow-left"></i>
+                    Back
+                </button>
+
+                <h1>Contact Us</h1>
+                <p class="page-lead">Have a question, an issue, or feedback? Here's how to reach us.</p>
+
+                <div class="page-body">
+                    <h2>General inquiries</h2>
+                    <p>For anything else, email us at <a href="mailto:hello@skilllink.com">hello@skilllink.com</a> and
+                        we'll get back to you within a couple of business days.</p>
+
+                    <h2>Support</h2>
+                    <p>Running into a problem with your account or a listing? Email <a
+                            href="mailto:support@skilllink.com">support@skilllink.com</a> with details and we'll help
+                        sort it out.</p>
+
+                    <h2>Business & partnerships</h2>
+                    <p>Interested in partnering with SkillLink? Reach out at <a
+                            href="mailto:partners@skilllink.com">partners@skilllink.com</a>.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="page-section faq" id="faq" hidden>
+            <div class="container page-content">
+                <button type="button" class="page-back" data-close-page>
+                    <i data-lucide="arrow-left"></i>
+                    Back
+                </button>
+
+                <h1>Frequently Asked Questions</h1>
+                <p class="page-lead">Common questions about using SkillLink.</p>
+
+                <div class="page-body">
+                    <h2>Is SkillLink free to use?</h2>
+                    <p>Creating an account and browsing listings is free. Any platform fees for specific transactions
+                        are disclosed before you're charged.</p>
+
+                    <h2>Can I offer more than one service?</h2>
+                    <p>Yes — you can list as many services as you like across different categories.</p>
+
+                    <h2>How do I contact a provider?</h2>
+                    <p>Open their listing to see contact details, or reach out once in-app messaging is available.</p>
+
+                    <h2>What if a provider doesn't deliver as promised?</h2>
+                    <p>SkillLink connects clients and providers but isn't a party to agreements made between them. See
+                        our Terms & Conditions for details.</p>
+
+                    <h2>How do I delete my account?</h2>
+                    <p>Contact us and we'll remove your account and associated data — see our Privacy Policy for more on
+                        how it's handled.</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+    <footer>
+        <div class="footer-inner">
+            <span>
+                <a href="#about">About Us</a>
+                <a href="#terms">Terms & Conditions</a>
+                <a href="#privacy">Privacy Policy</a>
+            </span>
+
+            <span>
+                <a href="#help">Help</a>
+                <a href="#contact">Contact</a>
+                <a href="#faq">FAQ</a>
+            </span>
+
+            <span>
+                <a href="#facebook">Facebook</a>
+                <a href="#instagram">Instagram</a>
+                <a href="#github">GitHub</a>
+            </span>
+        </div>
+    </footer>
     <script src="https://unpkg.com/lucide@latest">lucide.createIcons();</script>
     <script src="main.js"></script>
 </body>

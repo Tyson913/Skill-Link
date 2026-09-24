@@ -1,4 +1,82 @@
-        @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Space+Grotesk:wght@300..700&display=swap');
+        @font-face {
+            font-family: 'Inter';
+            src: url('vendor/fonts/inter/inter-latin-300-normal.woff2') format('woff2');
+            font-weight: 300;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'Inter';
+            src: url('vendor/fonts/inter/inter-latin-400-normal.woff2') format('woff2');
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'Inter';
+            src: url('vendor/fonts/inter/inter-latin-500-normal.woff2') format('woff2');
+            font-weight: 500;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'Inter';
+            src: url('vendor/fonts/inter/inter-latin-600-normal.woff2') format('woff2');
+            font-weight: 600;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'Inter';
+            src: url('vendor/fonts/inter/inter-latin-700-normal.woff2') format('woff2');
+            font-weight: 700;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'Space Grotesk';
+            src: url('vendor/fonts/space-grotesk/space-grotesk-latin-300-normal.woff2') format('woff2');
+            font-weight: 300;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'Space Grotesk';
+            src: url('vendor/fonts/space-grotesk/space-grotesk-latin-400-normal.woff2') format('woff2');
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'Space Grotesk';
+            src: url('vendor/fonts/space-grotesk/space-grotesk-latin-500-normal.woff2') format('woff2');
+            font-weight: 500;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'Space Grotesk';
+            src: url('vendor/fonts/space-grotesk/space-grotesk-latin-600-normal.woff2') format('woff2');
+            font-weight: 600;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'Space Grotesk';
+            src: url('vendor/fonts/space-grotesk/space-grotesk-latin-700-normal.woff2') format('woff2');
+            font-weight: 700;
+            font-style: normal;
+            font-display: swap;
+        }
 
         :root {
             --color-primary: #2563EB;
@@ -86,6 +164,16 @@
             display: none;
         }
 
+        ion-footer.app-shell-footer {
+            display: block;
+            background: var(--color-surface);
+            box-shadow: none;
+        }
+
+        ion-footer.app-shell-footer::before {
+            display: none;
+        }
+
         ion-content::part(background) {
             background: var(--color-surface);
         }
@@ -94,6 +182,17 @@
             display: flex;
             min-height: 100%;
             flex-direction: column;
+        }
+
+        ion-button {
+            text-transform: none;
+            letter-spacing: 0;
+        }
+
+        ion-img.logo::part(image) {
+            width: auto;
+            height: 100%;
+            object-fit: contain;
         }
 
         main {
@@ -119,7 +218,9 @@
 
         button,
         input,
-        select {
+        select,
+        ion-input,
+        ion-select {
             font-family: var(--font-body);
         }
 
@@ -284,7 +385,8 @@
             color: var(--color-primary);
         }
 
-        .btn-icon svg {
+        .btn-icon svg,
+        .btn-icon ion-icon {
             width: 20px;
             height: 20px;
         }
@@ -303,7 +405,9 @@
         }
 
         .btn:disabled,
-        .auth-form button[type="submit"]:disabled {
+        ion-button.btn[disabled],
+        .auth-form button[type="submit"]:disabled,
+        .auth-form ion-button[type="submit"][disabled] {
             cursor: not-allowed;
             opacity: 0.7;
         }
@@ -407,7 +511,8 @@
             background: var(--color-surface-alt);
         }
 
-        .search-bar svg {
+        .search-bar svg,
+        .search-bar ion-icon {
             width: 18px;
             height: 18px;
 
@@ -416,7 +521,17 @@
             color: var(--color-muted);
         }
 
-        .search-bar input {
+        .search-bar input,
+        .search-bar ion-input {
+            --background: transparent;
+            --color: var(--color-ink);
+            --highlight-color: transparent;
+            --padding-bottom: 0;
+            --padding-end: 0;
+            --padding-start: 0;
+            --padding-top: 0;
+            --placeholder-color: var(--color-muted);
+
             width: 100%;
 
             border: none;
@@ -477,8 +592,20 @@
         }
 
         .filter-field input,
-        .filter-field select {
+        .filter-field select,
+        .filter-field ion-input,
+        .filter-field ion-select {
+            --background: var(--color-surface);
+            --color: var(--color-ink);
+            --highlight-color: transparent;
+            --padding-bottom: 0;
+            --padding-end: var(--space-3);
+            --padding-start: var(--space-3);
+            --padding-top: 0;
+            --placeholder-color: var(--color-muted);
+
             height: 40px;
+            min-height: 40px;
             padding: 0 var(--space-3);
 
             border: 1px solid var(--color-border);
@@ -491,7 +618,9 @@
         }
 
         .filter-field input:focus,
-        .filter-field select:focus {
+        .filter-field select:focus,
+        .filter-field ion-input.ion-focused,
+        .filter-field ion-select.select-expanded {
             border-color: var(--color-primary);
         }
 
@@ -599,7 +728,8 @@
             background: var(--color-accent-tint);
         }
 
-        .service-category-container svg {
+        .service-category-container svg,
+        .service-category-container ion-icon {
             width: 18px;
             height: 18px;
         }
@@ -639,7 +769,8 @@
             font-weight: 500;
         }
 
-        .service-header svg {
+        .service-header svg,
+        .service-header ion-icon {
             width: 20px;
             height: 20px;
             color: var(--color-primary);
@@ -728,7 +859,8 @@
             gap: var(--space-1);
         }
 
-        .service-meta svg {
+        .service-meta svg,
+        .service-meta ion-icon {
             width: 15px;
             height: 15px;
         }
@@ -802,7 +934,8 @@
             color: var(--color-primary);
         }
 
-        .service-close svg {
+        .service-close svg,
+        .service-close ion-icon {
             width: 18px;
             height: 18px;
         }
@@ -884,12 +1017,24 @@
         }
 
         .auth-form-close {
+            --background: transparent;
+            --background-hover: transparent;
+            --background-activated: transparent;
+            --box-shadow: none;
+            --color: var(--color-muted);
+            --padding-end: 0;
+            --padding-start: 0;
+
             position: absolute;
             top: var(--space-4);
             right: var(--space-4);
 
             border: none;
             background: transparent;
+
+            width: 30px;
+            height: 30px;
+            min-height: 30px;
 
             font-size: 22px;
             line-height: 1;
@@ -927,8 +1072,18 @@
             color: var(--color-ink);
         }
 
-        .form-group input {
+        .form-group input,
+        .form-group ion-input {
+            --background: var(--color-surface-alt);
+            --color: var(--color-ink);
+            --highlight-color: transparent;
+            --padding-bottom: 0;
+            --padding-end: var(--space-3);
+            --padding-start: var(--space-3);
+            --padding-top: 0;
+
             height: 42px;
+            min-height: 42px;
             padding: 0 var(--space-3);
 
             border: 1px solid var(--color-border);
@@ -940,12 +1095,20 @@
             color: var(--color-ink);
         }
 
-        .form-group input:focus {
+        .form-group input:focus,
+        .form-group ion-input.ion-focused {
             border-color: var(--color-primary);
         }
 
-        .auth-form button[type="submit"] {
+        .auth-form button[type="submit"],
+        .auth-form ion-button[type="submit"] {
+            --border-radius: var(--radius-sm);
+            --box-shadow: none;
+            --padding-bottom: 0;
+            --padding-top: 0;
+
             height: 44px;
+            min-height: 44px;
 
             border: none;
             border-radius: var(--radius-sm);
@@ -959,7 +1122,8 @@
             transition: background-color var(--transition);
         }
 
-        .auth-form button[type="submit"]:hover {
+        .auth-form button[type="submit"]:hover,
+        .auth-form ion-button[type="submit"]:hover {
             background: var(--color-primary-dark);
         }
 
@@ -991,7 +1155,8 @@
             text-decoration: underline;
         }
 
-        footer {
+        footer,
+        ion-footer.app-shell-footer {
             width: 100%;
 
             margin-top: var(--space-8);
@@ -1049,3 +1214,81 @@
             text-decoration:underline;
             text-underline-offset: 3px;
         }
+
+
+        .page-section {
+    margin-top: var(--space-7);
+    margin-bottom: var(--space-8);
+}
+
+.page-section[hidden] {
+    display: none;
+}
+
+.page-content {
+    max-width: 720px;
+}
+
+.page-back {
+    --background: transparent;
+    --background-hover: transparent;
+    --background-activated: transparent;
+    --box-shadow: none;
+    --color: var(--color-primary);
+    --padding-end: 0;
+    --padding-start: 0;
+
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+
+    margin-bottom: var(--space-5);
+    padding: 0;
+
+    border: none;
+    background: transparent;
+
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--color-primary);
+
+    cursor: pointer;
+    min-height: 0;
+    text-transform: none;
+}
+
+.page-back:hover {
+    text-decoration: underline;
+}
+
+.page-back svg,
+.page-back ion-icon {
+    width: 16px;
+    height: 16px;
+}
+
+.page-content h1 {
+    font-size: 28px;
+}
+
+.page-lead {
+    margin-top: var(--space-2);
+    color: var(--color-muted);
+    font-size: 15px;
+}
+
+.page-body {
+    margin-top: var(--space-6);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+}
+
+.page-body h2 {
+    font-size: 17px;
+    margin-bottom: var(--space-2);
+}
+
+.page-body p {
+    font-size: 15px;
+}
