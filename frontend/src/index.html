@@ -17,6 +17,47 @@
 
             <nav class="header-left">
 
+                <ion-button id="becomeProviderNav" class="btn btn-ghost nav-only-desktop" type="button" fill="clear">
+                    Become a provider
+                </ion-button>
+
+                <ion-button id="dashboardNavBtn" class="btn btn-ghost nav-only-desktop" type="button" fill="clear" hidden>
+                    Dashboard
+                </ion-button>
+
+                <div class="notif-wrap" id="notifWrap" hidden>
+                    <ion-button id="notifBell" class="btn btn-icon" type="button" aria-label="Notifications" aria-expanded="false">
+                        <ion-icon name="notifications-outline" aria-hidden="true"></ion-icon>
+                        <span class="notif-badge" id="notifBadge" hidden>0</span>
+                    </ion-button>
+
+                    <div class="notif-panel" id="notifPanel" hidden>
+                        <div class="notif-panel-header">
+                            <h3>Notifications</h3>
+                            <button type="button" class="notif-mark-all" id="notifMarkAll">Mark all read</button>
+                        </div>
+                        <div class="notif-list" id="notifList"></div>
+                        <button type="button" class="notif-view-all" id="notifViewAll">View all notifications</button>
+                    </div>
+                </div>
+
+                <div class="mobile-menu-wrap nav-mobile-only">
+                    <ion-button id="mobileMenuToggle" class="btn btn-icon" type="button" aria-label="More menu" aria-expanded="false">
+                        <ion-icon name="menu-outline" aria-hidden="true"></ion-icon>
+                    </ion-button>
+
+                    <div class="mobile-menu-panel" id="mobileMenuPanel" hidden>
+                        <button type="button" id="mobileBecomeProviderLink" class="mobile-menu-item">
+                            <ion-icon name="briefcase-outline" aria-hidden="true"></ion-icon>
+                            Become a provider
+                        </button>
+                        <button type="button" id="mobileDashboardLink" class="mobile-menu-item" hidden>
+                            <ion-icon name="grid-outline" aria-hidden="true"></ion-icon>
+                            Dashboard
+                        </button>
+                    </div>
+                </div>
+
                 <ion-button id="loginBtn" class="btn btn-ghost" type="button" fill="clear">
                     Log in
                 </ion-button>
@@ -74,9 +115,23 @@
                         <ion-icon name="options-outline" aria-hidden="true"></ion-icon>
                     </ion-button>
 
+                    <ion-button type="button" class="btn btn-icon" id="nearMeToggle" aria-label="Show providers near me"
+                        aria-pressed="false" title="Near me">
+                        <ion-icon name="navigate-outline" aria-hidden="true"></ion-icon>
+                    </ion-button>
+
                 </div>
 
                 <p id="appStatus" class="app-status" role="status"></p>
+
+                <div class="recommend-section" id="recommendSection" hidden>
+                    <div class="recommend-heading">
+                        <h2 id="recommendTitle">Recommended for you</h2>
+                        <p id="recommendSubtitle">Based on top-rated providers near you.</p>
+                    </div>
+
+                    <div class="recommend-track" id="recommendTrack"></div>
+                </div>
 
                 <form action="" id="filter-form" class="filter-form" hidden>
 
@@ -617,30 +672,44 @@
                         </a>
                     </p>
                 </form>
+            </div>
+        </div>
 
-                <form action="">
-                    <span>
-                        <label for="fullname">Full Name</label>
-                        <ion-input type="text" placeholder=""></ion-input>
-                    </span>
+        <div class="auth-form-container" id="disputeFormContainer">
+            <div class="auth-form-overlay" id="disputeFormOverlay"></div>
 
-                    <span>
-                        <label for="">Age</label>
-                        <ion-input type="number" min="18"></ion-input>
-                    </span>
+            <div class="auth-form-box">
+                <ion-button type="button" class="auth-form-close" id="disputeFormClose" aria-label="Close" fill="clear">
+                    <ion-icon name="close-outline" aria-hidden="true"></ion-icon>
+                </ion-button>
 
-                    <span>
-                        <label for="">Location</label>
+                <form id="disputeForm" class="auth-form" novalidate>
+                    <h2 id="disputeFormTitle">Report an issue</h2>
 
-                    </span>
+                    <div class="form-group">
+                        <label for="disputeReason">Reason</label>
+                        <ion-select id="disputeReason" name="reason" interface="popover" value="no-show">
+                            <ion-select-option value="no-show">Provider didn't show up</ion-select-option>
+                            <ion-select-option value="quality">Service quality issue</ion-select-option>
+                            <ion-select-option value="payment">Payment dispute</ion-select-option>
+                            <ion-select-option value="conduct">Inappropriate conduct</ion-select-option>
+                            <ion-select-option value="other">Other</ion-select-option>
+                        </ion-select>
+                    </div>
 
-                    <span>
+                    <div class="form-group">
+                        <label for="disputeDetails">Details</label>
+                        <textarea id="disputeDetails" name="details" rows="4"
+                            placeholder="Tell us what happened..." required></textarea>
+                    </div>
 
-                    </span>
-
+                    <ion-button type="submit" class="btn btn-primary">Submit report</ion-button>
+                    <p id="disputeFormStatus" class="form-status" role="status"></p>
                 </form>
             </div>
         </div>
+
+        <div class="toast-stack" id="toastStack" aria-live="polite"></div>
 
         <section class="page-section about" id="about" hidden>
             <div class="container page-content">
@@ -833,6 +902,366 @@
             </div>
         </section>
 
+        <section class="app-view provider-profile" id="providerProfilePage" style="display:none;">
+            <div class="container page-content-wide">
+                <button type="button" class="page-back" id="providerProfileBack">
+                    <ion-icon name="arrow-back-outline" aria-hidden="true"></ion-icon>
+                    Back to browsing
+                </button>
+
+                <div class="provider-hero">
+                    <div class="provider-hero-main">
+                        <div class="provider-avatar-lg" id="providerAvatar"></div>
+
+                        <div class="provider-hero-info">
+                            <div class="provider-name-row">
+                                <h1 id="providerName">Provider name</h1>
+                                <span class="badge badge-verified" id="providerVerifiedBadge" hidden>
+                                    <ion-icon name="checkmark-circle" aria-hidden="true"></ion-icon>
+                                    Verified
+                                </span>
+                            </div>
+
+                            <div class="provider-meta-row">
+                                <span class="provider-rating" id="providerRatingSummary">
+                                    <ion-icon name="star" aria-hidden="true"></ion-icon>
+                                    4.8 <span class="provider-rating-count">(0 reviews)</span>
+                                </span>
+                                <span class="provider-meta-sep">•</span>
+                                <span id="providerLocation">
+                                    <ion-icon name="location-outline" aria-hidden="true"></ion-icon>
+                                    Location
+                                </span>
+                                <span class="provider-meta-sep">•</span>
+                                <span id="providerMemberSince">Member since 2025</span>
+                            </div>
+
+                            <p class="provider-bio" id="providerBio">Provider description goes here.</p>
+
+                            <div class="reputation-strip" id="providerReputationStrip" hidden>
+                                <ion-icon name="alert-circle-outline" aria-hidden="true"></ion-icon>
+                                <span id="providerStrikeText">1 of 3 strikes on record</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="provider-hero-actions">
+                        <ion-button type="button" class="btn btn-icon" id="providerSaveBtn" aria-label="Save provider" aria-pressed="false">
+                            <ion-icon name="heart-outline" aria-hidden="true"></ion-icon>
+                        </ion-button>
+                        <ion-button type="button" class="btn btn-ghost" id="providerReportBtn">
+                            <ion-icon name="flag-outline" aria-hidden="true"></ion-icon>
+                            Report
+                        </ion-button>
+                    </div>
+                </div>
+
+                <div class="profile-tabs" role="tablist" id="providerTabs">
+                    <button type="button" class="profile-tab is-active" data-tab="services" role="tab" aria-selected="true">Services</button>
+                    <button type="button" class="profile-tab" data-tab="availability" role="tab" aria-selected="false">Availability</button>
+                    <button type="button" class="profile-tab" data-tab="reviews" role="tab" aria-selected="false">Reviews</button>
+                </div>
+
+                <div class="profile-tab-panel is-active" id="providerServicesPanel" data-panel="services">
+                    <div class="service-list" id="providerServiceList"></div>
+                </div>
+
+                <div class="profile-tab-panel" id="providerAvailabilityPanel" data-panel="availability" hidden>
+                    <p class="panel-hint">Pick an open slot to request this provider for that time.</p>
+                    <div class="availability-grid" id="availabilityGrid"></div>
+                    <div class="availability-actions" id="availabilityActions" hidden>
+                        <span id="selectedSlotLabel"></span>
+                        <ion-button type="button" class="btn btn-primary" id="requestSlotBtn">Request this time</ion-button>
+                    </div>
+                </div>
+
+                <div class="profile-tab-panel" id="providerReviewsPanel" data-panel="reviews" hidden>
+                    <div class="review-summary">
+                        <div class="review-score">
+                            <span id="reviewAvgScore">4.8</span>
+                            <div class="review-stars" id="reviewAvgStars"></div>
+                            <p id="reviewCount">0 reviews</p>
+                        </div>
+
+                        <div class="review-breakdown" id="reviewBreakdown"></div>
+                    </div>
+
+                    <ion-button type="button" class="btn btn-ghost" id="writeReviewBtn">
+                        <ion-icon name="create-outline" aria-hidden="true"></ion-icon>
+                        Write a review
+                    </ion-button>
+
+                    <form class="review-form" id="reviewForm" hidden>
+                        <div class="review-star-input" id="reviewStarInput" data-value="0">
+                            <ion-icon name="star-outline" data-star="1"></ion-icon>
+                            <ion-icon name="star-outline" data-star="2"></ion-icon>
+                            <ion-icon name="star-outline" data-star="3"></ion-icon>
+                            <ion-icon name="star-outline" data-star="4"></ion-icon>
+                            <ion-icon name="star-outline" data-star="5"></ion-icon>
+                        </div>
+                        <textarea id="reviewComment" placeholder="Share how the service went..." rows="3"></textarea>
+                        <div class="review-form-actions">
+                            <ion-button type="button" class="btn btn-ghost" id="cancelReviewBtn">Cancel</ion-button>
+                            <ion-button type="submit" class="btn btn-primary">Post review</ion-button>
+                        </div>
+                    </form>
+
+                    <div class="review-list" id="reviewList"></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="app-view become-provider" id="becomeProviderPage" style="display:none;">
+            <div class="container page-content">
+                <button type="button" class="page-back" id="becomeProviderBack">
+                    <ion-icon name="arrow-back-outline" aria-hidden="true"></ion-icon>
+                    Back
+                </button>
+
+                <h1>Become a provider</h1>
+                <p class="page-lead">List a service, set your availability, and start getting matched with clients near
+                    you.</p>
+
+                <form id="providerForm" class="stacked-form" novalidate>
+                    <div class="form-step">
+                        <h2>1. Service details</h2>
+
+                        <div class="form-group">
+                            <label for="providerServiceTitle">Service title</label>
+                            <ion-input type="text" id="providerServiceTitle" name="title" required
+                                placeholder="e.g. Residential electrical repair"></ion-input>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="providerServiceCategory">Category</label>
+                                <ion-select id="providerServiceCategory" name="category" interface="popover" value="home-repair">
+                                    <ion-select-option value="home-repair">Home & Repair</ion-select-option>
+                                    <ion-select-option value="technology">Technology</ion-select-option>
+                                    <ion-select-option value="automotive">Automotive</ion-select-option>
+                                    <ion-select-option value="cleaning">Cleaning</ion-select-option>
+                                    <ion-select-option value="beauty-wellness">Beauty & Wellness</ion-select-option>
+                                    <ion-select-option value="education">Education</ion-select-option>
+                                    <ion-select-option value="creative">Creative</ion-select-option>
+                                    <ion-select-option value="construction">Construction</ion-select-option>
+                                    <ion-select-option value="delivery-moving">Delivery & Moving</ion-select-option>
+                                    <ion-select-option value="professional">Professional Services</ion-select-option>
+                                </ion-select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="providerServicePrice">Starting price (₱)</label>
+                                <ion-input type="number" id="providerServicePrice" name="price" min="0" required></ion-input>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="providerServiceLocation">Location</label>
+                            <ion-input type="text" id="providerServiceLocation" name="location" required
+                                placeholder="City or service area"></ion-input>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="providerServiceDescription">Description</label>
+                            <textarea id="providerServiceDescription" name="description" rows="4"
+                                placeholder="What do you offer, and what makes you a good fit?"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-step">
+                        <h2>2. Weekly availability</h2>
+                        <p class="panel-hint">Toggle the days and general time blocks you're usually free. You can
+                            fine-tune exact slots later.</p>
+
+                        <div class="availability-picker" id="availabilityPicker"></div>
+                    </div>
+
+                    <div class="form-step">
+                        <h2>3. Verification</h2>
+                        <p class="panel-hint">Upload a valid ID or certification so clients know you're verified. This
+                            unlocks the "Verified" badge on your profile after admin review.</p>
+
+                        <label class="dropzone" for="providerVerificationFile">
+                            <ion-icon name="cloud-upload-outline" aria-hidden="true"></ion-icon>
+                            <span id="dropzoneLabel">Click to upload, or drag a file here</span>
+                            <input type="file" id="providerVerificationFile" hidden accept="image/*,.pdf">
+                        </label>
+                    </div>
+
+                    <ion-button type="submit" class="btn btn-primary btn-lg">Submit for review</ion-button>
+                    <p id="providerFormStatus" class="form-status" role="status"></p>
+                </form>
+
+                <div class="success-panel" id="providerSuccessPanel" hidden>
+                    <ion-icon name="checkmark-circle" aria-hidden="true"></ion-icon>
+                    <h2>You're on the list</h2>
+                    <p>Your provider profile is <strong>pending verification</strong>. We'll notify you once it's
+                        approved — usually within 1–2 business days.</p>
+                    <ion-button type="button" class="btn btn-primary" id="providerSuccessDone">Go to dashboard</ion-button>
+                </div>
+            </div>
+        </section>
+
+        <section class="app-view dashboard-page" id="dashboardPage" style="display:none;">
+            <div class="container page-content-wide">
+                <div class="dashboard-header">
+                    <h1>Your dashboard</h1>
+                    <p class="page-lead">Track requests, manage favorites, and keep tabs on your account.</p>
+                </div>
+
+                <div class="dashboard-layout">
+                    <nav class="dashboard-nav" id="dashboardNav" role="tablist">
+                        <button type="button" class="dashboard-nav-item is-active" data-dtab="overview" role="tab">
+                            <ion-icon name="grid-outline" aria-hidden="true"></ion-icon> Overview
+                        </button>
+                        <button type="button" class="dashboard-nav-item" data-dtab="requests" role="tab">
+                            <ion-icon name="briefcase-outline" aria-hidden="true"></ion-icon> My requests
+                        </button>
+                        <button type="button" class="dashboard-nav-item" data-dtab="history" role="tab">
+                            <ion-icon name="time-outline" aria-hidden="true"></ion-icon> Service history
+                        </button>
+                        <button type="button" class="dashboard-nav-item" data-dtab="favorites" role="tab">
+                            <ion-icon name="heart-outline" aria-hidden="true"></ion-icon> Favorites
+                        </button>
+                        <button type="button" class="dashboard-nav-item" data-dtab="notifications" role="tab">
+                            <ion-icon name="notifications-outline" aria-hidden="true"></ion-icon> Notifications
+                        </button>
+                        <button type="button" class="dashboard-nav-item" data-dtab="reviews" role="tab">
+                            <ion-icon name="star-outline" aria-hidden="true"></ion-icon> My reviews
+                        </button>
+                        <button type="button" class="dashboard-nav-item" data-dtab="disputes" role="tab">
+                            <ion-icon name="alert-circle-outline" aria-hidden="true"></ion-icon> Reports & disputes
+                        </button>
+                        <button type="button" class="dashboard-nav-item" data-dtab="trust" role="tab">
+                            <ion-icon name="shield-checkmark-outline" aria-hidden="true"></ion-icon> Account standing
+                        </button>
+                    </nav>
+
+                    <div class="dashboard-content">
+
+                        <div class="dashboard-panel is-active" id="dtab-overview" data-dpanel="overview">
+                            <div class="stat-grid" id="overviewStats"></div>
+                            <h3 class="dashboard-subheading">Recent activity</h3>
+                            <div class="timeline" id="overviewActivity"></div>
+                        </div>
+
+                        <div class="dashboard-panel" id="dtab-requests" data-dpanel="requests" hidden>
+                            <div class="panel-toolbar">
+                                <div class="segmented" id="requestStatusFilter">
+                                    <button type="button" class="is-active" data-status="all">All</button>
+                                    <button type="button" data-status="pending">Pending</button>
+                                    <button type="button" data-status="accepted">Accepted</button>
+                                    <button type="button" data-status="in-progress">In progress</button>
+                                    <button type="button" data-status="completed">Completed</button>
+                                </div>
+                            </div>
+                            <div class="request-list" id="requestList"></div>
+                        </div>
+
+                        <div class="dashboard-panel" id="dtab-history" data-dpanel="history" hidden>
+                            <div class="request-list" id="historyList"></div>
+                        </div>
+
+                        <div class="dashboard-panel" id="dtab-favorites" data-dpanel="favorites" hidden>
+                            <div class="service-list" id="favoritesList"></div>
+                        </div>
+
+                        <div class="dashboard-panel" id="dtab-notifications" data-dpanel="notifications" hidden>
+                            <div class="notif-list notif-list-page" id="notifPageList"></div>
+                        </div>
+
+                        <div class="dashboard-panel" id="dtab-reviews" data-dpanel="reviews" hidden>
+                            <div class="review-list" id="myReviewList"></div>
+                        </div>
+
+                        <div class="dashboard-panel" id="dtab-disputes" data-dpanel="disputes" hidden>
+                            <div class="panel-toolbar">
+                                <ion-button type="button" class="btn btn-primary" id="newDisputeBtn">
+                                    <ion-icon name="add-outline" aria-hidden="true"></ion-icon>
+                                    New report
+                                </ion-button>
+                            </div>
+                            <div class="dispute-list" id="disputeList"></div>
+                        </div>
+
+                        <div class="dashboard-panel" id="dtab-trust" data-dpanel="trust" hidden>
+                            <div class="trust-card">
+                                <h3>Three-strike standing</h3>
+                                <p class="panel-hint">Serious or repeated policy violations add a strike. Three strikes
+                                    leads to suspension.</p>
+                                <div class="strike-tracker" id="strikeTracker"></div>
+                                <a href="#" class="trust-guidelines-link">Read community guidelines</a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="app-view admin-page" id="adminDashboardPage" style="display:none;">
+            <div class="container page-content-wide">
+                <div class="dashboard-header">
+                    <h1>Admin console</h1>
+                    <p class="page-lead">Platform oversight — users, providers, verification, and disputes. <span
+                            class="demo-note">(Demo view — not access-gated in this build.)</span></p>
+                </div>
+
+                <nav class="segmented segmented-lg" id="adminNav" role="tablist">
+                    <button type="button" class="is-active" data-atab="analytics">Analytics</button>
+                    <button type="button" data-atab="users">Users & providers</button>
+                    <button type="button" data-atab="verification">Verification</button>
+                    <button type="button" data-atab="reports">Reports & disputes</button>
+                </nav>
+
+                <div class="admin-panel is-active" id="atab-analytics" data-apanel="analytics">
+                    <div class="stat-grid" id="adminStats"></div>
+
+                    <div class="admin-grid-2">
+                        <div class="panel-card">
+                            <h3>Requests this quarter</h3>
+                            <div class="bar-chart" id="adminBarChart"></div>
+                        </div>
+                        <div class="panel-card">
+                            <h3>Top categories</h3>
+                            <div class="rank-list" id="adminTopCategories"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="admin-panel" id="atab-users" data-apanel="users" hidden>
+                    <div class="panel-toolbar">
+                        <span class="search-bar admin-search">
+                            <ion-icon name="search-outline" aria-hidden="true"></ion-icon>
+                            <input type="text" id="adminUserSearch" placeholder="Search users or providers">
+                        </span>
+                    </div>
+                    <div class="data-table-wrap">
+                        <table class="data-table" id="adminUserTable">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Role</th>
+                                    <th>Strikes</th>
+                                    <th>Status</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody id="adminUserTableBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="admin-panel" id="atab-verification" data-apanel="verification" hidden>
+                    <div class="verify-queue" id="verifyQueue"></div>
+                </div>
+
+                <div class="admin-panel" id="atab-reports" data-apanel="reports" hidden>
+                    <div class="dispute-list" id="adminDisputeList"></div>
+                </div>
+            </div>
+        </section>
+
     </main>
     <footer>
         <div class="footer-inner">
@@ -852,6 +1281,10 @@
                 <a href="#facebook">Facebook</a>
                 <a href="#instagram">Instagram</a>
                 <a href="#github">GitHub</a>
+            </span>
+
+            <span>
+                <a href="#" id="adminFooterLink">Admin console</a>
             </span>
         </div>
     </footer>
