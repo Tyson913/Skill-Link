@@ -23,12 +23,105 @@ const logoutBtn = document.getElementById('logout');
 const filterToggle = document.getElementById('filterToggle');
 const filterForm = document.getElementById('filter-form');
 const filterCategory = document.getElementById('filterCategory');
+const filterLocation = document.getElementById('filterLocation');
 const serviceSearch = document.getElementById('serviceSearch');
 const appStatus = document.getElementById('appStatus');
 const loginStatus = document.getElementById('loginStatus');
 const signupStatus = document.getElementById('signupStatus');
 const categoryPage = document.getElementById('categoryPage');
 const categoryList = document.querySelector('.service-category-container');
+
+// --- New feature DOM refs ---
+const becomeProviderNav = document.getElementById('becomeProviderNav');
+const dashboardNavBtn = document.getElementById('dashboardNavBtn');
+const notifWrap = document.getElementById('notifWrap');
+const notifBell = document.getElementById('notifBell');
+const notifBadge = document.getElementById('notifBadge');
+const notifPanel = document.getElementById('notifPanel');
+const notifList = document.getElementById('notifList');
+const notifMarkAll = document.getElementById('notifMarkAll');
+const notifViewAll = document.getElementById('notifViewAll');
+const notifPageList = document.getElementById('notifPageList');
+const nearMeToggle = document.getElementById('nearMeToggle');
+const recommendSection = document.getElementById('recommendSection');
+const recommendTrack = document.getElementById('recommendTrack');
+const recommendSubtitle = document.getElementById('recommendSubtitle');
+const adminFooterLink = document.getElementById('adminFooterLink');
+const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+const mobileMenuPanel = document.getElementById('mobileMenuPanel');
+const mobileBecomeProviderLink = document.getElementById('mobileBecomeProviderLink');
+const mobileDashboardLink = document.getElementById('mobileDashboardLink');
+const toastStack = document.getElementById('toastStack');
+
+const providerProfilePage = document.getElementById('providerProfilePage');
+const providerProfileBack = document.getElementById('providerProfileBack');
+const providerAvatar = document.getElementById('providerAvatar');
+const providerName = document.getElementById('providerName');
+const providerVerifiedBadge = document.getElementById('providerVerifiedBadge');
+const providerRatingSummary = document.getElementById('providerRatingSummary');
+const providerLocation = document.getElementById('providerLocation');
+const providerMemberSince = document.getElementById('providerMemberSince');
+const providerBio = document.getElementById('providerBio');
+const providerReputationStrip = document.getElementById('providerReputationStrip');
+const providerStrikeText = document.getElementById('providerStrikeText');
+const providerSaveBtn = document.getElementById('providerSaveBtn');
+const providerReportBtn = document.getElementById('providerReportBtn');
+const providerTabs = document.getElementById('providerTabs');
+const providerServiceList = document.getElementById('providerServiceList');
+const availabilityGrid = document.getElementById('availabilityGrid');
+const availabilityActions = document.getElementById('availabilityActions');
+const selectedSlotLabel = document.getElementById('selectedSlotLabel');
+const requestSlotBtn = document.getElementById('requestSlotBtn');
+const reviewAvgScore = document.getElementById('reviewAvgScore');
+const reviewAvgStars = document.getElementById('reviewAvgStars');
+const reviewCount = document.getElementById('reviewCount');
+const reviewBreakdown = document.getElementById('reviewBreakdown');
+const writeReviewBtn = document.getElementById('writeReviewBtn');
+const reviewForm = document.getElementById('reviewForm');
+const reviewStarInput = document.getElementById('reviewStarInput');
+const reviewComment = document.getElementById('reviewComment');
+const cancelReviewBtn = document.getElementById('cancelReviewBtn');
+const reviewList = document.getElementById('reviewList');
+
+const becomeProviderPage = document.getElementById('becomeProviderPage');
+const becomeProviderBack = document.getElementById('becomeProviderBack');
+const providerForm = document.getElementById('providerForm');
+const availabilityPicker = document.getElementById('availabilityPicker');
+const providerVerificationFile = document.getElementById('providerVerificationFile');
+const dropzoneLabel = document.getElementById('dropzoneLabel');
+const providerFormStatus = document.getElementById('providerFormStatus');
+const providerSuccessPanel = document.getElementById('providerSuccessPanel');
+const providerSuccessDone = document.getElementById('providerSuccessDone');
+
+const dashboardPage = document.getElementById('dashboardPage');
+const dashboardNav = document.getElementById('dashboardNav');
+const overviewStats = document.getElementById('overviewStats');
+const overviewActivity = document.getElementById('overviewActivity');
+const requestStatusFilter = document.getElementById('requestStatusFilter');
+const requestList = document.getElementById('requestList');
+const historyList = document.getElementById('historyList');
+const favoritesList = document.getElementById('favoritesList');
+const myReviewList = document.getElementById('myReviewList');
+const disputeList = document.getElementById('disputeList');
+const newDisputeBtn = document.getElementById('newDisputeBtn');
+const strikeTracker = document.getElementById('strikeTracker');
+
+const adminDashboardPage = document.getElementById('adminDashboardPage');
+const adminNav = document.getElementById('adminNav');
+const adminStats = document.getElementById('adminStats');
+const adminBarChart = document.getElementById('adminBarChart');
+const adminTopCategories = document.getElementById('adminTopCategories');
+const adminUserSearch = document.getElementById('adminUserSearch');
+const adminUserTableBody = document.getElementById('adminUserTableBody');
+const verifyQueue = document.getElementById('verifyQueue');
+const adminDisputeList = document.getElementById('adminDisputeList');
+
+const disputeFormContainer = document.getElementById('disputeFormContainer');
+const disputeFormOverlay = document.getElementById('disputeFormOverlay');
+const disputeFormClose = document.getElementById('disputeFormClose');
+const disputeForm = document.getElementById('disputeForm');
+const disputeFormTitle = document.getElementById('disputeFormTitle');
+const disputeFormStatus = document.getElementById('disputeFormStatus');
 
 const categoryLabels = {
     'home-repair': 'Home & Repair',
@@ -63,6 +156,838 @@ const categoryIcons = {
 
 function refreshIcons() {
     // Ionic icons render themselves once the web components are hydrated.
+}
+
+/* =========================================================
+   DEMO DATA — the features below (matching, scheduling,
+   reviews, notifications, disputes, admin) don't have backend
+   endpoints yet. Everything in this block is placeholder data
+   shaped like what a real API response would look like, so the
+   UI is fully navigable now. Swap each render function's data
+   source for an apiRequest() call once the routes exist —
+   the spots to change are marked "REPLACE WITH API".
+   ========================================================= */
+
+const demoProviders = [
+    { id: 'prov-1', name: 'Marco Villanueva', initials: 'MV', category: 'home-repair', verified: true, strikes: 0, location: 'Davao City', memberSince: 'Jan 2024', bio: 'Licensed electrician and general home repair specialist with 8 years of field experience.', avgRating: 4.8, reviewCount: 34, price: 850 },
+    { id: 'prov-2', name: 'Aira Santos', initials: 'AS', category: 'technology', verified: true, strikes: 1, location: 'Davao City', memberSince: 'Mar 2023', bio: 'Full-stack developer offering website builds, bug fixes, and technical consulting.', avgRating: 4.6, reviewCount: 21, price: 1500 },
+    { id: 'prov-3', name: 'Jun Dela Cruz', initials: 'JD', category: 'automotive', verified: false, strikes: 0, location: 'Tagum City', memberSince: 'Jul 2024', bio: 'Mobile mechanic for car and motorcycle repairs — I come to you.', avgRating: 4.9, reviewCount: 12, price: 600 },
+    { id: 'prov-4', name: 'Liza Ramos', initials: 'LR', category: 'cleaning', verified: true, strikes: 0, location: 'Davao City', memberSince: 'Nov 2022', bio: 'Deep-cleaning specialist for homes and small offices.', avgRating: 4.7, reviewCount: 58, price: 1200 }
+];
+
+const demoReviews = {
+    'prov-1': [
+        { author: 'Ken T.', rating: 5, date: '2026-08-14', comment: 'Fixed our wiring issue fast and explained everything clearly.' },
+        { author: 'Mae O.', rating: 4, date: '2026-07-02', comment: 'Good work, arrived a bit later than scheduled.' }
+    ],
+    'prov-2': [
+        { author: 'Renz A.', rating: 5, date: '2026-08-30', comment: 'Rebuilt our checkout flow in a weekend. Highly recommend.' }
+    ],
+    'prov-3': [
+        { author: 'Bea L.', rating: 5, date: '2026-09-01', comment: 'Came to the house same day and diagnosed the issue in minutes.' }
+    ],
+    'prov-4': [
+        { author: 'Carlo R.', rating: 5, date: '2026-08-20', comment: 'Spotless. Booking again next month.' },
+        { author: 'Nina P.', rating: 4, date: '2026-07-11', comment: 'Great job overall, missed one corner of the kitchen.' }
+    ]
+};
+
+let demoNotifications = [
+    { id: 'n1', type: 'request', title: 'Marco Villanueva accepted your request', time: '2h ago', unread: true },
+    { id: 'n2', type: 'review', title: 'You have a new 5-star review', time: '1d ago', unread: true },
+    { id: 'n3', type: 'system', title: 'Your provider profile was verified', time: '3d ago', unread: false },
+    { id: 'n4', type: 'strike', title: 'A dispute against your account was resolved', time: '5d ago', unread: false }
+];
+
+const notifIcons = {
+    request: 'briefcase-outline',
+    review: 'star-outline',
+    system: 'checkmark-circle-outline',
+    strike: 'alert-circle-outline'
+};
+
+let demoRequests = [
+    { id: 'r1', serviceTitle: 'Home rewiring', providerName: 'Marco Villanueva', status: 'in-progress', price: 3500, date: '2026-09-20' },
+    { id: 'r2', serviceTitle: 'Laptop screen repair', providerName: 'Aira Santos', status: 'pending', price: 1800, date: '2026-09-24' },
+    { id: 'r3', serviceTitle: 'Car AC check-up', providerName: 'Jun Dela Cruz', status: 'accepted', price: 1200, date: '2026-09-25' }
+];
+
+const demoHistory = [
+    { id: 'h1', serviceTitle: 'Deep house cleaning', providerName: 'Liza Ramos', status: 'completed', price: 2500, date: '2026-08-30' },
+    { id: 'h2', serviceTitle: 'Motorcycle tune-up', providerName: 'Jun Dela Cruz', status: 'completed', price: 900, date: '2026-08-10' }
+];
+
+const demoMyReviews = [
+    { author: 'You', providerName: 'Liza Ramos', rating: 5, date: '2026-08-31', comment: 'Spotless work, will book again.' }
+];
+
+let demoDisputes = [
+    { id: 'd1', subject: 'Provider no-show', status: 'open', date: '2026-09-18' },
+    { id: 'd2', subject: 'Billing discrepancy', status: 'resolved', date: '2026-08-05' }
+];
+
+const requestStatusSteps = ['pending', 'accepted', 'in-progress', 'completed'];
+const requestStatusLabels = {
+    pending: 'Pending',
+    accepted: 'Accepted',
+    'in-progress': 'In progress',
+    completed: 'Completed',
+    cancelled: 'Cancelled'
+};
+
+const demoAdminStats = [
+    { label: 'Total users', value: '4,218', trend: '+6.4%' },
+    { label: 'Active providers', value: '612', trend: '+3.1%' },
+    { label: 'Requests this month', value: '1,904', trend: '+11%' },
+    { label: 'Avg. rating', value: '4.7', trend: '+0.1' }
+];
+
+const demoBarChart = [
+    { label: 'Jun', value: 62 }, { label: 'Jul', value: 74 }, { label: 'Aug', value: 58 },
+    { label: 'Sep', value: 91 }, { label: 'Oct*', value: 40 }
+];
+
+const demoTopCategories = [
+    { label: 'Home & Repair', value: 82 },
+    { label: 'Cleaning', value: 68 },
+    { label: 'Technology', value: 54 },
+    { label: 'Automotive', value: 41 }
+];
+
+let demoAdminUsers = [
+    { name: 'Marco Villanueva', role: 'Provider', strikes: 0, status: 'active' },
+    { name: 'Aira Santos', role: 'Provider', strikes: 1, status: 'active' },
+    { name: 'Jun Dela Cruz', role: 'Provider', strikes: 0, status: 'pending' },
+    { name: 'Renz Aquino', role: 'Client', strikes: 2, status: 'active' },
+    { name: 'Bea Lopez', role: 'Client', strikes: 3, status: 'suspended' }
+];
+
+let demoVerifyQueue = [
+    { name: 'Jun Dela Cruz', category: 'Automotive', submitted: '2 days ago' },
+    { name: 'Carlo Reyes', category: 'Construction', submitted: '4 days ago' }
+];
+
+let demoAdminDisputes = [
+    { id: 'ad1', subject: 'Client vs. Marco Villanueva — no-show claim', status: 'open', date: '2026-09-18' },
+    { id: 'ad2', subject: 'Client vs. Aira Santos — billing discrepancy', status: 'open', date: '2026-09-15' },
+    { id: 'ad3', subject: 'Client vs. Bea Lopez — conduct complaint (3rd strike)', status: 'resolved', date: '2026-08-05' }
+];
+
+const savedProviderIds = new Set(['prov-4']);
+const myStrikes = 0; // REPLACE WITH API: currentUser.strikes
+
+let activeProviderId = null;
+let selectedAvailabilitySlot = null;
+let selectedReviewRating = 0;
+
+function toast(message, type = '') {
+    const el = document.createElement('div');
+    el.className = `toast${type ? ` toast-${type}` : ''}`;
+    el.innerHTML = `${iconMarkup(type === 'error' ? 'alert-circle' : 'checkmark-circle')}<span>${message}</span>`;
+    toastStack.append(el);
+
+    window.setTimeout(() => {
+        el.classList.add('is-leaving');
+        window.setTimeout(() => el.remove(), 200);
+    }, 2600);
+}
+
+function timeAgoLabel(dateStr) {
+    return dateStr;
+}
+
+/* =========================================================
+   VIEW MANAGEMENT — full-page views (landing, browse,
+   provider profile, become-a-provider, dashboard, admin).
+   Static info pages (about/terms/etc.) keep their own
+   showPage()/closePage() system further below.
+   ========================================================= */
+
+const appViews = {
+    landing: landingPage,
+    main: mainPage,
+    provider: providerProfilePage,
+    becomeProvider: becomeProviderPage,
+    dashboard: dashboardPage,
+    admin: adminDashboardPage
+};
+
+let currentViewKey = 'landing';
+
+function showView(key, afterShow) {
+    Object.values(appViews).forEach((view) => {
+        view.style.display = 'none';
+    });
+
+    const target = appViews[key];
+
+    if (!target) {
+        return;
+    }
+
+    target.style.display = 'block';
+    currentViewKey = key;
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    if (typeof afterShow === 'function') {
+        afterShow();
+    }
+}
+
+/* ---------- notifications ---------- */
+
+function renderNotifBadge() {
+    const unreadCount = demoNotifications.filter((n) => n.unread).length;
+    notifBadge.textContent = String(unreadCount);
+    notifBadge.hidden = unreadCount === 0;
+}
+
+function buildNotifItem(notif) {
+    const item = document.createElement('div');
+    item.className = `notif-item${notif.unread ? ' is-unread' : ''}`;
+    item.innerHTML = `
+        <span class="notif-icon">${iconMarkup(notifIcons[notif.type] || 'notifications-outline')}</span>
+        <div class="notif-body">
+            <p>${notif.title}</p>
+            <time>${notif.time}</time>
+        </div>
+    `;
+    return item;
+}
+
+function renderNotifications() {
+    notifList.textContent = '';
+    notifPageList.textContent = '';
+
+    if (demoNotifications.length === 0) {
+        notifList.innerHTML = '<p class="notif-empty">You\'re all caught up.</p>';
+        notifPageList.innerHTML = '<p class="list-empty">No notifications yet.</p>';
+    } else {
+        demoNotifications.slice(0, 5).forEach((notif) => notifList.append(buildNotifItem(notif)));
+        demoNotifications.forEach((notif) => notifPageList.append(buildNotifItem(notif)));
+    }
+
+    renderNotifBadge();
+}
+
+function toggleNotifPanel(forceState) {
+    const willOpen = typeof forceState === 'boolean' ? forceState : notifPanel.hidden;
+    notifPanel.hidden = !willOpen;
+    notifBell.setAttribute('aria-expanded', String(willOpen));
+}
+
+/* ---------- recommended-for-you ---------- */
+
+function renderRecommendations() {
+    if (!currentUser) {
+        recommendSection.hidden = true;
+        return;
+    }
+
+    recommendSection.hidden = false;
+    recommendTrack.textContent = '';
+
+    const ranked = [...demoProviders].sort((a, b) => b.avgRating - a.avgRating);
+
+    ranked.forEach((provider) => {
+        const card = document.createElement('div');
+        card.className = 'recommend-card';
+        card.dataset.providerId = provider.id;
+        card.innerHTML = `
+            <div class="recommend-card-top">
+                <div class="recommend-avatar">${provider.initials}</div>
+                <div>
+                    <h4>${provider.name}</h4>
+                    <p class="recommend-sub">${categoryLabels[provider.category] || provider.category} • ${provider.location}</p>
+                </div>
+            </div>
+            <p class="recommend-rating">${iconMarkup('star')} ${provider.avgRating.toFixed(1)} (${provider.reviewCount})</p>
+        `;
+        card.addEventListener('click', () => openProviderProfile(provider.id));
+        recommendTrack.append(card);
+    });
+}
+
+function updateNearMeState(isOn) {
+    nearMeToggle.setAttribute('aria-pressed', String(isOn));
+
+    if (isOn) {
+        filterLocation.value = 'Davao City';
+        recommendSubtitle.textContent = 'Top-rated providers near Davao City.';
+    } else {
+        filterLocation.value = '';
+        recommendSubtitle.textContent = 'Based on top-rated providers on SkillLink.';
+    }
+
+    loadServices();
+}
+
+/* ---------- provider profile ---------- */
+
+function getProviderById(id) {
+    return demoProviders.find((p) => p.id === id) || null;
+}
+
+function findProviderByName(name) {
+    return demoProviders.find((p) => p.name === name) || null;
+}
+
+function openProviderProfile(providerId) {
+    const provider = getProviderById(providerId);
+
+    if (!provider) {
+        return;
+    }
+
+    activeProviderId = providerId;
+
+    providerAvatar.textContent = provider.initials;
+    providerName.textContent = provider.name;
+    providerVerifiedBadge.hidden = !provider.verified;
+    providerRatingSummary.innerHTML = `${iconMarkup('star')} ${provider.avgRating.toFixed(1)} <span class="provider-rating-count">(${provider.reviewCount} reviews)</span>`;
+    providerLocation.innerHTML = `${iconMarkup('location-outline')} ${provider.location}`;
+    providerMemberSince.textContent = `Member since ${provider.memberSince}`;
+    providerBio.textContent = provider.bio;
+
+    if (provider.strikes > 0) {
+        providerReputationStrip.hidden = false;
+        providerStrikeText.textContent = `${provider.strikes} of 3 strikes on record`;
+    } else {
+        providerReputationStrip.hidden = true;
+    }
+
+    providerSaveBtn.setAttribute('aria-pressed', String(savedProviderIds.has(providerId)));
+    providerSaveBtn.querySelector('ion-icon').setAttribute('name', savedProviderIds.has(providerId) ? 'heart' : 'heart-outline');
+
+    renderProviderServices(provider);
+    renderAvailabilityGrid();
+    renderReviewsTab(provider);
+    switchProviderTab('services');
+
+    showView('provider');
+}
+
+function renderProviderServices(provider) {
+    providerServiceList.textContent = '';
+
+    const matching = services.filter((s) => s.providerName === provider.name);
+    const list = matching.length > 0 ? matching : [{
+        id: `${provider.id}-default`,
+        title: `${categoryLabels[provider.category] || 'General'} service`,
+        providerName: provider.name,
+        price: provider.price,
+        description: provider.bio,
+        location: provider.location,
+        rating: provider.avgRating,
+        category: provider.category,
+        categoryName: categoryLabels[provider.category]
+    }];
+
+    list.forEach((service) => providerServiceList.append(buildServiceCard(service)));
+}
+
+const availabilityDays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+const availabilitySlots = ['9–11am', '11am–1pm', '2–4pm', '4–6pm'];
+
+function seedAvailability(providerId) {
+    // Deterministic pseudo-random booked slots so the grid looks
+    // realistic and stays stable per provider across re-renders.
+    let seed = 0;
+    for (let i = 0; i < providerId.length; i += 1) {
+        seed += providerId.charCodeAt(i);
+    }
+
+    const booked = new Set();
+    availabilityDays.forEach((_, dayIndex) => {
+        availabilitySlots.forEach((_, slotIndex) => {
+            if ((seed + dayIndex * 3 + slotIndex * 7) % 5 === 0) {
+                booked.add(`${dayIndex}-${slotIndex}`);
+            }
+        });
+    });
+
+    return booked;
+}
+
+function renderAvailabilityGrid() {
+    availabilityGrid.textContent = '';
+    selectedAvailabilitySlot = null;
+    availabilityActions.hidden = true;
+
+    const booked = seedAvailability(activeProviderId || 'default');
+
+    availabilityDays.forEach((day, dayIndex) => {
+        const col = document.createElement('div');
+        col.className = 'avail-day';
+
+        const label = document.createElement('div');
+        label.className = 'avail-day-label';
+        label.textContent = day;
+        col.append(label);
+
+        availabilitySlots.forEach((slot, slotIndex) => {
+            const key = `${dayIndex}-${slotIndex}`;
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'avail-slot';
+            btn.textContent = slot;
+            btn.dataset.key = key;
+
+            if (booked.has(key)) {
+                btn.classList.add('is-booked');
+                btn.disabled = true;
+            } else {
+                btn.addEventListener('click', () => selectAvailabilitySlot(key, `${day}, ${slot}`, btn));
+            }
+
+            col.append(btn);
+        });
+
+        availabilityGrid.append(col);
+    });
+}
+
+function selectAvailabilitySlot(key, label, btnEl) {
+    availabilityGrid.querySelectorAll('.avail-slot.is-selected').forEach((el) => el.classList.remove('is-selected'));
+    btnEl.classList.add('is-selected');
+    selectedAvailabilitySlot = { key, label };
+    selectedSlotLabel.textContent = `Selected: ${label}`;
+    availabilityActions.hidden = false;
+}
+
+function switchProviderTab(tabName) {
+    providerTabs.querySelectorAll('.profile-tab').forEach((tab) => {
+        const isActive = tab.dataset.tab === tabName;
+        tab.classList.toggle('is-active', isActive);
+        tab.setAttribute('aria-selected', String(isActive));
+    });
+
+    document.querySelectorAll('.profile-tab-panel').forEach((panel) => {
+        panel.hidden = panel.dataset.panel !== tabName;
+    });
+}
+
+function renderReviewsTab(provider) {
+    const reviews = demoReviews[provider.id] || [];
+
+    reviewAvgScore.textContent = provider.avgRating.toFixed(1);
+    reviewCount.textContent = `${provider.reviewCount} reviews`;
+    reviewAvgStars.innerHTML = starsMarkup(Math.round(provider.avgRating));
+
+    reviewBreakdown.textContent = '';
+    [5, 4, 3, 2, 1].forEach((star) => {
+        const count = reviews.filter((r) => r.rating === star).length;
+        const pct = reviews.length ? Math.round((count / reviews.length) * 100) : 0;
+        const row = document.createElement('div');
+        row.className = 'review-breakdown-row';
+        row.innerHTML = `<span>${star} star</span><span class="review-breakdown-bar"><span style="width:${pct}%"></span></span><span>${count}</span>`;
+        reviewBreakdown.append(row);
+    });
+
+    reviewList.textContent = '';
+
+    if (reviews.length === 0) {
+        reviewList.innerHTML = '<p class="list-empty">No reviews yet — be the first to leave one.</p>';
+        return;
+    }
+
+    reviews.forEach((review) => {
+        const card = document.createElement('div');
+        card.className = 'review-card';
+        card.innerHTML = `
+            <div class="review-card-head">
+                <span class="review-card-author">${review.author}</span>
+                <span class="review-card-date">${review.date}</span>
+            </div>
+            <div class="review-stars">${starsMarkup(review.rating)}</div>
+            <p>${review.comment}</p>
+        `;
+        reviewList.append(card);
+    });
+}
+
+function starsMarkup(count) {
+    let markup = '';
+    for (let i = 0; i < 5; i += 1) {
+        markup += iconMarkup(i < count ? 'star' : 'star-outline');
+    }
+    return markup;
+}
+
+/* ---------- become a provider ---------- */
+
+function renderAvailabilityPicker() {
+    availabilityPicker.textContent = '';
+
+    availabilityDays.forEach((day) => {
+        const row = document.createElement('div');
+        row.className = 'avail-pick-row';
+
+        const label = document.createElement('span');
+        label.className = 'avail-pick-day';
+        label.textContent = day;
+        row.append(label);
+
+        availabilitySlots.forEach((slot) => {
+            const chip = document.createElement('button');
+            chip.type = 'button';
+            chip.className = 'avail-pick-chip';
+            chip.textContent = slot;
+            chip.addEventListener('click', () => chip.classList.toggle('is-active'));
+            row.append(chip);
+        });
+
+        availabilityPicker.append(row);
+    });
+}
+
+/* ---------- dashboard ---------- */
+
+function switchDashboardTab(tabName) {
+    dashboardNav.querySelectorAll('.dashboard-nav-item').forEach((btn) => {
+        btn.classList.toggle('is-active', btn.dataset.dtab === tabName);
+    });
+
+    document.querySelectorAll('.dashboard-panel').forEach((panel) => {
+        panel.hidden = panel.dataset.dpanel !== tabName;
+    });
+
+    if (tabName === 'overview') renderDashboardOverview();
+    if (tabName === 'requests') renderRequests('all');
+    if (tabName === 'history') renderHistory();
+    if (tabName === 'favorites') renderFavorites();
+    if (tabName === 'notifications') renderNotifications();
+    if (tabName === 'reviews') renderMyReviews();
+    if (tabName === 'disputes') renderDisputes();
+    if (tabName === 'trust') renderTrustTab();
+}
+
+function renderDashboardOverview() {
+    const stats = [
+        { label: 'Active requests', value: String(demoRequests.filter((r) => r.status !== 'completed').length), trend: '' },
+        { label: 'Saved providers', value: String(savedProviderIds.size), trend: '' },
+        { label: 'Unread notifications', value: String(demoNotifications.filter((n) => n.unread).length), trend: '' },
+        { label: 'Completed services', value: String(demoHistory.length), trend: '' }
+    ];
+
+    overviewStats.innerHTML = stats.map((s) => `
+        <div class="stat-card">
+            <div class="stat-value">${s.value}</div>
+            <div class="stat-label">${s.label}</div>
+        </div>
+    `).join('');
+
+    overviewActivity.textContent = '';
+    demoNotifications.slice(0, 4).forEach((n) => {
+        const item = document.createElement('div');
+        item.className = 'timeline-item';
+        item.innerHTML = `<p>${n.title}</p><time>${n.time}</time>`;
+        overviewActivity.append(item);
+    });
+}
+
+function buildRequestCard(request, { showReview } = {}) {
+    const card = document.createElement('div');
+    card.className = 'request-card';
+
+    const stepIndex = requestStatusSteps.indexOf(request.status);
+
+    const stepsMarkup = requestStatusSteps.map((step, i) => `
+        <div class="request-progress-step${i <= stepIndex ? ' is-done' : ''}">
+            <span class="dot"></span>
+            <span>${requestStatusLabels[step]}</span>
+        </div>
+    `).join('');
+
+    card.innerHTML = `
+        <div class="request-card-head">
+            <div>
+                <h4>${request.serviceTitle}</h4>
+                <p class="request-card-provider">with ${request.providerName} • ${request.date}</p>
+            </div>
+            <span class="status-pill status-${request.status}">${requestStatusLabels[request.status]}</span>
+        </div>
+        ${request.status !== 'cancelled' ? `<div class="request-progress">${stepsMarkup}</div>` : ''}
+        <div class="request-card-footer">
+            <span class="price">${formatPrice(request.price)}</span>
+            <div class="request-card-actions">
+                ${showReview ? '<button type="button" class="link-btn" data-action="review">Leave a review</button>' : ''}
+                ${request.status === 'pending' ? '<button type="button" class="link-btn danger" data-action="cancel">Cancel</button>' : ''}
+            </div>
+        </div>
+    `;
+
+    if (showReview) {
+        card.querySelector('[data-action="review"]')?.addEventListener('click', () => {
+            const provider = findProviderByName(request.providerName);
+            if (provider) {
+                openProviderProfile(provider.id);
+                switchProviderTab('reviews');
+                writeReviewBtn.click();
+            }
+        });
+    }
+
+    card.querySelector('[data-action="cancel"]')?.addEventListener('click', () => {
+        request.status = 'cancelled';
+        renderRequests(requestStatusFilter.querySelector('.is-active')?.dataset.status || 'all');
+        toast('Request cancelled.');
+    });
+
+    return card;
+}
+
+function renderRequests(filterStatus) {
+    requestList.textContent = '';
+
+    const filtered = filterStatus === 'all'
+        ? demoRequests
+        : demoRequests.filter((r) => r.status === filterStatus);
+
+    if (filtered.length === 0) {
+        requestList.innerHTML = '<p class="list-empty">No requests in this category.</p>';
+        return;
+    }
+
+    filtered.forEach((r) => requestList.append(buildRequestCard(r)));
+}
+
+function renderHistory() {
+    historyList.textContent = '';
+
+    if (demoHistory.length === 0) {
+        historyList.innerHTML = '<p class="list-empty">No completed services yet.</p>';
+        return;
+    }
+
+    demoHistory.forEach((r) => historyList.append(buildRequestCard(r, { showReview: true })));
+}
+
+function renderFavorites() {
+    favoritesList.textContent = '';
+
+    const saved = demoProviders.filter((p) => savedProviderIds.has(p.id));
+
+    if (saved.length === 0) {
+        favoritesList.innerHTML = '<p class="list-empty">You haven\'t saved any providers yet.</p>';
+        return;
+    }
+
+    saved.forEach((provider) => {
+        const card = buildServiceCard({
+            id: provider.id,
+            title: `${categoryLabels[provider.category] || 'General'} service`,
+            providerName: provider.name,
+            price: provider.price,
+            description: provider.bio,
+            location: provider.location,
+            rating: provider.avgRating,
+            category: provider.category,
+            categoryName: categoryLabels[provider.category]
+        });
+        favoritesList.append(card);
+    });
+}
+
+function renderMyReviews() {
+    myReviewList.textContent = '';
+
+    if (demoMyReviews.length === 0) {
+        myReviewList.innerHTML = '<p class="list-empty">You haven\'t written any reviews yet.</p>';
+        return;
+    }
+
+    demoMyReviews.forEach((review) => {
+        const card = document.createElement('div');
+        card.className = 'review-card';
+        card.innerHTML = `
+            <div class="review-card-head">
+                <span class="review-card-author">${review.providerName}</span>
+                <span class="review-card-date">${review.date}</span>
+            </div>
+            <div class="review-stars">${starsMarkup(review.rating)}</div>
+            <p>${review.comment}</p>
+        `;
+        myReviewList.append(card);
+    });
+}
+
+function renderDisputes() {
+    disputeList.textContent = '';
+
+    if (demoDisputes.length === 0) {
+        disputeList.innerHTML = '<p class="list-empty">No reports filed.</p>';
+        return;
+    }
+
+    demoDisputes.forEach((d) => {
+        const card = document.createElement('div');
+        card.className = 'dispute-card';
+        card.innerHTML = `
+            <div>
+                <h4>${d.subject}</h4>
+                <time>Filed ${d.date}</time>
+            </div>
+            <span class="status-pill status-${d.status}">${d.status === 'open' ? 'Under review' : 'Resolved'}</span>
+        `;
+        disputeList.append(card);
+    });
+}
+
+function renderTrustTab() {
+    strikeTracker.innerHTML = [0, 1, 2].map((i) => `
+        <div class="strike-dot${i < myStrikes ? ' is-active' : ''}">
+            <div class="shield">${iconMarkup(i < myStrikes ? 'alert-outline' : 'shield-checkmark-outline')}</div>
+            <p>Strike ${i + 1}</p>
+        </div>
+    `).join('');
+}
+
+/* ---------- admin console ---------- */
+
+function switchAdminTab(tabName) {
+    adminNav.querySelectorAll('button').forEach((btn) => {
+        btn.classList.toggle('is-active', btn.dataset.atab === tabName);
+    });
+
+    document.querySelectorAll('.admin-panel').forEach((panel) => {
+        panel.hidden = panel.dataset.apanel !== tabName;
+    });
+
+    if (tabName === 'analytics') renderAdminAnalytics();
+    if (tabName === 'users') renderAdminUsers();
+    if (tabName === 'verification') renderVerifyQueue();
+    if (tabName === 'reports') renderAdminDisputes();
+}
+
+function renderAdminAnalytics() {
+    adminStats.innerHTML = demoAdminStats.map((s) => `
+        <div class="stat-card">
+            <div class="stat-value">${s.value}</div>
+            <div class="stat-label">${s.label}</div>
+            <div class="stat-trend">${iconMarkup('trending-up-outline')} ${s.trend}</div>
+        </div>
+    `).join('');
+
+    const max = Math.max(...demoBarChart.map((b) => b.value));
+    adminBarChart.innerHTML = demoBarChart.map((b) => `
+        <div class="bar-chart-col">
+            <div class="bar" style="height:${Math.round((b.value / max) * 100)}%"></div>
+            <span>${b.label}</span>
+        </div>
+    `).join('');
+
+    const maxCat = Math.max(...demoTopCategories.map((c) => c.value));
+    adminTopCategories.innerHTML = demoTopCategories.map((c, i) => `
+        <div class="rank-row">
+            <span class="rank-index">${i + 1}</span>
+            <span>${c.label}</span>
+            <span class="rank-bar"><span style="width:${Math.round((c.value / maxCat) * 100)}%"></span></span>
+        </div>
+    `).join('');
+}
+
+function renderAdminUsers(filterText = '') {
+    adminUserTableBody.textContent = '';
+
+    const filtered = demoAdminUsers.filter((u) =>
+        u.name.toLowerCase().includes(filterText.toLowerCase())
+    );
+
+    if (filtered.length === 0) {
+        adminUserTableBody.innerHTML = '<tr><td colspan="5" class="list-empty">No matches.</td></tr>';
+        return;
+    }
+
+    filtered.forEach((user, index) => {
+        const row = document.createElement('tr');
+        const statusBadgeClass = user.status === 'active' ? 'badge-verified' : user.status === 'suspended' ? 'badge-suspended' : 'badge-pending';
+        row.innerHTML = `
+            <td>${user.name}</td>
+            <td>${user.role}</td>
+            <td>${user.strikes} / 3</td>
+            <td><span class="badge ${statusBadgeClass}">${user.status}</span></td>
+            <td>
+                <button type="button" class="link-btn${user.status === 'suspended' ? '' : ' danger'}" data-user-index="${index}">
+                    ${user.status === 'suspended' ? 'Reinstate' : 'Suspend'}
+                </button>
+            </td>
+        `;
+        row.querySelector('[data-user-index]').addEventListener('click', () => {
+            user.status = user.status === 'suspended' ? 'active' : 'suspended';
+            renderAdminUsers(adminUserSearch.value);
+            toast(`${user.name} ${user.status === 'suspended' ? 'suspended' : 'reinstated'}.`);
+        });
+        adminUserTableBody.append(row);
+    });
+}
+
+function renderVerifyQueue() {
+    verifyQueue.textContent = '';
+
+    if (demoVerifyQueue.length === 0) {
+        verifyQueue.innerHTML = '<p class="list-empty">No providers waiting on verification.</p>';
+        return;
+    }
+
+    demoVerifyQueue.forEach((entry, index) => {
+        const card = document.createElement('div');
+        card.className = 'verify-card';
+        card.innerHTML = `
+            <div class="verify-card-info">
+                <div class="recommend-avatar">${entry.name.split(' ').map((w) => w[0]).join('').slice(0, 2)}</div>
+                <div>
+                    <h4>${entry.name}</h4>
+                    <p>${entry.category} • submitted ${entry.submitted}</p>
+                </div>
+            </div>
+            <div class="verify-card-actions">
+                <button type="button" class="btn btn-approve" data-verify-action="approve">Approve</button>
+                <button type="button" class="btn btn-reject" data-verify-action="reject">Reject</button>
+            </div>
+        `;
+
+        card.querySelector('[data-verify-action="approve"]').addEventListener('click', () => {
+            demoVerifyQueue = demoVerifyQueue.filter((_, i) => i !== index);
+            renderVerifyQueue();
+            toast(`${entry.name} verified.`);
+        });
+
+        card.querySelector('[data-verify-action="reject"]').addEventListener('click', () => {
+            demoVerifyQueue = demoVerifyQueue.filter((_, i) => i !== index);
+            renderVerifyQueue();
+            toast(`${entry.name}'s submission rejected.`, 'error');
+        });
+
+        verifyQueue.append(card);
+    });
+}
+
+function renderAdminDisputes() {
+    adminDisputeList.textContent = '';
+
+    demoAdminDisputes.forEach((d, index) => {
+        const card = document.createElement('div');
+        card.className = 'dispute-card';
+        card.innerHTML = `
+            <div>
+                <h4>${d.subject}</h4>
+                <time>Filed ${d.date}</time>
+            </div>
+            <div class="verify-card-actions">
+                <span class="status-pill status-${d.status}">${d.status === 'open' ? 'Open' : 'Resolved'}</span>
+                ${d.status === 'open' ? '<button type="button" class="btn btn-approve" data-resolve>Resolve</button>' : ''}
+            </div>
+        `;
+
+        card.querySelector('[data-resolve]')?.addEventListener('click', () => {
+            demoAdminDisputes[index].status = 'resolved';
+            renderAdminDisputes();
+            toast('Dispute marked resolved.');
+        });
+
+        adminDisputeList.append(card);
+    });
 }
 
 function iconMarkup(name) {
@@ -166,7 +1091,12 @@ function setLoggedIn(user) {
     logoutBtn.hidden = false;
     loginBtn.hidden = true;
     signupBtn.hidden = true;
+    dashboardNavBtn.hidden = false;
+    mobileDashboardLink.hidden = false;
+    notifWrap.hidden = false;
     closeAuthForm();
+    renderNotifications();
+    renderRecommendations();
 }
 
 function setLoggedOut() {
@@ -177,6 +1107,12 @@ function setLoggedOut() {
     logoutBtn.hidden = true;
     loginBtn.hidden = false;
     signupBtn.hidden = false;
+    dashboardNavBtn.hidden = true;
+    mobileDashboardLink.hidden = true;
+    notifWrap.hidden = true;
+    toggleNotifPanel(false);
+    toggleMobileMenu(false);
+    recommendSection.hidden = true;
 }
 
 function formatPrice(price) {
@@ -321,7 +1257,13 @@ function buildServiceCard(service) {
 
     const provider = document.createElement('p');
     provider.className = 'service-provider';
-    provider.textContent = service.providerName;
+    const linkedProvider = findProviderByName(service.providerName);
+
+    if (linkedProvider) {
+        provider.innerHTML = `<span class="provider-link" data-provider-id="${linkedProvider.id}">${service.providerName}</span>`;
+    } else {
+        provider.textContent = service.providerName;
+    }
 
     titleGroup.append(title, provider);
 
@@ -329,7 +1271,34 @@ function buildServiceCard(service) {
     price.className = 'service-price';
     price.textContent = formatPrice(service.price);
 
-    header.append(titleGroup, price);
+    const favoriteBtn = document.createElement('button');
+    favoriteBtn.type = 'button';
+    favoriteBtn.className = 'service-favorite-btn';
+    favoriteBtn.setAttribute('aria-label', 'Save provider');
+    const isSaved = linkedProvider && savedProviderIds.has(linkedProvider.id);
+    favoriteBtn.classList.toggle('is-saved', Boolean(isSaved));
+    favoriteBtn.innerHTML = iconMarkup(isSaved ? 'heart' : 'heart-outline');
+
+    favoriteBtn.addEventListener('click', () => {
+        if (!linkedProvider) {
+            toast('This provider isn\'t linked to a profile yet.', 'error');
+            return;
+        }
+
+        if (savedProviderIds.has(linkedProvider.id)) {
+            savedProviderIds.delete(linkedProvider.id);
+            favoriteBtn.classList.remove('is-saved');
+            favoriteBtn.innerHTML = iconMarkup('heart-outline');
+            toast('Removed from favorites.');
+        } else {
+            savedProviderIds.add(linkedProvider.id);
+            favoriteBtn.classList.add('is-saved');
+            favoriteBtn.innerHTML = iconMarkup('heart');
+            toast('Saved to favorites.');
+        }
+    });
+
+    header.append(titleGroup, price, favoriteBtn);
 
     const description = document.createElement('p');
     description.className = 'service-description';
@@ -462,9 +1431,7 @@ function queueServiceLoad() {
 }
 
 mainPageTrigger.addEventListener('click', () => {
-    landingPage.style.display = 'none';
-    mainPage.style.display = 'block';
-    loadServices();
+    showView('main', loadServices);
 });
 
 loginBtn.addEventListener('click', () => openAuthForm('login'));
@@ -653,6 +1620,18 @@ document.addEventListener('click', async (event) => {
         });
         hireButton.textContent = 'Requested';
         setStatus(appStatus, 'Hire request sent.');
+
+        const hiredService = services.find((s) => String(s.id) === String(hireButton.dataset.hireServiceId));
+        if (hiredService) {
+            demoRequests.unshift({
+                id: `r${Date.now()}`,
+                serviceTitle: hiredService.title,
+                providerName: hiredService.providerName,
+                status: 'pending',
+                price: hiredService.price,
+                date: new Date().toISOString().slice(0, 10)
+            });
+        }
     } catch (error) {
         hireButton.disabled = false;
         hireButton.textContent = 'Hire';
@@ -662,7 +1641,7 @@ document.addEventListener('click', async (event) => {
 
 // --- Footer pages: About / Terms / Privacy ---
 const pageSections = document.querySelectorAll('.page-section');
-const primaryViews = [landingPage, mainPage]; // the two "real" views, already in your code
+const primaryViews = Object.values(appViews); // every full-page app view
 
 let previousView = landingPage;
 
@@ -692,12 +1671,319 @@ document.querySelectorAll('footer a[href^="#"]').forEach(link => {
     });
 });
 
-document.querySelectorAll('.page-back').forEach(btn => {
+// Scoped to .page-section descendants only — the provider-profile and
+// become-a-provider "Back" buttons below are wired separately via showView().
+document.querySelectorAll('.page-section .page-back').forEach(btn => {
     btn.addEventListener('click', () => {
         closePage();
         history.pushState(null, '', window.location.pathname);
     });
 });
+
+/* =========================================================
+   NEW FEATURE EVENT WIRING
+   ========================================================= */
+
+function openBecomeProviderFlow() {
+    if (!currentUser) {
+        openAuthForm('login');
+        setStatus(loginStatus, 'Log in before setting up a provider profile.', 'error');
+        return;
+    }
+    renderAvailabilityPicker();
+    providerForm.hidden = false;
+    providerSuccessPanel.hidden = true;
+    showView('becomeProvider');
+}
+
+function openDashboardFlow() {
+    showView('dashboard', () => switchDashboardTab('overview'));
+}
+
+becomeProviderNav.addEventListener('click', openBecomeProviderFlow);
+dashboardNavBtn.addEventListener('click', openDashboardFlow);
+
+mobileBecomeProviderLink.addEventListener('click', () => {
+    toggleMobileMenu(false);
+    openBecomeProviderFlow();
+});
+
+mobileDashboardLink.addEventListener('click', () => {
+    toggleMobileMenu(false);
+    openDashboardFlow();
+});
+
+function toggleMobileMenu(forceState) {
+    const willOpen = typeof forceState === 'boolean' ? forceState : mobileMenuPanel.hidden;
+    mobileMenuPanel.hidden = !willOpen;
+    mobileMenuToggle.setAttribute('aria-expanded', String(willOpen));
+}
+
+mobileMenuToggle.addEventListener('click', (e) => {
+    e.stopPropagation();
+    toggleNotifPanel(false);
+    toggleMobileMenu();
+});
+
+document.addEventListener('click', (e) => {
+    if (!mobileMenuPanel.hidden && !mobileMenuPanel.contains(e.target) && e.target !== mobileMenuToggle) {
+        toggleMobileMenu(false);
+    }
+});
+
+adminFooterLink.addEventListener('click', (e) => {
+    e.preventDefault();
+    showView('admin', () => switchAdminTab('analytics'));
+});
+
+notifBell.addEventListener('click', (e) => {
+    e.stopPropagation();
+    toggleMobileMenu(false);
+    toggleNotifPanel();
+});
+
+document.addEventListener('click', (e) => {
+    if (!notifPanel.hidden && !notifPanel.contains(e.target) && e.target !== notifBell) {
+        toggleNotifPanel(false);
+    }
+});
+
+notifMarkAll.addEventListener('click', () => {
+    demoNotifications = demoNotifications.map((n) => ({ ...n, unread: false }));
+    renderNotifications();
+    toast('All notifications marked as read.');
+});
+
+notifViewAll.addEventListener('click', () => {
+    toggleNotifPanel(false);
+    if (!currentUser) return;
+    showView('dashboard', () => switchDashboardTab('notifications'));
+});
+
+nearMeToggle.addEventListener('click', () => {
+    const isOn = nearMeToggle.getAttribute('aria-pressed') !== 'true';
+    updateNearMeState(isOn);
+});
+
+// Provider name links inside service cards (browse grid, favorites, recommendations)
+document.addEventListener('click', (e) => {
+    const link = e.target.closest('.provider-link');
+    if (link && link.dataset.providerId) {
+        openProviderProfile(link.dataset.providerId);
+    }
+});
+
+providerProfileBack.addEventListener('click', () => showView('main'));
+
+providerTabs.addEventListener('click', (e) => {
+    const tabBtn = e.target.closest('.profile-tab');
+    if (tabBtn) switchProviderTab(tabBtn.dataset.tab);
+});
+
+providerSaveBtn.addEventListener('click', () => {
+    if (!activeProviderId) return;
+    const icon = providerSaveBtn.querySelector('ion-icon');
+    const nowSaved = !savedProviderIds.has(activeProviderId);
+
+    if (nowSaved) {
+        savedProviderIds.add(activeProviderId);
+        icon.setAttribute('name', 'heart');
+        toast('Saved to favorites.');
+    } else {
+        savedProviderIds.delete(activeProviderId);
+        icon.setAttribute('name', 'heart-outline');
+        toast('Removed from favorites.');
+    }
+
+    providerSaveBtn.setAttribute('aria-pressed', String(nowSaved));
+});
+
+providerReportBtn.addEventListener('click', () => {
+    if (!currentUser) {
+        openAuthForm('login');
+        return;
+    }
+    disputeFormTitle.textContent = `Report ${providerName.textContent}`;
+    setStatus(disputeFormStatus, '');
+    disputeFormContainer.classList.add('is-open');
+});
+
+requestSlotBtn.addEventListener('click', () => {
+    if (!selectedAvailabilitySlot) return;
+
+    if (!currentUser) {
+        openAuthForm('login');
+        return;
+    }
+
+    demoRequests.unshift({
+        id: `r${Date.now()}`,
+        serviceTitle: `${providerName.textContent} — booked slot`,
+        providerName: providerName.textContent,
+        status: 'pending',
+        price: getProviderById(activeProviderId)?.price || 0,
+        date: selectedAvailabilitySlot.label
+    });
+
+    toast(`Requested ${selectedAvailabilitySlot.label}.`);
+    renderAvailabilityGrid();
+});
+
+writeReviewBtn.addEventListener('click', () => {
+    if (!currentUser) {
+        openAuthForm('login');
+        return;
+    }
+    reviewForm.hidden = false;
+    selectedReviewRating = 0;
+    updateReviewStarInput();
+});
+
+cancelReviewBtn.addEventListener('click', () => {
+    reviewForm.hidden = true;
+    reviewComment.value = '';
+});
+
+function updateReviewStarInput() {
+    reviewStarInput.querySelectorAll('ion-icon').forEach((icon) => {
+        const starValue = Number(icon.dataset.star);
+        icon.classList.toggle('is-filled', starValue <= selectedReviewRating);
+        icon.setAttribute('name', starValue <= selectedReviewRating ? 'star' : 'star-outline');
+    });
+}
+
+reviewStarInput.addEventListener('click', (e) => {
+    const star = e.target.closest('[data-star]');
+    if (star) {
+        selectedReviewRating = Number(star.dataset.star);
+        updateReviewStarInput();
+    }
+});
+
+reviewForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    if (selectedReviewRating === 0) {
+        toast('Pick a star rating first.', 'error');
+        return;
+    }
+
+    const provider = getProviderById(activeProviderId);
+    if (!provider) return;
+
+    const reviews = demoReviews[provider.id] || (demoReviews[provider.id] = []);
+    reviews.unshift({
+        author: currentUser?.name || 'You',
+        rating: selectedReviewRating,
+        date: new Date().toISOString().slice(0, 10),
+        comment: reviewComment.value.trim() || '(No comment provided.)'
+    });
+
+    provider.reviewCount += 1;
+    provider.avgRating = reviews.reduce((sum, r) => sum + r.rating, 0) / reviews.length;
+
+    reviewForm.hidden = true;
+    reviewComment.value = '';
+    renderReviewsTab(provider);
+    toast('Review posted — thank you!');
+});
+
+becomeProviderBack.addEventListener('click', () => showView('main'));
+
+providerForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    setStatus(providerFormStatus, '');
+
+    const title = document.getElementById('providerServiceTitle').value.trim();
+    const price = document.getElementById('providerServicePrice').value;
+    const location = document.getElementById('providerServiceLocation').value.trim();
+
+    if (!title || !price || !location) {
+        setStatus(providerFormStatus, 'Please fill in the service title, price, and location.', 'error');
+        return;
+    }
+
+    // REPLACE WITH API: POST /providers (title, category, price, location,
+    // description, availability, verification file) once the endpoint exists.
+    providerForm.hidden = true;
+    providerSuccessPanel.hidden = false;
+});
+
+providerVerificationFile.addEventListener('change', () => {
+    const file = providerVerificationFile.files?.[0];
+    dropzoneLabel.textContent = file ? file.name : 'Click to upload, or drag a file here';
+});
+
+providerSuccessDone.addEventListener('click', () => {
+    showView('dashboard', () => switchDashboardTab('overview'));
+});
+
+dashboardNav.addEventListener('click', (e) => {
+    const btn = e.target.closest('.dashboard-nav-item');
+    if (btn) switchDashboardTab(btn.dataset.dtab);
+});
+
+requestStatusFilter.addEventListener('click', (e) => {
+    const btn = e.target.closest('button');
+    if (!btn) return;
+    requestStatusFilter.querySelectorAll('button').forEach((b) => b.classList.toggle('is-active', b === btn));
+    renderRequests(btn.dataset.status);
+});
+
+newDisputeBtn.addEventListener('click', () => {
+    disputeFormTitle.textContent = 'File a new report';
+    setStatus(disputeFormStatus, '');
+    disputeFormContainer.classList.add('is-open');
+});
+
+function closeDisputeForm() {
+    disputeFormContainer.classList.remove('is-open');
+}
+
+disputeFormClose.addEventListener('click', closeDisputeForm);
+disputeFormOverlay.addEventListener('click', closeDisputeForm);
+
+disputeForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const details = document.getElementById('disputeDetails').value.trim();
+
+    if (!details) {
+        setStatus(disputeFormStatus, 'Please add some details.', 'error');
+        return;
+    }
+
+    const disputeReasonLabels = {
+        'no-show': "Provider didn't show up",
+        quality: 'Service quality issue',
+        payment: 'Payment dispute',
+        conduct: 'Inappropriate conduct',
+        other: 'General report'
+    };
+    const reasonValue = document.getElementById('disputeReason').value;
+
+    // REPLACE WITH API: POST /reports (reason, details, targetProviderId)
+    demoDisputes.unshift({
+        id: `d${Date.now()}`,
+        subject: disputeReasonLabels[reasonValue] || 'General report',
+        status: 'open',
+        date: new Date().toISOString().slice(0, 10)
+    });
+
+    disputeForm.reset();
+    closeDisputeForm();
+    toast('Report submitted — our team will review it.');
+
+    if (currentViewKey === 'dashboard') {
+        renderDisputes();
+    }
+});
+
+adminNav.addEventListener('click', (e) => {
+    const btn = e.target.closest('button');
+    if (btn) switchAdminTab(btn.dataset.atab);
+});
+
+adminUserSearch?.addEventListener('input', () => renderAdminUsers(adminUserSearch.value));
 
 // lets someone load the site at yoursite.com/#about directly
 window.addEventListener('DOMContentLoaded', () => {
