@@ -1,0 +1,399 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SkillLink | Hire skilled people. Offer your skills.</title>
+    <meta name="description"
+        content="SkillLink connects people who need a job done with providers who have the skill, from home repair to web design." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <script>try { document.documentElement.dataset.auth = localStorage.getItem('skilllink.session') ? 'user' : 'guest' } catch (e) { }</script>
+    <script>try { var t = localStorage.getItem('skilllink.theme') || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'); document.documentElement.dataset.theme = t } catch (e) { }</script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ionic/core@8/css/core.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ionic/core@8/css/palettes/dark.class.css" />
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@ionic/core@8/dist/ionic/ionic.esm.js"></script>
+    <link rel="stylesheet" href="skilllink.css">
+    <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet" />
+</head>
+
+<body data-view="landingPage">
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="#landingPage" class="brand"><svg class="logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 804 615" role="img" aria-label="SkillLink"><path class="lg-a" transform="translate(249.1 17.8)" d="M0 0 C1.3 -0 2.5 -0 3.8 -0.1 C11.7 -0.1 18.5 0.7 25.9 3.2 C27 3.6 28.1 4 29.2 4.4 C43 10 54.7 19.5 63.9 31.2 C64.3 31.8 64.7 32.3 65.2 32.9 C78.4 50.4 82.1 71.9 79.4 93.2 C76.3 108.7 69.7 123.6 58.9 135.2 C58.2 135.2 57.6 135.2 56.9 135.2 C56.6 135.8 56.4 136.4 56.2 137 C50.5 146.9 36.1 153.5 25.9 157.2 C25.5 157.4 25.5 157.4 23.5 158.3 C6.1 164.7 -16.1 162.3 -32.8 154.9 C-37.2 152.7 -41.2 150.3 -45.1 147.2 C-46 146.6 -46.9 145.9 -47.8 145.3 C-57 138 -65.4 130.2 -70.1 119.2 C-71.1 117.6 -72.1 115.9 -73.1 114.2 C-82.2 97.2 -82.5 73.4 -76.9 55 C-74 46.3 -69.9 39.4 -64.1 32.2 C-63.6 31.5 -63 30.7 -62.4 29.9 C-47.4 9.3 -24.9 0.1 0 0 Z"/><path class="lg-a" transform="translate(224.2 202.7)" d="M0 0 C2 -0 4.1 -0 6.1 -0 C10.4 -0 14.6 -0 18.8 0 C24.3 0 29.7 0 35.1 -0 C39.3 -0 43.5 -0 47.7 -0 C49.7 -0 51.7 -0 53.6 -0 C64.2 -0 74.4 0.1 84.8 2.3 C85.9 2.5 86.9 2.7 88 2.9 C99.8 5.4 115.5 11.3 123.8 20.3 C125.1 21.4 126.3 22.5 127.6 23.6 C127.9 23.9 127.9 23.9 129.7 25.5 C131 26.5 132.3 27.6 133.6 28.7 C138.4 32.5 142 37 145.8 41.8 C147.8 44.3 147.8 44.3 149.5 45.9 C151.9 48.3 153.3 51.3 154.8 54.3 C155.3 55.1 155.8 56 156.2 56.8 C156.7 57.7 157.2 58.6 157.7 59.5 C157.9 59.9 157.9 59.9 159 62 C159.8 64.3 159.8 64.3 158.8 67.3 C151.5 67.5 144.1 67.7 136.7 67.8 C134.2 67.9 131.7 67.9 129.2 68 C125.5 68.1 121.9 68.2 118.3 68.2 C117.2 68.3 116.1 68.3 114.9 68.4 C110.1 68.4 107.1 68.3 103.2 65.1 C100.8 62.4 100.8 62.4 98.8 59.7 C91.9 51 79.5 47 68.8 45.3 C66.2 45.1 63.6 45 60.9 45 C60.1 45 59.3 45 58.5 44.9 C55.9 44.9 53.3 44.9 50.7 44.8 C49.8 44.8 48.9 44.8 48 44.8 C43.3 44.7 38.6 44.6 33.8 44.5 C29 44.5 24.1 44.4 19.3 44.3 C15.5 44.2 11.8 44.1 8 44.1 C6.2 44.1 4.4 44 2.6 44 C-17.3 43.5 -35.1 47.8 -51.2 60.3 C-52.2 61 -53.3 61.8 -54.3 62.6 C-66.8 74.3 -73.7 90.1 -75.6 106.9 C-75.8 114.2 -74.4 120.4 -72.2 127.3 C-72 128.1 -71.7 128.9 -71.5 129.8 C-68 143.6 -57.4 156.5 -45.5 164.3 C-43.7 165.3 -41.9 166.3 -40.2 167.3 C-39.5 167.7 -38.9 168.1 -38.2 168.5 C-26.2 175.4 -10.8 174.7 2.7 174.7 C4.5 174.7 6.4 174.7 8.3 174.7 C12.2 174.7 16.1 174.7 20 174.7 C25 174.6 29.9 174.6 34.9 174.7 C38.8 174.7 42.6 174.7 46.5 174.7 C48.3 174.7 50.2 174.7 52 174.7 C72.8 174.7 86.1 170.8 101.6 156.5 C103.8 154.3 103.8 154.3 105.8 151.3 C108 150.9 108 150.9 110.8 150.9 C111.3 150.9 111.3 150.9 113.8 150.9 C115 150.9 116.1 151 117.2 151 C118.3 151 119.5 151 120.6 151 C124.2 151 127.9 151 131.5 151.1 C133.9 151.1 136.4 151.1 138.8 151.1 C144.8 151.2 150.8 151.2 156.8 151.3 C157.8 155 158 155.9 156.3 159.5 C155.5 160.8 154.7 162 153.8 163.3 C153.4 164 152.9 164.7 152.4 165.4 C145.5 176.1 137.9 186.4 127.8 194.3 C127.3 194.8 126.8 195.3 126.3 195.8 C123.2 198.8 119.4 201 115.8 203.3 C115.2 203.7 114.6 204.1 113.9 204.6 C111.9 205.8 109.9 207.1 107.8 208.3 C107 208.8 106.2 209.2 105.3 209.7 C92.2 216.9 76.7 220.4 61.8 220.4 C60.9 220.4 60 220.4 59 220.4 C56.1 220.5 53.1 220.5 50.2 220.5 C49.7 220.5 49.7 220.5 47.1 220.5 C41.7 220.5 36.4 220.5 31 220.5 C25.5 220.5 20 220.5 14.5 220.6 C10.2 220.6 5.9 220.6 1.6 220.6 C-0.4 220.6 -2.4 220.6 -4.5 220.6 C-15.8 220.7 -26.2 220.3 -37.2 217.3 C-38.3 216.9 -39.5 216.6 -40.8 216.3 C-46.2 214.7 -51.3 213 -56.2 210.3 C-58.2 209.3 -58.2 209.3 -61.4 208 C-65.6 206.2 -69.3 203.7 -73.1 201 C-73.4 200.8 -73.4 200.8 -75.2 199.5 C-80.1 196.1 -84.8 192.5 -89.2 188.3 C-90 187.5 -90.8 186.7 -91.6 185.9 C-94.2 183.2 -96.5 180.4 -98.7 177.3 C-99.1 176.8 -99.1 176.8 -101 174.3 C-118.2 150.3 -125.9 121.7 -121.7 92.3 C-118.9 77.1 -113.3 59.4 -102.2 48.3 C-101.2 46.6 -100.3 44.9 -99.3 43.2 C-95.1 36.2 -88.7 30 -82.2 25.3 C-81.5 25.3 -80.8 25.3 -80.2 25.3 C-80.2 24.6 -80.2 23.9 -80.2 23.3 C-73.1 17.1 -64.5 13.2 -56.2 9.3 C-55.4 8.9 -54.5 8.5 -53.7 8 C-47.5 5 -41 3.5 -34.2 2.3 C-33.3 2.1 -32.5 1.9 -31.7 1.8 C-21.1 -0.1 -10.7 -0 0 0 Z"/><path class="lg-a" transform="translate(66.2 491.7)" d="M0 0 C1.2 0 2.4 0 3.6 0 C17 0.2 29.4 1.5 39.6 11.1 C44.4 16.4 46.1 21.2 46.8 28.3 C46.4 29 46.1 29.6 45.8 30.3 C41.2 30.5 36.6 30.5 32.1 30.6 C30.8 30.7 29.5 30.7 28.1 30.8 C26.9 30.8 25.6 30.8 24.4 30.8 C23.8 30.8 23.8 30.8 20.9 30.9 C16.8 30.1 15.5 28.3 12.8 25.3 C4.4 23 -6.1 23.2 -14.2 26.3 C-14.5 29.1 -14.5 29.1 -14.2 32.3 C-11.5 34.9 -9.4 35.7 -5.7 36.2 C-4.8 36.3 -3.9 36.4 -3 36.5 C-2.1 36.6 -1.2 36.7 -0.2 36.8 C6.7 37.7 13.5 38.8 20.3 40.6 C22.6 41.3 25 41.7 27.4 42.1 C35.1 43.8 41.4 48.9 45.8 55.3 C50.2 64 49.9 73.3 47.4 82.6 C44.9 89.3 40.9 92.9 34.8 96.3 C16.8 104.4 -6.4 105.1 -25.2 99.3 C-33.5 96.1 -40.1 92.2 -44.1 83.9 C-45.9 79.7 -46.9 75.9 -47.2 71.3 C-42.5 68.1 -37.5 68.9 -31.9 68.9 C-30.7 68.8 -29.6 68.8 -28.4 68.8 C-20 68.7 -20 68.7 -16.2 71.7 C-15.6 72.5 -14.9 73.4 -14.2 74.3 C-9.5 78.6 -4.4 77.8 1.7 77.8 C2.8 77.8 3.9 77.9 5 77.9 C12.8 77.9 12.8 77.9 15.6 76.2 C17 74.8 17 74.8 18.8 72.3 C18.1 69.9 18.1 69.9 16.8 67.3 C14 66.2 14 66.2 10.6 65.6 C9.3 65.3 8.1 65.1 6.8 64.8 C5.5 64.6 4.1 64.4 2.8 64.1 C2.2 64 2.2 64 -1.1 63.4 C-5.8 62.5 -10.6 61.6 -15.4 60.8 C-25.1 59.2 -35.2 56.3 -41.2 48 C-41.5 47.5 -41.9 46.9 -42.2 46.3 C-42.8 45.4 -43.4 44.5 -44.1 43.6 C-47.2 34.9 -46.9 26 -43.5 17.4 C-39.6 9.4 -31.3 5.2 -23.2 2.3 C-15.6 0.2 -7.9 -0 0 0 Z"/><path class="lg-a" transform="translate(141.6 492.7)" d="M0 0 C1 -0 1.9 -0 2.9 -0 C3.9 -0 4.8 -0.1 5.8 -0.1 C6.6 -0.1 7.5 -0.1 8.3 -0.1 C8.7 0 8.7 0 10.4 0.3 C13 4.1 12.7 7.1 12.6 11.5 C12.6 12.3 12.6 13.1 12.6 13.9 C12.6 16.4 12.6 19 12.6 21.5 C12.6 23.2 12.5 24.9 12.5 26.7 C12.5 30.9 12.5 35.1 12.4 39.3 C20.6 31.2 27.7 22.2 34.9 13.3 C35.7 12.3 36.4 11.4 37.2 10.4 C38 9.5 38.7 8.6 39.4 7.7 C39.7 7.3 39.7 7.3 41.4 5.3 C41.7 4.9 41.7 4.9 43.1 3.1 C49.1 -1.4 59.2 0.2 66.4 0.2 C66.9 0.2 66.9 0.2 69.3 0.2 C70.2 0.2 71.1 0.2 72 0.2 C72.8 0.2 73.6 0.2 74.4 0.2 C76.4 0.3 76.4 0.3 78.4 1.3 C77 5.8 74.5 8.9 71.4 12.4 C70.4 13.6 69.4 14.7 68.4 15.9 C67.9 16.5 67.4 17.1 66.9 17.6 C64.1 20.9 61.4 24.3 58.6 27.6 C57.1 29.5 55.5 31.4 53.9 33.3 C53.1 34.2 52.3 35.2 51.5 36.2 C50.8 37.1 50 37.9 49.3 38.8 C47.5 41.3 46.3 43.3 45.4 46.3 C46.7 49.8 48.1 52 50.8 54.6 C53.6 57.5 55.9 60.6 58.2 63.9 C59.1 65.2 60 66.4 60.9 67.7 C61.3 68.3 61.7 68.9 62.2 69.5 C64 72 65.8 74.5 67.6 77 C68.2 77.9 68.8 78.7 69.5 79.6 C70.9 81.5 72.2 83.4 73.6 85.3 C74.4 86.2 75.1 87.2 75.8 88.2 C76.5 89.1 77.1 89.9 77.8 90.8 C79.4 93.2 80.5 95.6 81.4 98.3 C78.7 101.1 71 99.8 67 99.9 C65.5 99.9 64 100 62.5 100 C50 100.6 50 100.6 46.2 97.4 C44.6 95.1 43.5 92.8 42.4 90.3 C41.5 89 40.6 87.7 39.6 86.4 C36.4 82.3 33.4 78.1 30.4 73.9 C28.5 71.3 26.5 68.8 24.4 66.3 C22.7 66.9 21.1 67.6 19.4 68.3 C18.4 68.7 17.4 69.2 16.3 69.6 C12.9 72.8 13 73.6 12.7 78.1 C12.6 80.4 12.6 82.7 12.6 84.9 C12.6 87.2 12.6 89.5 12.5 91.8 C12.5 92.8 12.5 93.8 12.5 94.9 C12.4 97.3 12.4 97.3 11.4 99.3 C7.5 99.3 3.5 99.4 -0.5 99.4 C-1.1 99.4 -1.1 99.4 -3.9 99.4 C-5 99.4 -6.1 99.4 -7.2 99.4 C-7.7 99.4 -7.7 99.4 -10.2 99.4 C-12.6 99.3 -12.6 99.3 -13.6 98.3 C-13.7 95.3 -13.7 92.4 -13.7 89.4 C-13.7 88.5 -13.7 87.6 -13.7 86.6 C-13.8 83.5 -13.8 80.4 -13.8 77.3 C-13.8 75.1 -13.8 73 -13.8 70.8 C-13.8 66.3 -13.8 61.8 -13.8 57.3 C-13.8 51.5 -13.8 45.8 -13.9 40 C-13.9 35.5 -13.9 31.1 -13.9 26.7 C-13.9 24.5 -13.9 22.4 -13.9 20.3 C-13.9 17.3 -13.9 14.3 -13.9 11.3 C-13.9 10.4 -13.9 9.6 -13.9 8.6 C-13.9 6.2 -13.9 6.2 -13.6 2.3 C-9.2 -0.6 -5.2 -0 0 0 Z"/><path class="lg-a" transform="translate(246 492.7)" d="M0 0 C0.9 -0 1.8 -0 2.8 -0 C3.7 -0 4.5 -0.1 5.4 -0.1 C6.2 -0.1 7 -0.1 7.9 -0.1 C10.6 0.4 11.3 1.2 13 3.3 C13.3 6.4 13.4 9.2 13.4 12.3 C13.4 12.7 13.4 12.7 13.4 15 C13.4 18 13.3 21.1 13.3 24.1 C13.3 26.2 13.3 28.3 13.3 30.4 C13.3 34.8 13.3 39.2 13.3 43.6 C13.3 49.2 13.2 54.9 13.2 60.5 C13.2 64.9 13.2 69.2 13.2 73.5 C13.2 75.6 13.2 77.7 13.2 79.8 C13.2 82.7 13.2 85.6 13.2 88.5 C13.2 89.4 13.2 90.2 13.2 91.1 C13.1 97.1 13.1 97.1 12 99.3 C4.1 99.3 -3.8 99.3 -12 99.3 C-14 94.4 -14.1 91.6 -13.6 86.6 C-13 78.3 -12.9 70 -13 61.7 C-13 59.2 -13 56.8 -13 54.4 C-13.1 47.4 -13.1 40.5 -13.2 33.6 C-13.2 29.3 -13.2 25 -13.2 20.8 C-13.3 19.1 -13.3 17.5 -13.3 15.9 C-13.3 13.6 -13.3 11.4 -13.3 9.2 C-13.3 7.9 -13.3 6.6 -13.4 5.3 C-13.2 4.3 -13.1 3.3 -13 2.3 C-8.7 -0.5 -5 -0 0 0 Z"/><path class="lg-a" transform="translate(369.5 492.9)" d="M0 0 C0.9 -0 1.8 -0 2.7 -0 C3.1 -0 3.1 -0 5.5 0 C6.4 0 7.3 0 8.3 -0 C8.7 -0 8.7 -0 10.9 0 C11.3 0 11.3 0 13.4 0 C15.5 0.1 15.5 0.1 18.5 1.1 C20 4 19.7 6.5 19.7 9.7 C19.8 10.4 19.8 11 19.8 11.7 C19.8 14 19.8 16.2 19.9 18.4 C19.9 20 19.9 21.5 19.9 23.1 C20 27.1 20 31.2 20.1 35.3 C20.1 39.4 20.2 43.6 20.2 47.7 C20.3 55.8 20.4 64 20.5 72.1 C21.1 72.1 21.8 72.2 22.4 72.2 C28.7 72.3 35.1 72.4 41.4 72.5 C43.8 72.5 46.2 72.6 48.5 72.6 C51.9 72.7 55.3 72.8 58.7 72.8 C59.8 72.8 60.9 72.8 62 72.9 C62.9 72.9 63.9 72.9 64.9 72.9 C65.4 72.9 65.4 72.9 67.6 73 C69.5 73.1 69.5 73.1 70.5 74.1 C70.6 75.9 70.7 77.7 70.7 79.4 C70.7 80.5 70.7 81.6 70.7 82.7 C70.7 83.8 70.7 85 70.7 86.1 C70.7 87.3 70.7 88.4 70.7 89.6 C70.7 90.6 70.7 91.7 70.7 92.8 C70.7 93.8 70.7 94.8 70.7 95.8 C70.5 98.1 70.5 98.1 69.5 99.1 C67.2 99.2 64.8 99.3 62.4 99.2 C62.1 99.2 62.1 99.2 60.2 99.2 C57.7 99.2 55.3 99.2 52.8 99.2 C51.3 99.2 49.8 99.2 48.3 99.2 C42.7 99.2 37.1 99.2 31.5 99.2 C19 99.2 6.4 99.2 -6.5 99.1 C-6.5 66.8 -6.5 34.5 -6.5 1.1 C-4.1 -0.1 -2.6 0 0 0 Z"/><path class="lg-a" transform="translate(295.6 492.8)" d="M0 0 C0.4 -0 0.4 -0 2.4 -0.1 C5.1 0.4 5.7 1 7.4 3.2 C7.8 6.2 7.8 6.2 7.8 9.9 C7.8 10.6 7.8 11.3 7.8 12 C7.9 14.2 7.9 16.4 7.9 18.6 C7.9 20.2 7.9 21.7 7.9 23.3 C8 27.3 8 31.4 8 35.4 C8.1 39.6 8.1 43.7 8.2 47.9 C8.3 56 8.3 64.1 8.4 72.2 C9 72.3 9.5 72.3 10.2 72.3 C16.2 72.4 22.3 72.5 28.4 72.6 C30.7 72.7 32.9 72.7 35.2 72.7 C38.5 72.8 41.7 72.9 45 72.9 C46 73 47 73 48.1 73 C48.6 73 48.6 73 50.9 73 C51.8 73.1 52.6 73.1 53.5 73.1 C55.4 73.2 55.4 73.2 56.4 74.2 C56.4 76.1 56.3 78 56.3 79.8 C56.2 80.9 56.2 82.1 56.1 83.2 C56.1 84.4 56 85.6 55.9 86.8 C55.9 88 55.8 89.2 55.8 90.4 C55.6 93.4 55.5 96.3 55.4 99.2 C45.7 99.3 36.1 99.3 26.5 99.3 C22 99.3 17.5 99.3 13.1 99.3 C8.8 99.3 4.4 99.3 0.1 99.3 C-1.5 99.3 -3.2 99.4 -4.8 99.4 C-7.1 99.4 -9.4 99.4 -11.7 99.4 C-12.4 99.4 -12.4 99.4 -15.7 99.4 C-18.6 99.2 -18.6 99.2 -19.6 98.2 C-19.7 95.3 -19.8 92.3 -19.8 89.3 C-19.8 88.4 -19.8 87.5 -19.8 86.5 C-19.8 83.4 -19.8 80.3 -19.8 77.2 C-19.8 75 -19.8 72.9 -19.8 70.7 C-19.8 66.2 -19.8 61.7 -19.8 57.2 C-19.7 51.4 -19.8 45.6 -19.8 39.8 C-19.8 35.4 -19.8 31 -19.8 26.5 C-19.8 24.4 -19.8 22.2 -19.8 20.1 C-19.8 17.1 -19.8 14.1 -19.8 11.2 C-19.8 10.3 -19.8 9.4 -19.8 8.5 C-19.7 2.4 -19.7 2.4 -18.6 1.2 C-12.5 0.5 -6.2 0.2 0 0 Z"/><path class="lg-b" transform="translate(488.2 93.7)" d="M0 0 C1.7 -0 3.3 -0 5 -0 C8.5 -0 12 -0 15.4 -0 C19.9 -0 24.3 -0 28.8 -0 C32.2 -0.1 35.6 -0.1 39.1 -0.1 C40.7 -0.1 42.4 -0.1 44 -0.1 C65.3 -0.2 65.3 -0.2 73.5 6.4 C74.1 6.9 74.8 7.4 75.4 7.9 C76.8 9.3 76.8 9.3 76.8 11.3 C77.5 11.6 78.1 11.8 78.7 12.1 C81.1 13.5 82 14.6 83.5 17 C83.9 17.6 84.3 18.3 84.7 18.9 C87.6 24.8 88.2 30.4 88.3 36.9 C88.3 37.3 88.3 37.3 88.3 39.3 C88.4 41.7 88.4 44.2 88.5 46.7 C88.5 48.4 88.5 50.1 88.6 51.8 C88.7 56 88.8 60.1 88.8 64.3 C91.9 65.8 95.1 65.4 98.4 65.4 C98.8 65.4 98.8 65.4 100.8 65.4 C102.5 65.4 104.2 65.4 105.8 65.4 C109.5 65.4 113.1 65.5 116.7 65.5 C123.5 65.5 130.2 65.6 136.9 65.6 C141.6 65.6 146.3 65.6 151 65.6 C152.8 65.6 154.6 65.6 156.3 65.6 C169.7 65.6 181.9 66.7 192.2 76.2 C193.1 77.1 194.1 77.9 195 78.7 C205.8 91.5 205.9 104 205.7 120.2 C205.7 123.9 205.7 127.6 205.7 131.4 C205.7 133.8 205.7 136.2 205.7 138.6 C205.7 139.7 205.7 140.8 205.7 141.9 C205.5 152.1 201.9 160.3 194.9 167.7 C189 173.3 183.1 177 175.3 179.4 C174.6 179.7 173.8 179.9 173 180.2 C166.9 182.1 160.8 183.5 154.6 184.6 C150.6 185.4 146.7 186.3 142.7 187.3 C137.9 188.5 133 189.7 128.1 190.9 C119.2 192.9 110.4 195.1 101.7 197.7 C94.8 199.8 87.9 201.5 80.8 203 C77 203.8 73.5 204.8 69.8 206.3 C68.2 206.6 66.5 206.9 64.8 207.2 C59.4 208.1 54.5 209.7 49.5 211.6 C46.8 212.3 46.8 212.3 44.7 212.4 C41.6 210.6 41.2 207.2 40.2 203.9 C36.4 192.7 29.8 185.1 19.1 179.6 C10.2 175.6 0.4 176.4 -9.2 176.6 C-11.3 176.6 -13.4 176.6 -15.5 176.6 C-21 176.6 -26.5 176.6 -32 176.6 C-40.8 176.7 -49.6 176.8 -58.5 176.8 C-61.5 176.8 -64.6 176.8 -67.7 176.8 C-69.6 176.8 -71.4 176.8 -73.3 176.8 C-74.2 176.9 -75 176.9 -75.9 176.9 C-78.3 176.9 -78.3 176.9 -82.2 176.3 C-84.1 174 -84.1 174 -85.2 171.3 C-85.7 170.2 -86.3 169 -86.8 167.9 C-87.1 167.3 -87.4 166.6 -87.8 166 C-91 159.3 -94.5 152.9 -98.4 146.6 C-98.8 145.9 -99.2 145.2 -99.7 144.5 C-101.9 141 -104.2 138.2 -107.2 135.3 C-107.5 134.3 -107.8 133.3 -108.2 132.3 C-109.8 130.9 -111.5 129.6 -113.2 128.3 C-115.5 126.1 -117.7 123.8 -119.9 121.4 C-132.8 109.1 -149.2 99.7 -166.2 94.3 C-165.1 86.1 -158.5 80.2 -152.5 75 C-140.3 66.1 -128.8 65.6 -114.3 65.6 C-112.4 65.6 -110.5 65.6 -108.6 65.5 C-103.7 65.5 -98.8 65.5 -93.9 65.5 C-88.8 65.5 -83.8 65.4 -78.7 65.4 C-68.9 65.3 -59 65.3 -49.2 65.3 C-49.1 64.2 -49.1 63.2 -49.1 62.1 C-49 58.2 -48.9 54.2 -48.8 50.3 C-48.8 48.6 -48.8 46.9 -48.7 45.2 C-48.7 42.8 -48.6 40.3 -48.6 37.9 C-48.6 37.1 -48.5 36.4 -48.5 35.6 C-48.3 25.7 -44.9 18.1 -37.9 11.1 C-26.2 0.4 -15.2 -0 0 0 Z M-22 30 C-25.9 35.8 -24.7 43.5 -24.5 50.2 C-24.4 51.7 -24.4 53.2 -24.4 54.6 C-24.3 58.2 -24.3 61.7 -24.2 65.3 C-21 66.9 -17.6 66.5 -14.2 66.5 C-13.3 66.5 -12.5 66.5 -11.7 66.5 C-8.9 66.5 -6.2 66.5 -3.4 66.5 C-1.5 66.5 0.4 66.5 2.3 66.5 C6.2 66.5 10.2 66.5 14.2 66.5 C19.3 66.5 24.4 66.6 29.5 66.6 C33.5 66.6 37.4 66.6 41.3 66.6 C43.2 66.6 45.1 66.6 47 66.6 C49.6 66.7 52.2 66.7 54.8 66.7 C55.2 66.7 55.2 66.7 57.2 66.7 C59.4 66.7 59.4 66.7 62.8 66.3 C66.2 61.3 65.1 55.3 64.9 49.5 C64.8 47.4 64.9 45.3 64.9 43.2 C64.6 32.2 64.6 32.2 60.5 27.9 C56.3 24.5 52.8 24.2 47.5 24.1 C46.8 24.1 46.2 24.1 45.5 24.1 C43.4 24.1 41.2 24.1 39.1 24.1 C37.6 24.1 36.1 24.1 34.7 24.1 C31.5 24.1 28.4 24.1 25.3 24.1 C21.3 24.1 17.4 24 13.4 24 C10.3 24 7.3 24 4.2 24 C2.7 24 1.3 24 -0.2 24 C-2.3 23.9 -4.3 23.9 -6.4 23.9 C-7.5 23.9 -8.7 23.9 -9.9 23.9 C-15.1 24.5 -18.3 26.5 -22 30 Z"/><path class="lg-b" transform="translate(684 285)" d="M0 0 C3 2 3 2 3.4 3.9 C3.4 4.7 3.4 5.5 3.4 6.3 C3.4 7.2 3.4 8.2 3.5 9.1 C3.5 9.6 3.5 9.6 3.5 12.1 C3.5 13.2 3.5 14.2 3.5 15.3 C3.5 18.8 3.5 22.3 3.5 25.8 C3.6 28.3 3.6 30.7 3.6 33.1 C3.6 38.3 3.6 43.4 3.6 48.5 C3.6 55 3.7 61.6 3.7 68.1 C3.8 73.1 3.8 78.2 3.8 83.2 C3.8 85.6 3.8 88 3.8 90.4 C4 105 4.1 115.2 -6.2 126.4 C-12.9 133.1 -22 137.7 -31.6 138.1 C-32.5 138.1 -33.4 138.1 -34.3 138.1 C-34.9 138.1 -34.9 138.1 -37.6 138.1 C-38.2 138.1 -38.2 138.1 -41.1 138.1 C-42.3 138.1 -43.6 138.1 -44.9 138.1 C-48.3 138.1 -51.8 138.1 -55.2 138.1 C-58.9 138.1 -62.6 138.1 -66.3 138.1 C-72.8 138.1 -79.2 138.1 -85.6 138.1 C-94.9 138.1 -104.2 138.1 -113.6 138.1 C-128.6 138.1 -143.7 138.1 -158.8 138.1 C-173.5 138.1 -188.2 138.1 -202.8 138.1 C-203.7 138.1 -204.6 138.1 -205.6 138.1 C-210.1 138.1 -214.6 138.1 -219.2 138.1 C-256.8 138 -294.4 138 -332 138 C-332 137 -332 136 -332 135 C-330.6 133.6 -330.6 133.6 -328.6 132.2 C-327.9 131.7 -327.2 131.2 -326.5 130.7 C-325.8 130.1 -325 129.6 -324.2 129.1 C-319.9 125.9 -315.8 122.8 -312 119 C-311.3 119 -310.7 119 -310 119 C-309.7 118.4 -309.5 117.8 -309.2 117.3 C-307.9 114.8 -306.3 113 -304.4 110.9 C-295.7 101.3 -290.1 91.7 -284.8 79.9 C-284.3 78.9 -283.9 77.9 -283.4 76.9 C-283.2 76.5 -283.2 76.5 -282.2 74.3 C-281 72 -280 70.7 -278 69 C-275.1 68.7 -272.3 68.6 -269.4 68.6 C-268.5 68.6 -267.6 68.6 -266.7 68.6 C-264.8 68.6 -262.9 68.6 -261 68.6 C-257.9 68.6 -254.9 68.6 -251.8 68.6 C-243.2 68.6 -234.5 68.6 -225.9 68.6 C-220.6 68.6 -215.3 68.5 -210 68.5 C-207 68.5 -204.1 68.5 -201.1 68.5 C-183.8 68.5 -183.8 68.5 -176 64 C-175.7 63.8 -175.7 63.8 -174 63 C-166.5 59.1 -160.3 51.9 -157.2 43.9 C-154.8 40.1 -150.7 39.2 -146.4 38.2 C-145.2 37.9 -144 37.7 -142.7 37.5 C-138.5 36.8 -134.7 35.9 -130.7 34.5 C-125.8 32.8 -120.8 31.9 -115.8 30.9 C-110.6 30 -105.9 29 -101 27 C-98.8 26.5 -96.5 26 -94.3 25.6 C-90.1 24.7 -86 23.8 -81.9 22.4 C-78.3 21.3 -74.9 20.6 -71.2 20.1 C-65.6 19.2 -60.5 17.7 -55.1 15.9 C-51.4 14.8 -47.7 14.2 -43.9 13.6 C-39.3 12.7 -34.8 11.3 -30.3 9.9 C-27.6 9.2 -25 8.6 -22.2 8.2 C-16.4 7.2 -11.1 4.7 -5.8 2.2 C-3.9 1.4 -2 0.7 0 0 Z"/><path class="lg-b" transform="translate(320.5 288.4)" d="M0 0 C1.9 -0 3.8 -0 5.7 -0 C10.8 -0 15.9 -0 21 -0 C26.4 -0 31.7 -0 37.1 -0 C46.1 -0 55.1 -0 64.1 -0 C74.5 0 84.9 0 95.3 -0 C104.2 -0 113.1 -0 122.1 -0 C127.4 -0 132.7 -0 138.1 -0 C143.1 -0 148.1 -0 153.1 -0 C154.9 -0 156.8 -0 158.6 -0 C176.6 -0.1 176.6 -0.1 183.5 5.6 C185.7 7.8 185.7 7.8 187 9.8 C187.5 10.4 187.9 11.1 188.4 11.8 C191.7 17.4 191 24.3 190.5 30.6 C188.5 36.8 184.1 40.9 178.6 43.8 C173.2 46.5 168 46.8 162 46.8 C161.3 46.8 160.5 46.8 159.8 46.8 C157.3 46.8 154.8 46.8 152.3 46.8 C150.5 46.8 148.7 46.8 146.9 46.8 C142 46.8 137.2 46.8 132.3 46.8 C129.2 46.8 126.2 46.8 123.2 46.8 C112.6 46.8 101.9 46.8 91.3 46.8 C81.5 46.8 71.6 46.8 61.7 46.9 C53.2 46.9 44.7 46.9 36.2 46.9 C31.1 46.9 26.1 46.9 21 46.9 C16.2 46.9 11.5 46.9 6.7 46.9 C4.9 46.9 3.2 46.9 1.4 46.9 C-0.9 46.9 -3.3 46.9 -5.7 46.9 C-6.4 46.9 -7.1 46.9 -7.8 46.9 C-16.4 46.8 -22.2 44.2 -28.5 38.6 C-33.2 33.6 -33.6 30 -33.7 23.2 C-33.7 22.1 -33.7 21 -33.7 19.8 C-33.2 13.1 -29.8 8.9 -25.1 4.3 C-18 -1.3 -8.6 -0.1 0 0 Z"/><path class="lg-b" transform="translate(460.2 492.9)" d="M0 0 C0.5 -0 0.5 -0 3.1 -0 C4.2 -0 5.2 0 6.3 0 C6.9 0 6.9 0 9.6 -0 C10.1 -0 10.1 -0 12.7 0 C13.6 0 14.6 0 15.5 0 C17.8 0.1 17.8 0.1 19.8 1.1 C20.2 24.9 20.5 48.7 20.8 73.1 C44.3 73.1 44.3 73.1 51.7 73 C53.6 73 55.5 73 57.5 73 C58.5 73 59.5 73 60.5 73 C61.5 73 62.4 73 63.4 73 C64.2 73 65.1 73 65.9 73 C67.8 73.1 67.8 73.1 68.8 74.1 C68.9 75.9 69 77.7 69 79.4 C69 80.5 69 81.6 69 82.7 C69 83.8 69 85 69 86.1 C69 87.3 69 88.4 69 89.6 C69 90.6 69 91.7 69 92.8 C69 93.8 69 94.8 69 95.8 C68.8 98.1 68.8 98.1 67.8 99.1 C65.5 99.2 63.3 99.3 61 99.3 C60.2 99.3 59.5 99.3 58.8 99.3 C56.4 99.3 54 99.3 51.6 99.3 C49.9 99.3 48.3 99.3 46.6 99.3 C43.2 99.3 39.7 99.3 36.2 99.3 C31.7 99.3 27.3 99.3 22.8 99.3 C19.4 99.3 16 99.3 12.6 99.3 C10.9 99.3 9.3 99.3 7.6 99.3 C5.3 99.3 3 99.3 0.7 99.3 C0.1 99.3 0.1 99.3 -3.2 99.3 C-6.2 99.1 -6.2 99.1 -7.2 98.1 C-7.3 95.1 -7.3 92.1 -7.3 89.1 C-7.3 88.2 -7.3 87.2 -7.3 86.2 C-7.3 83.1 -7.3 80 -7.3 76.8 C-7.3 74.6 -7.3 72.5 -7.2 70.3 C-7.2 64.6 -7.2 58.8 -7.2 53.1 C-7.2 47.3 -7.2 41.4 -7.2 35.6 C-7.2 24.1 -7.2 12.6 -7.2 1.1 C-4.6 -0.1 -2.8 0 0 0 Z"/><path class="lg-b" transform="translate(546.6 492.7)" d="M0 0 C0.4 -0 0.4 -0 2.7 -0 C3.6 -0 4.5 0 5.4 0 C6.4 0 7.3 0 8.2 -0 C9.1 -0 10 -0 10.9 0 C11.7 0 12.5 0 13.3 0 C15.4 0.3 15.4 0.3 18.4 2.3 C18.8 4.7 18.9 6.9 18.9 9.4 C18.9 9.7 18.9 9.7 18.9 11.6 C19 14 19 16.5 19 18.9 C19 20.6 19 22.3 19 24 C19.1 27.6 19.1 31.2 19.1 34.8 C19.2 39.3 19.2 43.8 19.3 48.4 C19.3 51.9 19.4 55.4 19.4 59 C19.4 60.6 19.4 62.3 19.4 64 C19.5 72.8 19.5 81.6 19 90.4 C19 91.2 18.9 91.9 18.9 92.7 C18.6 98.1 18.6 98.1 17.4 99.3 C15.7 99.4 13.9 99.4 12.1 99.4 C11 99.4 10 99.4 8.9 99.4 C7.7 99.4 6.6 99.4 5.4 99.4 C4.3 99.4 3.2 99.4 2 99.4 C0.9 99.4 -0.1 99.4 -1.2 99.4 C-2.2 99.4 -3.2 99.4 -4.3 99.4 C-6.6 99.3 -6.6 99.3 -7.6 98.3 C-7.7 95.3 -7.7 92.3 -7.7 89.4 C-7.7 88.4 -7.7 87.5 -7.7 86.5 C-7.8 83.4 -7.8 80.3 -7.8 77.2 C-7.8 75.1 -7.8 72.9 -7.8 70.8 C-7.8 66.3 -7.8 61.8 -7.8 57.3 C-7.8 51.5 -7.8 45.7 -7.9 39.9 C-7.9 35.5 -7.9 31.1 -7.9 26.6 C-7.9 24.5 -7.9 22.4 -7.9 20.2 C-7.9 17.2 -7.9 14.3 -7.9 11.3 C-7.9 10.4 -7.9 9.5 -7.9 8.6 C-7.9 6.1 -7.9 6.1 -7.6 2.3 C-4.4 0.2 -3.6 0 0 0 Z"/><path class="lg-b" transform="translate(588.6 492.7)" d="M0 0 C0.4 -0 0.4 -0 2.6 -0 C3.1 -0 3.1 -0 5.3 0 C6.2 0 7.1 0 8.1 -0 C16.4 0 16.4 0 20.4 2.3 C21.8 4.3 21.8 4.3 23.4 7.3 C24.4 8.8 25.4 10.4 26.4 12 C26.9 12.7 27.4 13.5 27.9 14.3 C29.4 16.3 29.4 16.3 32.4 18.3 C33.4 19.9 34.4 21.6 35.4 23.3 C37 25.6 38.6 27.8 40.2 30.1 C40.7 30.7 41.1 31.3 41.6 31.9 C42.8 33.7 44.1 35.5 45.4 37.3 C46 38.1 46.6 38.9 47.3 39.8 C49.8 43.2 52.4 46.3 55.4 49.3 C55.4 49 55.4 49 55.4 47.5 C55.5 41.4 55.6 35.4 55.7 29.3 C55.7 27 55.7 24.8 55.8 22.5 C55.8 19.2 55.8 16 55.9 12.7 C55.9 11.7 55.9 10.7 55.9 9.7 C55.9 8.7 56 7.8 56 6.8 C56 6 56 5.1 56 4.3 C56.1 3.6 56.3 3 56.4 2.3 C59.6 0.1 60.5 0 64.2 0 C65.1 -0 66 -0 67 -0 C68 -0 68.9 0 69.9 0 C70.4 0 70.4 0 72.8 -0 C73.8 -0 74.7 -0 75.6 0 C76.1 0 76.1 0 78.2 0 C80.4 0.3 80.4 0.3 83.4 2.3 C83.7 5.3 83.8 8.2 83.8 11.3 C83.8 12.2 83.8 13.2 83.8 14.1 C83.8 17.2 83.8 20.3 83.7 23.4 C83.7 25.6 83.7 27.7 83.7 29.9 C83.7 34.4 83.7 38.9 83.7 43.4 C83.7 49.2 83.7 55 83.6 60.7 C83.6 65.2 83.6 69.6 83.6 74 C83.6 76.2 83.6 78.3 83.6 80.4 C83.6 83.4 83.6 86.4 83.6 89.4 C83.6 90.3 83.6 91.2 83.6 92.1 C83.5 98.2 83.5 98.2 82.4 99.3 C78.4 99.7 74.3 99.7 70.3 99.8 C69.2 99.9 68 100 66.9 100 C58.7 100.2 58.7 100.2 55.2 97.7 C53.4 95.7 51.9 93.6 50.4 91.3 C49.4 90 48.4 88.7 47.5 87.4 C46.5 86.2 45.6 84.9 44.7 83.6 C44.5 83.3 44.5 83.3 43.3 81.7 C41.3 79 39.3 76.2 37.5 73.3 C34.9 69.5 32.2 65.9 29.4 62.3 C23.6 54.6 23.6 54.6 21.2 50.8 C19.4 48.3 19.4 48.3 17.4 47.3 C17.4 47.9 17.4 48.5 17.4 49.2 C17.5 55.6 17.5 62.1 17.5 68.5 C17.5 70.9 17.5 73.3 17.6 75.8 C17.6 79.2 17.6 82.7 17.6 86.1 C17.6 87.2 17.6 88.3 17.6 89.4 C17.6 90.4 17.6 91.4 17.6 92.4 C17.6 93.3 17.6 94.2 17.7 95.1 C17.4 97.3 17.4 97.3 15.4 99.3 C13.1 99.5 13.1 99.5 10.2 99.5 C9.2 99.5 8.2 99.5 7.1 99.5 C6 99.5 5 99.5 3.8 99.5 C2.8 99.5 1.7 99.5 0.6 99.5 C-7.4 99.4 -7.4 99.4 -8.6 98.3 C-8.7 95.3 -8.7 92.3 -8.7 89.3 C-8.7 88.4 -8.7 87.5 -8.7 86.5 C-8.7 83.4 -8.7 80.3 -8.7 77.2 C-8.7 75 -8.7 72.9 -8.7 70.7 C-8.7 65 -8.7 59.4 -8.7 53.7 C-8.6 47.9 -8.6 42.1 -8.6 36.3 C-8.6 25 -8.6 13.6 -8.6 2.3 C-5.5 0.6 -3.5 0 0 0 Z"/><path class="lg-b" transform="translate(699.9 492.8)" d="M0 0 C1 -0 2 -0 3.1 -0 C4.1 -0 5 -0 6 -0 C6.5 -0 6.5 -0 8.7 -0.1 C11.1 0.2 11.1 0.2 14.1 2.2 C14.3 4.9 14.4 7.3 14.4 10 C14.4 10.8 14.3 11.6 14.3 12.4 C14.3 14.9 14.3 17.3 14.2 19.8 C14.2 21.5 14.2 23.2 14.2 24.8 C14.2 29 14.1 33.1 14.1 37.2 C18.5 34.7 20.4 32.5 23.1 28.2 C24.8 26.1 26.5 24 28.3 21.9 C39.6 8.8 39.6 8.8 43.6 3 C45.1 1.2 45.1 1.2 48.1 0.2 C50.3 0.1 52.6 0.1 54.8 0.1 C55.5 0.1 56.2 0.1 56.8 0.1 C58.2 0.1 59.6 0.1 61 0.1 C63.1 0.1 65.2 0.1 67.4 0.1 C68.7 0.1 70.1 0.1 71.4 0.1 C72.6 0.1 73.9 0.1 75.1 0.1 C78.1 0.2 78.1 0.2 80.1 1.2 C79.5 4.6 78.5 6 76 8.3 C70.4 13.7 65.7 19.8 61.2 26.1 C59.6 28.5 58.1 30.2 56.1 32.2 C54.4 34.2 52.7 36.2 51.1 38.2 C50.1 39.3 49.2 40.4 48.2 41.6 C47.5 42.4 46.8 43.3 46.1 44.2 C47.3 46.9 48.7 49.3 50.5 51.7 C50.7 52.1 50.7 52.1 51.9 53.8 C52.4 54.5 52.9 55.2 53.4 55.9 C53.7 56.3 53.7 56.3 55 58.2 C60.1 65.3 65.4 72.3 70.6 79.3 C72.7 82 74.7 84.7 76.7 87.3 C77.6 88.6 78.6 89.9 79.6 91.1 C80.8 92.8 82 94.5 83.1 96.2 C82.9 96.7 82.9 96.7 82.1 99.2 C77.7 99.3 73.4 99.4 69.1 99.5 C67.6 99.5 66.2 99.5 64.7 99.6 C62.6 99.6 60.5 99.7 58.3 99.7 C57.1 99.7 55.8 99.7 54.5 99.8 C48.2 98.7 45.3 93.4 41.8 88.6 C41 87.5 40.2 86.5 39.4 85.4 C36.6 81.5 33.7 77.6 30.9 73.7 C29 71.1 27.1 68.6 25.1 66.2 C21.2 66.8 17.5 68 15.1 71.2 C14.2 75.5 14.2 79.9 14.2 84.3 C14.2 86.7 14.2 89.1 14.2 91.4 C14.2 92.5 14.2 93.6 14.2 94.6 C14.1 97.2 14.1 97.2 13.1 99.2 C8.9 99.2 4.8 99.2 0.6 99.2 C0 99.3 0 99.3 -3 99.3 C-4.1 99.3 -5.2 99.3 -6.4 99.3 C-6.9 99.3 -6.9 99.3 -9.5 99.3 C-11.9 99.2 -11.9 99.2 -12.9 98.2 C-13 95.2 -13.1 92.2 -13.1 89.2 C-13.1 88.2 -13.1 87.3 -13.1 86.3 C-13.1 83.2 -13 80 -13 76.9 C-13 74.7 -13 72.5 -13 70.4 C-13 64.6 -13 58.9 -13 53.2 C-13 47.3 -13 41.5 -13 35.6 C-13 24.1 -13 12.7 -12.9 1.2 C-9.1 -0.7 -4.3 0 0 0 Z"/><path class="lg-b" transform="translate(258 499)" d="M0 0 C0.3 0 0.7 0 1 0 C1 20.1 1 40.3 1 61 C0.7 61 0.3 61 0 61 C0 40.9 0 20.7 0 0 Z"/></svg></a>
+            <nav class="header-actions" aria-label="Account">
+                <button type="button" class="btn icon outline" id="themeBtn" aria-label="Switch to dark mode" title="Switch to dark mode" aria-pressed="false"></button>
+                <button type="button" class="btn text provider-only" id="become" data-auth-only="user"><i data-lucide="briefcase"></i><span class="btn-label">Become a provider</span></button>
+                <button type="button" class="btn outline" id="login" data-auth-only="guest">Log in</button>
+                <button type="button" class="btn primary" id="signup" data-auth-only="guest">Sign up</button>
+                <a class="btn text" id="adminLink" href="#admin" hidden>Admin</a>
+                <button type="button" class="btn icon outline" id="notif" aria-label="Notifications"
+                    data-auth-only="user"><i data-lucide="bell"></i><span class="badge" id="notifCount"
+                        hidden></span></button>
+                <button type="button" class="btn icon outline" id="cart" aria-label="Cart" data-auth-only="user"><i
+                        data-lucide="shopping-cart"></i><span class="badge" id="cartCount" hidden></span></button>
+                <button type="button" class="btn icon outline" id="profileBtn" aria-label="Profile" title="Profile" aria-pressed="false" data-auth-only="user"></button>
+                <button type="button" class="btn outline" id="logout" aria-label="Log out" data-auth-only="user"><i
+                        data-lucide="log-out"></i><span class="btn-label">Log out</span></button>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="landingPage">
+            <div class="hero-wrap">
+                <div class="container hero">
+                    <div class="hero-copy">
+                        <h1>Every problem has a solution.</h1>
+                        <p>Find the right service to get it solved, or offer the skill someone is looking for.</p>
+                        <div class="hero-actions">
+                            <a class="btn primary" href="#mainPage">Find a service</a>
+                        </div>
+                    </div>
+                    <ul class="hero-art pairs" aria-hidden="true">
+                        <li><span class="need">Kitchen faucet keeps leaking</span><i></i><span class="skill">Plumber</span></li>
+                        <li><span class="need">Logo for my bakery</span><i></i><span class="skill">Graphic designer</span></li>
+                        <li><span class="need">Wi-Fi drops every evening</span><i></i><span class="skill">IT technician</span></li>
+                        <li><span class="need">Move a sofa across town</span><i></i><span class="skill">Mover</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="section" id="landingCats">
+                <div class="container">
+                    <div class="sec-head">
+                        <h2>Browse by category</h2>
+                        <a class="btn text" href="#mainPage">See all services</a>
+                    </div>
+                    <div class="cat-grid" role="group" aria-label="Work categories">
+                        <button type="button" class="cat-tile" data-cat="Home &amp; Repair"><i data-lucide="hammer"></i><span>Home &amp; Repair</span></button>
+                        <button type="button" class="cat-tile" data-cat="Technology"><i data-lucide="laptop"></i><span>Technology</span></button>
+                        <button type="button" class="cat-tile" data-cat="Automotive"><i data-lucide="car"></i><span>Automotive</span></button>
+                        <button type="button" class="cat-tile" data-cat="Cleaning"><i data-lucide="sparkles"></i><span>Cleaning</span></button>
+                        <button type="button" class="cat-tile" data-cat="Beauty &amp; Wellness"><i data-lucide="flower-2"></i><span>Beauty &amp; Wellness</span></button>
+                        <button type="button" class="cat-tile" data-cat="Education"><i data-lucide="graduation-cap"></i><span>Education</span></button>
+                        <button type="button" class="cat-tile" data-cat="Creative"><i data-lucide="pen-tool"></i><span>Creative</span></button>
+                        <button type="button" class="cat-tile" data-cat="Construction"><i data-lucide="hard-hat"></i><span>Construction</span></button>
+                        <button type="button" class="cat-tile" data-cat="Delivery &amp; Moving"><i data-lucide="truck"></i><span>Delivery &amp; Moving</span></button>
+                        <button type="button" class="cat-tile" data-cat="Professional Services"><i data-lucide="briefcase"></i><span>Professional Services</span></button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section alt" id="how">
+                <div class="container">
+                    <h2>How it works</h2>
+                    <div class="how">
+                        <div class="how-col hire">
+                            <h3>Need something done?</h3>
+                            <ol>
+                                <li>Search or browse a category.</li>
+                                <li>Compare providers and their experience.</li>
+                                <li>Contact the one you trust and agree on the job.</li>
+                            </ol>
+                        </div>
+                        <div class="how-col offer">
+                            <h3>Have a skill to offer?</h3>
+                            <ol>
+                                <li>Create your provider profile.</li>
+                                <li>List the services you offer.</li>
+                                <li>Receive requests and start working.</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="container">
+                    <h2>Built for both sides</h2>
+                    <div class="principles">
+                        <div>
+                            <h3>Every kind of skill</h3>
+                            <p>Fixing a pipe or building a website. Manual and technical work live in one place.</p>
+                        </div>
+                        <div>
+                            <h3>You choose</h3>
+                            <p>Read profiles, compare experience, and hire the person who fits your job.</p>
+                        </div>
+                        <div>
+                            <h3>One account, two roles</h3>
+                            <p>Hire when you need help. Offer a service when you have time to give.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <section id="mainPage" class="section" hidden>
+            <div class="container">
+                <div class="page-head">
+                    <h2>Browse services</h2>
+                </div>
+                <div class="search-row">
+                    <label for="search" class="sr-only">Search services</label>
+                    <input type="search" id="search" placeholder="What do you need help with?" />
+                    <button type="button" class="btn outline" id="filterBttnToggle" aria-expanded="false"
+                        aria-controls="filterForm">
+                        <i data-lucide="sliders-horizontal"></i> Filters
+                    </button>
+                </div>
+
+                <form id="filterForm" class="filter-form" hidden>
+                    <div class="field"><label for="f-location">Location</label><input type="text" id="f-location"
+                            placeholder="City or province" /></div>
+                    <div class="field"><label for="f-type">Service type</label><select id="f-type">
+                            <option>Any</option>
+                            <option>Manual</option>
+                            <option>Technical</option>
+                        </select></div>
+                    <div class="field"><label for="f-min">Minimum rating</label><select id="f-min">
+                            <option value="0">Any</option>
+                            <option value="4">4 and up</option>
+                            <option value="4.5">4.5 and up</option>
+                        </select></div>
+                    <div class="field check"><input type="checkbox" id="f-ver" /><label for="f-ver">Verified
+                            only</label></div>
+                    <div class="field check"><input type="checkbox" id="f-avail" /><label for="f-avail">Available
+                            today</label></div>
+                    <button type="button" class="btn outline" id="clearF">Clear filters</button>
+                </form>
+
+                <div class="categories" id="categories" role="group" aria-label="Service categories">
+                    <button type="button" class="category" data-cat="Home &amp; Repair" aria-pressed="true"><span class="ico"><i data-lucide="hammer"></i></span>Home &amp; Repair</button>
+                    <button type="button" class="category" data-cat="Technology" aria-pressed="false"><span class="ico"><i data-lucide="laptop"></i></span>Technology</button>
+                    <button type="button" class="category" data-cat="Automotive" aria-pressed="false"><span class="ico"><i data-lucide="car"></i></span>Automotive</button>
+                    <button type="button" class="category" data-cat="Cleaning" aria-pressed="false"><span class="ico"><i data-lucide="sparkles"></i></span>Cleaning</button>
+                    <button type="button" class="category" data-cat="Beauty &amp; Wellness" aria-pressed="false"><span class="ico"><i data-lucide="flower-2"></i></span>Beauty &amp; Wellness</button>
+                    <button type="button" class="category" data-cat="Education" aria-pressed="false"><span class="ico"><i data-lucide="graduation-cap"></i></span>Education</button>
+                    <button type="button" class="category" data-cat="Creative" aria-pressed="false"><span class="ico"><i data-lucide="pen-tool"></i></span>Creative</button>
+                    <button type="button" class="category" data-cat="Construction" aria-pressed="false"><span class="ico"><i data-lucide="hard-hat"></i></span>Construction</button>
+                    <button type="button" class="category" data-cat="Delivery &amp; Moving" aria-pressed="false"><span class="ico"><i data-lucide="truck"></i></span>Delivery &amp; Moving</button>
+                    <button type="button" class="category" data-cat="Professional Services" aria-pressed="false"><span class="ico"><i data-lucide="briefcase"></i></span>Professional Services</button>
+                </div>
+                <p id="resCount" class="muted"></p>
+                <div id="results" class="cards"></div>
+            </div>
+        </section>
+
+        <section id="providerPage" class="section page" hidden>
+            <div class="container narrow">
+                <button type="button" class="btn text back-btn" data-back><i data-lucide="arrow-left"></i>Back</button>
+                <h1>Become a provider</h1>
+                <p class="page-sub">Tell us about you. You will add your services from your provider dashboard next.</p>
+                <form id="providerForm">
+                    <fieldset>
+                        <legend>About you</legend>
+                        <div class="row"><div class="field"><label for="p-name">Full name</label><input type="text" id="p-name" name="name" placeholder="Juan Dela Cruz" autocomplete="name" required /></div><div class="field"><label for="p-age">Age</label><input type="number" id="p-age" name="age" placeholder="18 or older" min="18" required /></div></div>
+                        <div class="field"><label for="p-phone">Mobile number</label><input type="tel" id="p-phone" name="phone" placeholder="0917 123 4567" autocomplete="tel" pattern="[+0-9 \-]{7,}" required /></div>
+                        <div class="field"><label for="p-exp">Experience (optional)</label><input type="text" id="p-exp" name="exp" placeholder="e.g. 5 years in home plumbing"  /></div>
+                    </fieldset>
+                    <fieldset>
+                        <legend>Availability</legend>
+                        <div class="field"><label for="p-days">Days</label><select id="p-days" name="days" required><option>Weekdays</option><option>Weekends</option><option>Every day</option></select></div>
+                        <div class="row"><div class="field"><label for="p-from">From</label><input type="time" id="p-from" name="from" placeholder="" value="08:00" required /></div><div class="field"><label for="p-to">To</label><input type="time" id="p-to" name="to" placeholder="" value="17:00" required /></div></div>
+                    </fieldset>
+                    <fieldset>
+                        <legend>Location</legend>
+                        <div class="row"><div class="field"><label for="p-province">Province</label><input type="text" id="p-province" name="province" placeholder="Davao del Sur" required /></div><div class="field"><label for="p-city">City/Municipality</label><input type="text" id="p-city" name="city" placeholder="Davao City" required /></div></div>
+                        <div class="field"><label for="p-barangay">Barangay</label><input type="text" id="p-barangay" name="barangay" placeholder="Barangay name" required /></div>
+                        <div class="field"><label for="p-street">Street, building, house no.</label><input type="text" id="p-street" name="street" placeholder="Street and house number" required /></div>
+                    </fieldset>
+                    <div class="field check"><input type="checkbox" id="p-agree" name="agree" required /><label for="p-agree">My details are accurate and I agree to the <a href="#terms">Terms</a>.</label></div>
+                    <button type="submit" class="btn primary wide">Register as provider</button>
+                </form>
+            </div>
+        </section>
+
+        <section id="dashboard" class="section page" hidden>
+            <div class="container narrow">
+                <button type="button" class="btn text back-btn" data-back><i data-lucide="arrow-left"></i>Back</button>
+                <div class="page-head">
+                    <div><h1>Provider dashboard</h1><p class="page-sub notice" id="dashSub"></p></div>
+                </div>
+                <div class="dash-top">
+                    <section class="dcard ro" aria-labelledby="rt-h"><div class="dhead"><h2 id="rt-h">Overall rating</h2><span class="tag">Read only</span></div><div id="ratingBox"></div></section>
+                    <section class="dcard ro" aria-labelledby="st-h"><div class="dhead"><h2 id="st-h">Activity</h2><span class="tag">Read only</span></div><div class="dash-stats" id="dashStats"></div></section>
+                </div>
+                <div class="seg" role="tablist" aria-label="Dashboard">
+                    <button type="button" role="tab" data-tab="profile">Profile</button>
+                    <button type="button" role="tab" data-tab="mine">My services</button>
+                    <button type="button" role="tab" data-tab="incoming">Requests received</button>
+                    <button type="button" role="tab" data-tab="hires">My hires</button>
+                    <button type="button" role="tab" data-tab="history">History</button>
+                </div>
+                <div id="dashProfile">
+                    <form id="dashForm">
+                        <section class="dcard" aria-labelledby="d-h1"><h2 id="d-h1">Basic information</h2>
+                            <div class="row"><div class="field"><label for="d-name">Full name</label><input type="text" id="d-name" name="name" autocomplete="name" required /></div><div class="field"><label for="d-age">Age</label><input type="number" id="d-age" name="age" min="18" placeholder="18 or older" required /></div></div>
+                            <div class="field"><label for="d-exp">Experience (optional)</label><input type="text" id="d-exp" name="exp" placeholder="e.g. 5 years in home plumbing" /></div>
+                        </section>
+                        <section class="dcard" aria-labelledby="d-h2"><h2 id="d-h2">Services and categories</h2>
+                            <div class="chips" id="dashCats"></div>
+                            <div class="acts"><button type="button" class="btn outline sm" id="addSvc">Add service</button><button type="button" class="btn text sm" id="manageSvc">Manage services</button></div>
+                        </section>
+                        <section class="dcard" aria-labelledby="d-h3"><h2 id="d-h3">Pricing</h2>
+                            <div class="row keep"><div class="field"><label for="d-rate">Starting rate in PHP (optional)</label><input type="number" id="d-rate" name="rate" min="0" inputmode="numeric" placeholder="500" /></div><div class="field"><label for="d-unit">Rate type</label><select id="d-unit" name="unit"><option>Per hour</option><option>Per day</option><option>Per job</option></select></div></div>
+                        </section>
+                        <section class="dcard" aria-labelledby="d-h4"><h2 id="d-h4">Location</h2>
+                            <div class="row"><div class="field"><label for="d-province">Province</label><input type="text" id="d-province" name="province" required /></div><div class="field"><label for="d-city">City/Municipality</label><input type="text" id="d-city" name="city" required /></div></div>
+                            <div class="field"><label for="d-barangay">Barangay</label><input type="text" id="d-barangay" name="barangay" required /></div>
+                            <div class="field"><label for="d-street">Street, building, house no.</label><input type="text" id="d-street" name="street" required /></div>
+                        </section>
+                        <section class="dcard" aria-labelledby="d-h5"><h2 id="d-h5">Availability</h2>
+                            <div class="field"><label for="d-days">Days</label><select id="d-days" name="days" required><option>Weekdays</option><option>Weekends</option><option>Every day</option></select></div>
+                            <div class="row keep"><div class="field"><label for="d-from">From</label><input type="time" id="d-from" name="from" required /></div><div class="field"><label for="d-to">To</label><input type="time" id="d-to" name="to" required /></div></div>
+                        </section>
+                        <section class="dcard" aria-labelledby="d-h6"><h2 id="d-h6">About you</h2>
+                            <div class="field"><label for="d-bio">Description</label><textarea id="d-bio" name="bio" rows="4" maxlength="400" placeholder="Tell members about your skills and how you work."></textarea></div>
+                            <p class="hint">Up to 400 characters. Shown on your listings.</p>
+                        </section>
+                        <section class="dcard" aria-labelledby="d-h7"><h2 id="d-h7">Contact</h2>
+                            <div class="row"><div class="field"><label for="d-phone">Mobile number</label><input type="tel" id="d-phone" name="phone" autocomplete="tel" pattern="[+0-9 \-]{7,}" required /></div><div class="field"><label for="d-email">Email</label><input type="email" id="d-email" readonly /></div></div>
+                            <p class="hint">Your email is your login and cannot be changed here.</p>
+                        </section>
+                        <section class="dcard ro" aria-labelledby="d-h8"><div class="dhead"><h2 id="d-h8">Ratings and reviews</h2><span class="tag">Read only</span></div><div id="revList"></div></section>
+                        <div class="save-bar"><span class="notice" id="saveMsg" role="status"></span><button type="submit" class="btn primary">Save changes</button></div>
+                    </form>
+                </div>
+                <div class="svc-list"></div>
+            </div>
+        </section>
+
+        <section id="profile" class="section page" hidden>
+            <div class="container narrow">
+                <h1>Your profile</h1>
+                <p class="page-sub">Manage your personal details and account.</p>
+                <div id="profileBody"></div>
+            </div>
+        </section>
+
+        <section id="notifications" class="section page" hidden>
+            <div class="container narrow">
+                <div class="page-head">
+                    <h1>Notifications</h1><button type="button" class="btn text" id="markAll">Mark all as read</button>
+                </div>
+                <div id="notifList"></div>
+            </div>
+        </section>
+
+        <section id="services" class="section page" hidden>
+            <div class="container narrow">
+                <div class="page-head"><h1>My requests</h1></div>
+                <div class="seg" role="tablist" aria-label="My requests">
+                    <button type="button" role="tab" data-tab="hires">My hires</button>
+                    <button type="button" role="tab" data-tab="saved">Saved</button>
+                    <button type="button" role="tab" data-tab="history">History</button>
+                </div>
+                <div class="svc-list"></div>
+            </div>
+        </section>
+
+        <section id="admin" class="section page" hidden>
+            <div class="container">
+                <h1>Admin</h1>
+                <p class="page-sub">Verify providers, review reports and track activity.</p>
+                <div id="adminBody"></div>
+            </div>
+        </section>
+
+        <section id="infoPage" class="section page" hidden>
+            <div class="container narrow">
+                <h1 id="infoTitle"></h1>
+                <div id="infoBody" class="prose"></div>
+            </div>
+        </section>
+    </main>
+
+    <ion-tab-bar id="tabbar" data-auth-only="user">
+        <ion-tab-button tab="mainPage"><i data-lucide="search"></i><ion-label>Browse</ion-label></ion-tab-button>
+        <ion-tab-button tab="services"><i data-lucide="clipboard-list"></i><ion-label>Requests</ion-label></ion-tab-button>
+        <ion-tab-button tab="notifications"><i data-lucide="bell"></i><ion-label>Alerts</ion-label></ion-tab-button>
+        <ion-tab-button tab="profile"><i data-lucide="user"></i><ion-label>Profile</ion-label></ion-tab-button>
+    </ion-tab-bar>
+
+    <footer class="site-footer">
+        <div class="container footer-grid">
+            <div class="footer-brand">
+                <span class="wordmark">SkillLink</span>
+                <p>Connecting people who need a job done with people who can do it.</p>
+            </div>
+            <nav aria-label="Hire">
+                <h3>Hire</h3>
+                <ul>
+                    <li><a href="#mainPage">Find a service</a></li>
+                    <li><a href="#landingCats">Categories</a></li>
+                    <li><a href="#how">How it works</a></li>
+                </ul>
+            </nav>
+            <nav aria-label="Offer">
+                <h3>Offer</h3>
+                <ul>
+                    <li><a href="#guidelines">Provider guidelines</a></li>
+                    <li><a href="#help">Help center</a></li>
+                </ul>
+            </nav>
+            <nav aria-label="Company">
+                <h3>Company</h3>
+                <ul>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="#terms">Terms</a></li>
+                    <li><a href="#privacy">Privacy</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="container footer-bottom">
+            <small>&copy; <span id="year">2026</span> SkillLink. All rights reserved.</small>
+        </div>
+    </footer>
+
+    <dialog id="modal">
+        <div class="dialog-body"><button type="button" class="btn icon text close" data-close aria-label="Close"><i
+                    data-lucide="x"></i></button>
+            <form id="mForm"></form>
+        </div>
+    </dialog>
+
+    <dialog id="auths">
+        <div class="dialog-body">
+            <button type="button" class="btn icon text close" data-close aria-label="Close"><i data-lucide="x"></i></button>
+            <div class="switcher" role="tablist" aria-label="Account" data-active="signup">
+                <button type="button" role="tab" id="tab-signup" data-mode="signup" aria-selected="true" aria-controls="signupPanel">Sign up</button>
+                <button type="button" role="tab" id="tab-login" data-mode="login" aria-selected="false" aria-controls="loginPanel" tabindex="-1">Log in</button>
+            </div>
+            <div id="signupPanel" role="tabpanel" aria-labelledby="tab-signup">
+                <div class="auth-mark"><i data-lucide="user-plus"></i></div>
+                <h2>Create your account</h2>
+                <p class="dialog-sub">Hire skilled people or offer your own skills.</p>
+                <form>
+                    <div class="field"><label for="s-name">Full name</label><input type="text" id="s-name" autocomplete="name" placeholder="Juan Dela Cruz" required /></div>
+                    <div class="field"><label for="s-email">Email</label><input type="email" id="s-email" autocomplete="email" placeholder="you@example.com" required /></div>
+                    <div class="field"><label for="s-pass">Password</label><div class="pw"><input type="password" id="s-pass" autocomplete="new-password" placeholder="At least 8 characters" minlength=8 required /><button type="button" class="pw-toggle" aria-label="Show password" aria-pressed="false"><i data-lucide="eye"></i></button></div></div>
+                    <button type="submit" class="btn primary wide">Create account</button>
+                </form>
+                <p class="auth-alt">Already have an account? <button type="button" class="link" data-mode-link="login">Log in</button></p>
+            </div>
+            <div id="loginPanel" role="tabpanel" aria-labelledby="tab-login" hidden>
+                <div class="auth-mark"><i data-lucide="log-in"></i></div>
+                <h2>Welcome back</h2>
+                <p class="dialog-sub">Log in to pick up where you left off.</p>
+                <form>
+                    <div class="field"><label for="l-email">Email</label><input type="email" id="l-email" autocomplete="email" placeholder="you@example.com" required /></div>
+                    <div class="field"><label for="l-pass">Password</label><div class="pw"><input type="password" id="l-pass" autocomplete="current-password" placeholder="Your password" required /><button type="button" class="pw-toggle" aria-label="Show password" aria-pressed="false"><i data-lucide="eye"></i></button></div></div>
+                    <button type="submit" class="btn primary wide">Log in</button>
+                </form>
+                <p class="auth-alt">New to SkillLink? <button type="button" class="link" data-mode-link="signup">Create an account</button></p>
+            </div>
+        </div>
+    </dialog>
+    <script src="skilllink.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
